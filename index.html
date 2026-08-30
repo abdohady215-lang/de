@@ -1,14 +1,87 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ZONE SPORT - AI NEWS DESIGNER</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0A1128">
+  <meta name="description" content="ZONE SPORT AI News Designer">
+  <title>ZONE SPORT | مصمم الأخبار الذكي</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-lockup"><span class="brand-mark">Z</span><span><strong>ZONE <i>SPORT</i></strong><small>مصمم الأخبار الذكي</small></span></div>
+    <div class="topbar-meta"><span class="live-dot"></span><span>استوديو الأخبار</span><span class="topbar-date" id="todayDate"></span></div>
+  </header>
+
+  <main class="app-shell">
+    <aside class="control-panel">
+      <div class="panel-heading"><div><span class="eyebrow">AI NEWS DESIGNER</span><h1>اصنع الخبر بصريًا</h1></div><span class="version">01</span></div>
+      <section class="control-section">
+        <div class="section-title"><span class="step">01</span><h2>محتوى الخبر</h2><span class="ai-chip">AI SMART</span></div>
+        <label class="field-label" for="headline">العنوان الرئيسي</label>
+        <input id="headline" class="text-input" type="text" maxlength="120" placeholder="اكتب عنوان الخبر هنا..." value="" autocomplete="off">
+        <div class="field-row"><label class="field-label" for="category">التصنيف</label><button id="classifyBtn" class="text-button" type="button">تصنيف ذكي <span>✦</span></button></div>
+        <select id="category" class="text-input select-input"></select>
+        <label class="field-label" for="story">تفاصيل الخبر <span class="optional">اختياري</span></label>
+        <textarea id="story" class="text-input story-input" maxlength="380" placeholder="أضف سطرًا توضيحيًا أو تفاصيل إضافية..."></textarea>
+        <div class="char-count"><span id="charCount">0</span> / 380</div>
+      </section>
+
+      <section class="control-section">
+        <div class="section-title"><span class="step">02</span><h2>الصورة الخلفية</h2></div>
+        <div id="dropZone" class="drop-zone"><input id="imageInput" type="file" accept="image/png,image/jpeg,image/webp"><span class="upload-icon">↥</span><strong>اسحب الصورة إلى هنا</strong><small>أو انقر للاختيار · PNG / JPG / WEBP</small></div>
+        <div id="imageTools" class="image-tools hidden"><span class="file-name" id="fileName">الصورة المضافة</span><button id="removeImage" class="icon-button" type="button" title="إزالة الصورة">×</button><label>تكبير <input id="imageZoom" type="range" min="100" max="180" value="100"></label><label>المحاذاة <select id="imagePosition"><option value="center">وسط</option><option value="top">أعلى</option><option value="bottom">أسفل</option><option value="right">يمين</option><option value="left">يسار</option></select></label></div>
+      </section>
+
+      <section class="control-section compact-section">
+        <div class="section-title"><span class="step">03</span><h2>ضبط التصميم</h2></div>
+        <div class="range-row"><label for="fontSize">حجم العنوان</label><output id="fontSizeValue">64</output><input id="fontSize" type="range" min="34" max="92" value="64"></div>
+        <div class="range-row"><label for="lineHeight">تباعد السطور</label><output id="lineHeightValue">1.15</output><input id="lineHeight" type="range" min="0.9" max="1.5" value="1.15" step="0.05"></div>
+        <div class="range-row"><label for="contrast">قوة التعتيم</label><output id="contrastValue">66%</output><input id="contrast" type="range" min="35" max="90" value="66"></div>
+        <div class="range-row"><label for="badgePosition">موضع الشارة</label><select id="badgePosition" class="mini-select"><option value="top">أعلى يمين</option><option value="bottom">أسفل يمين</option><option value="left">أعلى يسار</option></select></div>
+      </section>
+
+      <section class="control-section position-section">
+        <div class="section-title"><span class="step">04</span><h2>موضع النصوص</h2><span class="ai-chip">LIVE</span></div>
+        <div class="position-grid">
+          <label>المحاذاة الرأسية<select id="textVertical" class="mini-select"><option value="top">أعلى</option><option value="center" selected>منتصف</option><option value="bottom">أسفل</option></select></label>
+          <label>المحاذاة الأفقية<select id="textHorizontal" class="mini-select"><option value="right" selected>يمين</option><option value="center">وسط</option><option value="left">يسار</option></select></label>
+        </div>
+        <div class="range-row position-range"><label for="textY">موضع رأسي <output id="textYValue">50%</output></label><input id="textY" type="range" min="0" max="100" value="50"></div>
+        <div class="range-row position-range"><label for="textX">موضع أفقي <output id="textXValue">85%</output></label><input id="textX" type="range" min="0" max="100" value="85"></div>
+      </section>
+      <section class="control-section variation-section"><div class="section-title"><span class="step">05</span><h2>الأسلوب البصري</h2></div><div id="variationGrid" class="variation-grid"></div></section>
+      <section class="control-section logo-section">
+        <div class="section-title"><span class="step">06</span><h2>الشعار والهوية</h2><span class="ai-chip">BRAND</span></div>
+        <label class="toggle-row"><span>إظهار الشعار</span><input id="logoVisible" type="checkbox" checked><i></i></label>
+        <div id="logoDropZone" class="logo-drop-zone"><input id="logoInput" type="file" accept="image/png,image/svg+xml"><span>＋</span><strong>رفع شعار مخصص</strong><small>PNG / SVG</small></div>
+        <div class="position-grid logo-presets"><label>الموضع<select id="logoPreset" class="mini-select"><option value="top-right">أعلى يمين</option><option value="top-left">أعلى يسار</option><option value="bottom-right">أسفل يمين</option><option value="bottom-left">أسفل يسار</option></select></label><span id="logoName" class="file-name">ZONE SPORT</span></div>
+        <div class="range-row position-range"><label for="logoX">إزاحة أفقية <output id="logoXValue">90%</output></label><input id="logoX" type="range" min="0" max="100" value="90"></div>
+        <div class="range-row position-range"><label for="logoY">إزاحة رأسية <output id="logoYValue">8%</output></label><input id="logoY" type="range" min="0" max="100" value="8"></div>
+        <div class="range-row position-range"><label for="logoSize">حجم الشعار <output id="logoSizeValue">90px</output></label><input id="logoSize" type="range" min="20" max="250" value="90"></div>
+        <div class="range-row position-range"><label for="logoOpacity">شفافية الشعار <output id="logoOpacityValue">100%</output></label><input id="logoOpacity" type="range" min="10" max="100" value="100"></div>
+      </section>
+      <section class="control-section overlay-section">
+        <div class="section-title"><span class="step">07</span><h2>الشادو والتعتيم</h2></div>
+        <div class="range-row position-range"><label for="shadowOpacity">قوة التعتيم <output id="shadowOpacityValue">66%</output></label><input id="shadowOpacity" type="range" min="0" max="100" value="66"></div>
+        <div class="range-row position-range"><label for="shadowCoverage">تغطية الشادو <output id="shadowCoverageValue">75%</output></label><input id="shadowCoverage" type="range" min="10" max="100" value="75"></div>
+        <label class="field-label" for="shadowDirection">اتجاه التدرج</label><select id="shadowDirection" class="text-input select-input"><option value="bottom-top">من أسفل إلى أعلى</option><option value="top-bottom">من أعلى إلى أسفل</option><option value="radial">مركزي دائري</option><option value="lateral">جانبي</option></select>
+        <div class="range-row position-range"><label for="shadowBlur">نعومة التدرج <output id="shadowBlurValue">60%</output></label><input id="shadowBlur" type="range" min="0" max="100" value="60"></div>
+      </section>
+      <div class="panel-actions"><button id="saveBtn" class="secondary-button" type="button"><span>♡</span> حفظ التصميم</button><button id="exportBtn" class="primary-button" type="button"><span>⇩</span> تصدير PNG</button></div>
+      <button id="savedBtn" class="saved-link" type="button">التصاميم المحفوظة <span id="savedCount">0</span> <b>←</b></button>
+    </aside>
+
+    <section class="preview-area">
+      <div class="preview-header"><div><span class="eyebrow">LIVE PREVIEW / 1080 × 1350</span><h2>المعاينة المباشرة</h2></div><div class="preview-tools"><button id="previewZoomOut" class="icon-button" type="button" title="تصغير">−</button><span id="previewZoomValue">74%</span><button id="previewZoomIn" class="icon-button" type="button" title="تكبير">+</button></div></div>
+      <div class="canvas-stage"><div class="canvas-frame"><canvas id="newsCanvas" width="1080" height="1350"></canvas></div></div>
+      <div class="preview-footer"><span><i class="status-dot"></i> يتم التحديث لحظيًا</span><span>صيغة التصدير: PNG عالي الدقة</span></div>
+    </section>
+  </main>
+  <div id="toast" class="toast" role="status"></div>
+  <div id="savedModal" class="modal hidden"><div class="modal-card"><div class="modal-header"><h2>التصاميم المحفوظة</h2><button id="closeModal" class="icon-button" type="button">×</button></div><div id="savedList" class="saved-list"></div></div></div>
+  <script src="brand-config.js"></script>
+  <script src="app.js"></script>
+</body>
 </html>

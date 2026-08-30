@@ -17,6 +17,7 @@
   <main class="app-shell">
     <aside class="control-panel">
       <div class="panel-heading"><div><span class="eyebrow">AI NEWS DESIGNER</span><h1>اصنع الخبر بصريًا</h1></div><span class="version">01</span></div>
+      <div class="defaults-toolbar" aria-label="إعدادات المحرر الافتراضية"><button id="saveDefaults" class="default-action save-defaults" type="button"><span>▣</span> حفظ كإعدادات افتراضية</button><button id="resetDefaults" class="default-action reset-defaults" type="button"><span>↺</span> استعادة الضبط الأصلي</button></div>
       <section class="control-section">
         <div class="section-title"><span class="step">01</span><h2>محتوى الخبر</h2><span class="ai-chip">AI SMART</span></div>
         <label class="field-label" for="headline">العنوان الرئيسي</label>
@@ -37,6 +38,7 @@
       <section class="control-section compact-section">
         <div class="section-title"><span class="step">03</span><h2>ضبط التصميم</h2></div>
         <div class="range-row"><label for="fontSize">حجم العنوان</label><output id="fontSizeValue">64</output><input id="fontSize" type="range" min="34" max="92" value="64"></div>
+        <div class="range-row"><label for="kickerSize">حجم العنوان الصغير</label><output id="kickerSizeValue">22px</output><input id="kickerSize" type="range" min="12" max="48" value="22"></div>
         <div class="range-row"><label for="lineHeight">تباعد السطور</label><output id="lineHeightValue">1.15</output><input id="lineHeight" type="range" min="0.9" max="1.5" value="1.15" step="0.05"></div>
         <div class="range-row"><label for="contrast">قوة التعتيم</label><output id="contrastValue">66%</output><input id="contrast" type="range" min="35" max="90" value="66"></div>
         <div class="range-row"><label for="badgePosition">موضع الشارة</label><select id="badgePosition" class="mini-select"><option value="top">أعلى يمين</option><option value="bottom">أسفل يمين</option><option value="left">أعلى يسار</option></select></div>
@@ -78,7 +80,7 @@
       <button id="savedBtn" class="saved-link" type="button">التصاميم المحفوظة <span id="savedCount">0</span> <b>←</b></button>
     </aside>
 
-    <section class="preview-area">
+    <section class="preview-area" aria-label="المعاينة المباشرة">
       <div class="preview-header"><div><span class="eyebrow">LIVE PREVIEW / 1080 × 1350</span><h2>المعاينة المباشرة</h2></div><div class="preview-tools"><button id="previewZoomOut" class="icon-button" type="button" title="تصغير">−</button><span id="previewZoomValue">74%</span><button id="previewZoomIn" class="icon-button" type="button" title="تكبير">+</button></div></div>
       <div class="canvas-stage"><div class="canvas-frame"><canvas id="newsCanvas" width="1080" height="1350"></canvas></div></div>
       <div class="preview-footer"><span><i class="status-dot"></i> يتم التحديث لحظيًا</span><span>صيغة التصدير: PNG عالي الدقة</span></div>

@@ -18,6 +18,7 @@ window.ZONE_CONFIG = {
       latin: 'Arial, sans-serif'
     },
     defaults: { logoSize: 90, logoOpacity: 100, shadowOpacity: 66, shadowCoverage: 75, shadowDirection: 'bottom-top', shadowBlur: 60 },
+    persistence: { defaultStorageKey: 'ZONE_SPORT_DEFAULT_CONFIG', resetBehavior: 'reload' },
     layers: [
       { id: 'headline', icon: 'T', label: 'العنوان الرئيسي' },
       { id: 'subtitle', icon: 'S', label: 'النص التوضيحي' },

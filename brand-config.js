@@ -17,7 +17,16 @@ window.ZONE_CONFIG = {
       body: '"Tajawal", "Arial", sans-serif',
       latin: 'Arial, sans-serif'
     },
-    defaults: { logoSize: 90, logoOpacity: 100, shadowOpacity: 66, shadowCoverage: 75, shadowDirection: 'bottom-top', shadowBlur: 60 }
+    defaults: { logoSize: 90, logoOpacity: 100, shadowOpacity: 66, shadowCoverage: 75, shadowDirection: 'bottom-top', shadowBlur: 60 },
+    layers: [
+      { id: 'headline', icon: 'T', label: 'العنوان الرئيسي' },
+      { id: 'subtitle', icon: 'S', label: 'النص التوضيحي' },
+      { id: 'badge', icon: '◆', label: 'شارة التصنيف' },
+      { id: 'image', icon: '▧', label: 'الصورة الخلفية' },
+      { id: 'logo', icon: 'Z', label: 'الشعار والهوية' },
+      { id: 'overlay', icon: '◒', label: 'تدرج التعتيم' },
+      { id: 'watermark', icon: 'Z', label: 'العلامة المائية' }
+    ]
   },
   categories: [
     { id: 'breaking', label: 'عاجل', icon: '⚡', color: '#E63946' },

@@ -3,7 +3,8 @@
   const config = window.ZONE_CONFIG;
   const canvas = document.getElementById('newsCanvas');
   const ctx = canvas.getContext('2d');
-  const state = { category: 'sport', variation: 'editorial', image: null, imageName: '', logo: null, logoName: '', logoVisible: true, logoPreset: 'top-right', logoX: 90, logoY: 8, logoSize: 90, logoOpacity: 100, imageZoom: 100, imagePosition: 'center', fontSize: 64, lineHeight: 1.15, contrast: 66, badgePosition: 'top', textVertical: 'center', textHorizontal: 'right', textY: 50, textX: 85, shadowOpacity: 66, shadowCoverage: 75, shadowDirection: 'bottom-top', shadowBlur: 60, previewZoom: 74 };
+  const state = { category: 'sport', variation: 'editorial', image: null, imageName: '', logo: null, logoName: '', logoVisible: true, logoPreset: 'top-right', logoX: 90, logoY: 8, logoSize: 90, logoOpacity: 100, imageZoom: 100, imagePosition: 'center', fontSize: 64, lineHeight: 1.15, contrast: 66, badgePosition: 'top', textVertical: 'center', textHorizontal: 'right', textY: 50, textX: 85, shadowOpacity: 66, shadowCoverage: 75, shadowDirection: 'bottom-top', shadowBlur: 60, previewZoom: 74, layers: { headline: true, subtitle: true, badge: true, image: true, logo: true, overlay: true, watermark: true } };
+  const layerMeta = { headline: ['T', 'العنوان الرئيسي'], subtitle: ['S', 'النص التوضيحي'], badge: ['◆', 'شارة التصنيف'], image: ['▧', 'الصورة الخلفية'], logo: ['Z', 'الشعار والهوية'], overlay: ['◒', 'تدرج التعتيم'], watermark: ['Z', 'العلامة المائية'] };
   const $ = id => document.getElementById(id);
   const headline = $('headline'), story = $('story'), category = $('category');
 
@@ -12,13 +13,14 @@
     config.categories.forEach(item => { const option = document.createElement('option'); option.value = item.id; option.textContent = item.label; category.appendChild(option); });
     category.value = state.category;
     Object.keys(config.variations).forEach(key => { const variation = config.variations[key]; const button = document.createElement('button'); button.type = 'button'; button.className = 'variation-card' + (key === state.variation ? ' active' : ''); button.dataset.variation = key; button.innerHTML = '<strong>' + variation.label + '</strong><small>' + variation.description + '</small>'; button.addEventListener('click', () => { state.variation = key; document.querySelectorAll('.variation-card').forEach(card => card.classList.toggle('active', card === button)); render(); }); $('variationGrid').appendChild(button); });
-    bindControls(); render(); updateSavedCount();
+    bindControls(); render(); updateSavedCount(); renderLayers();
   }
   function bindControls() {
     [headline, story, category, $('fontSize'), $('lineHeight'), $('contrast'), $('badgePosition'), $('imageZoom'), $('imagePosition'), $('textVertical'), $('textHorizontal'), $('textY'), $('textX'), $('logoX'), $('logoY'), $('logoSize'), $('logoOpacity'), $('shadowOpacity'), $('shadowCoverage'), $('shadowDirection'), $('shadowBlur')].forEach(control => control.addEventListener('input', handleControl));
     [$('textVertical'), $('textHorizontal'), $('shadowDirection')].forEach(control => control.addEventListener('change', handleControl));
     $('logoPreset').addEventListener('change', handleControl); $('logoVisible').addEventListener('input', handleControl);
     $('logoPreset').addEventListener('change', () => { const presets = { 'top-right': [90, 8], 'top-left': [10, 8], 'bottom-right': [90, 92], 'bottom-left': [10, 92] }; [state.logoX, state.logoY] = presets[$('logoPreset').value]; $('logoX').value = state.logoX; $('logoY').value = state.logoY; updateLabels(); render(); });
+    $('restoreLayers').addEventListener('click', restoreLayers);
     story.addEventListener('input', () => $('charCount').textContent = story.value.length);
     $('classifyBtn').addEventListener('click', () => { const result = classify(headline.value + ' ' + story.value); category.value = result; state.category = result; showToast('تم اختيار قالب ' + config.templates[result].label); render(); });
     $('imageInput').addEventListener('change', event => loadImage(event.target.files[0]));
@@ -50,6 +52,9 @@
   function escapeHtml(value) { const div=document.createElement('div');div.textContent=value;return div.innerHTML; }
   function exportPng() { render(); const link=document.createElement('a');link.download='zone-sport-news-' + Date.now() + '.png';link.href=canvas.toDataURL('image/png');link.click();showToast('تم تصدير الصورة بجودة عالية'); }
   function showToast(message) { const toast=$('toast');toast.textContent=message;toast.classList.add('show');clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>toast.classList.remove('show'),2200); }
+  function renderLayers() { const list = $('layersList'); list.innerHTML = ''; Object.keys(layerMeta).forEach(key => { const row = document.createElement('div'); row.className = 'layer-row' + (state.layers[key] ? '' : ' deleted'); row.innerHTML = '<span class="layer-icon">' + layerMeta[key][0] + '</span><span class="layer-name">' + layerMeta[key][1] + '</span><button class="layer-action" type="button" title="' + (state.layers[key] ? 'إخفاء' : 'إظهار') + '">' + (state.layers[key] ? '◉' : '○') + '</button>'; row.querySelector('button').addEventListener('click', () => { state.layers[key] = !state.layers[key]; render(); renderLayers(); }); list.appendChild(row); }); }
+  function restoreLayers() { Object.keys(state.layers).forEach(key => { state.layers[key] = true; }); state.logoVisible = true; $('logoVisible').checked = true; render(); renderLayers(); showToast('تمت استعادة العناصر الافتراضية'); }
+  function renderLayers() { const list = $('layersList'); list.innerHTML = ''; Object.keys(layerMeta).forEach(key => { const row = document.createElement('div'); row.className = 'layer-row' + (state.layers[key] ? '' : ' deleted'); row.innerHTML = '<span class="layer-icon">' + layerMeta[key][0] + '</span><span class="layer-name">' + layerMeta[key][1] + '</span><button class="layer-action layer-visibility" type="button" title="تبديل الظهور">' + (state.layers[key] ? '◉' : '○') + '</button><button class="layer-action layer-delete" type="button" title="حذف العنصر">⌫</button>'; row.querySelector('.layer-visibility').addEventListener('click', () => { state.layers[key] = !state.layers[key]; render(); }); row.querySelector('.layer-delete').addEventListener('click', () => { state.layers[key] = false; render(); showToast('تمت إزالة ' + layerMeta[key][1]); }); list.appendChild(row); }); }
   function drawAdaptiveBackground(template, variation, focusY) {
     ctx.fillStyle = config.brand.colors.navy;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -127,7 +132,7 @@
   }
   function drawBase(template, variation) {
     ctx.fillStyle = config.brand.colors.navy; ctx.fillRect(0, 0, canvas.width, canvas.height);
-    if (state.image) { const image = state.image, scale = Math.max(canvas.width / image.width, canvas.height / image.height) * state.imageZoom / 100, width = image.width * scale, height = image.height * scale; const positions = { center: [.5, .5], top: [.5, .18], bottom: [.5, .82], left: [.18, .5], right: [.82, .5] }; const position = positions[state.imagePosition] || positions.center; ctx.drawImage(image, canvas.width * position[0] - width * position[0], canvas.height * position[1] - height * position[1], width, height); }
+    if (state.image && state.layers.image) { const image = state.image, scale = Math.max(canvas.width / image.width, canvas.height / image.height) * state.imageZoom / 100, width = image.width * scale, height = image.height * scale; const positions = { center: [.5, .5], top: [.5, .18], bottom: [.5, .82], left: [.18, .5], right: [.82, .5] }; const position = positions[state.imagePosition] || positions.center; ctx.drawImage(image, canvas.width * position[0] - width * position[0], canvas.height * position[1] - height * position[1], width, height); }
     else { const pattern = ctx.createLinearGradient(0, 0, canvas.width, canvas.height); pattern.addColorStop(0, '#1C2541'); pattern.addColorStop(.52, '#0A1128'); pattern.addColorStop(1, '#050914'); ctx.fillStyle = pattern; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.save(); ctx.globalAlpha = variation.pattern; ctx.strokeStyle = template.accent; ctx.lineWidth = 3; for (let x = -canvas.height; x < canvas.width; x += 55) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x + canvas.height, canvas.height); ctx.stroke(); } ctx.globalAlpha = .12; ctx.font = '900 280px Arial'; ctx.fillStyle = '#fff'; ctx.fillText('Z', 65, 365); ctx.restore(); }
   }
   function render() {
@@ -135,12 +140,11 @@
     const title = fitTitle(headline.value, 825, 5, state.fontSize), bodyLines = story.value.trim() ? wrapText(story.value, 775).slice(0, 3) : [];
     const titleHeight = title.size * state.lineHeight * title.lines.length, bodyHeight = bodyLines.length ? bodyLines.length * 38 + 40 : 0, blockHeight = 115 + titleHeight + bodyHeight;
     const anchorY = canvas.height * state.textY / 100; let blockTop = state.textVertical === 'top' ? anchorY : state.textVertical === 'bottom' ? anchorY - blockHeight : anchorY - blockHeight / 2; blockTop = Math.max(55, Math.min(canvas.height - blockHeight - 55, blockTop));
-    drawBase(template, variation); drawControlledOverlay((blockTop + blockHeight / 2) / canvas.height); drawBadge(template); drawLogo();
+    drawBase(template, variation); if (state.layers.overlay) drawControlledOverlay((blockTop + blockHeight / 2) / canvas.height); if (state.layers.badge) drawBadge(template); if (state.layers.logo) drawLogo();
     ctx.save(); ctx.direction = 'rtl'; ctx.textAlign = state.textHorizontal; const textX = canvas.width * state.textX / 100; let y = blockTop + 28;
-    ctx.fillStyle = template.accent; ctx.font = '700 22px Tajawal, Arial'; ctx.fillText(template.kicker, textX, y); y += 25; ctx.fillStyle = '#fff'; const lineStart = state.textHorizontal === 'right' ? textX - 100 : state.textHorizontal === 'left' ? textX : textX - 50; ctx.fillRect(lineStart, y, 100, 4); y += 85;
-    ctx.font = '800 ' + title.size + 'px Tajawal, Arial'; ctx.fillStyle = '#fff'; title.lines.forEach(line => { ctx.fillText(line, textX, y); y += title.size * state.lineHeight; });
-    if (bodyLines.length) { y += 40; ctx.fillStyle = 'rgba(232,236,245,.78)'; ctx.font = '400 25px Tajawal, Arial'; bodyLines.forEach(line => { ctx.fillText(line, textX, y); y += 38; }); }
-    ctx.fillStyle = 'rgba(255,255,255,.5)'; ctx.font = '500 16px Tajawal, Arial'; ctx.textAlign = 'right'; ctx.fillText('نبض الرياضة.. في قلب الحدث', 930, canvas.height - 90); ctx.restore(); updateLabels();
+    if (state.layers.headline) { ctx.fillStyle = template.accent; ctx.font = '700 22px Tajawal, Arial'; ctx.fillText(template.kicker, textX, y); y += 25; ctx.fillStyle = '#fff'; const lineStart = state.textHorizontal === 'right' ? textX - 100 : state.textHorizontal === 'left' ? textX : textX - 50; ctx.fillRect(lineStart, y, 100, 4); y += 85; ctx.font = '800 ' + title.size + 'px Tajawal, Arial'; ctx.fillStyle = '#fff'; title.lines.forEach(line => { ctx.fillText(line, textX, y); y += title.size * state.lineHeight; }); }
+    if (state.layers.subtitle && bodyLines.length) { y += 40; ctx.fillStyle = 'rgba(232,236,245,.78)'; ctx.font = '400 25px Tajawal, Arial'; bodyLines.forEach(line => { ctx.fillText(line, textX, y); y += 38; }); }
+    if (state.layers.watermark) { ctx.fillStyle = 'rgba(255,255,255,.5)'; ctx.font = '500 16px Tajawal, Arial'; ctx.textAlign = 'right'; ctx.fillText('نبض الرياضة.. في قلب الحدث', 930, canvas.height - 90); } ctx.restore(); updateLabels(); renderLayers();
   }
   init();
 })();

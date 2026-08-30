@@ -69,6 +69,11 @@
         <label class="field-label" for="shadowDirection">اتجاه التدرج</label><select id="shadowDirection" class="text-input select-input"><option value="bottom-top">من أسفل إلى أعلى</option><option value="top-bottom">من أعلى إلى أسفل</option><option value="radial">مركزي دائري</option><option value="lateral">جانبي</option></select>
         <div class="range-row position-range"><label for="shadowBlur">نعومة التدرج <output id="shadowBlurValue">60%</output></label><input id="shadowBlur" type="range" min="0" max="100" value="60"></div>
       </section>
+      <section class="control-section layers-section">
+        <div class="section-title"><span class="step">08</span><h2>إدارة عناصر التصميم</h2><span class="ai-chip">LAYERS</span></div>
+        <div id="layersList" class="layers-list" aria-live="polite"></div>
+        <button id="restoreLayers" class="restore-button" type="button">↻ استعادة العناصر الافتراضية</button>
+      </section>
       <div class="panel-actions"><button id="saveBtn" class="secondary-button" type="button"><span>♡</span> حفظ التصميم</button><button id="exportBtn" class="primary-button" type="button"><span>⇩</span> تصدير PNG</button></div>
       <button id="savedBtn" class="saved-link" type="button">التصاميم المحفوظة <span id="savedCount">0</span> <b>←</b></button>
     </aside>

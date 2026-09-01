@@ -1,29 +1,25 @@
 ```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>ZONE SPORT — Match Graphic Generator</title>
+<title>ZONE SPORT — Match & Poster Generator</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&family=Archivo+Black&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
-
 :root{
   --bg:#07080a;
   --panel:#0d0f12;
   --card:#14171b;
   --card-hover:#191d22;
   --line:#262b32;
-
   --text:#f4f5f7;
   --muted:#858d98;
   --muted2:#555d68;
-
   --radius:12px;
 }
 
@@ -31,8 +27,7 @@
   box-sizing:border-box;
 }
 
-html,
-body{
+html,body{
   margin:0;
   width:100%;
   height:100%;
@@ -45,16 +40,11 @@ body{
   overflow:hidden;
 }
 
-button,
-select,
-input{
+button,select,input{
   font:inherit;
 }
 
-
-/* =========================================================
-   APP
-========================================================= */
+/* APP */
 
 .app{
   min-height:100vh;
@@ -70,10 +60,7 @@ input{
     #07080a;
 }
 
-
-/* =========================================================
-   SIDEBAR
-========================================================= */
+/* SIDEBAR */
 
 .sidebar{
   height:100vh;
@@ -102,10 +89,7 @@ input{
   border-radius:20px;
 }
 
-
-/* =========================================================
-   BRAND
-========================================================= */
+/* BRAND */
 
 .brand{
   padding:3px 2px 22px;
@@ -126,10 +110,51 @@ input{
   font-weight:800;
 }
 
+/* MODE SWITCH */
 
-/* =========================================================
-   GROUPS
-========================================================= */
+.mode-switch{
+  margin-top:20px;
+
+  display:grid;
+  grid-template-columns:1fr 1fr;
+
+  padding:4px;
+
+  background:#090b0e;
+  border:1px solid #22272d;
+  border-radius:11px;
+}
+
+.mode-btn{
+  height:42px;
+
+  border:0;
+  border-radius:8px;
+
+  background:transparent;
+
+  color:#727a85;
+
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.6px;
+
+  cursor:pointer;
+
+  transition:.18s ease;
+}
+
+.mode-btn:hover{
+  color:white;
+}
+
+.mode-btn.active{
+  background:#f1f2f4;
+  color:#08090b;
+  box-shadow:0 5px 15px rgba(0,0,0,.22);
+}
+
+/* GROUPS */
 
 .group{
   margin-top:21px;
@@ -147,10 +172,7 @@ input{
   text-transform:uppercase;
 }
 
-
-/* =========================================================
-   UPLOAD
-========================================================= */
+/* UPLOAD */
 
 .upload{
   position:relative;
@@ -163,6 +185,8 @@ input{
 
   padding:0 14px;
 
+  margin-bottom:8px;
+
   background:#14171b;
 
   border:1px solid var(--line);
@@ -170,8 +194,7 @@ input{
 
   cursor:pointer;
 
-  transition:
-    .18s ease;
+  transition:.18s ease;
 }
 
 .upload:hover{
@@ -204,10 +227,7 @@ input{
   cursor:pointer;
 }
 
-
-/* =========================================================
-   CONTROL CARD
-========================================================= */
+/* CONTROL CARD */
 
 .control-card{
   padding:14px;
@@ -239,10 +259,7 @@ input{
   color:#f2f3f5;
 }
 
-
-/* =========================================================
-   TEAM SCORE
-========================================================= */
+/* TEAM SCORE */
 
 .team{
   padding:13px;
@@ -316,10 +333,7 @@ input{
   color:#f4f5f7;
 }
 
-
-/* =========================================================
-   FONT SELECT
-========================================================= */
+/* SELECT */
 
 .font-select{
   width:100%;
@@ -363,10 +377,7 @@ input{
   font-size:27px;
 }
 
-
-/* =========================================================
-   RESET POSITIONS
-========================================================= */
+/* RESET */
 
 .reset-position{
   width:100%;
@@ -395,10 +406,7 @@ input{
   border-color:#3b424b;
 }
 
-
-/* =========================================================
-   ACTIONS
-========================================================= */
+/* ACTIONS */
 
 .actions{
   margin-top:24px;
@@ -462,10 +470,39 @@ input{
   background:#15181c;
 }
 
+/* HIDDEN */
 
-/* =========================================================
-   STAGE
-========================================================= */
+.hidden{
+  display:none!important;
+}
+
+/* POSTER TITLE */
+
+.poster-title-input{
+  width:100%;
+  height:44px;
+
+  padding:0 13px;
+
+  background:#0f1114;
+  color:white;
+
+  border:1px solid #292e35;
+  border-radius:9px;
+
+  outline:none;
+
+  font-size:12px;
+  font-weight:700;
+
+  transition:.15s ease;
+}
+
+.poster-title-input:focus{
+  border-color:#505862;
+}
+
+/* STAGE */
 
 .stage{
   position:relative;
@@ -514,10 +551,7 @@ input{
   pointer-events:none;
 }
 
-
-/* =========================================================
-   CANVAS
-========================================================= */
+/* CANVAS */
 
 .canvas-wrap{
   position:relative;
@@ -585,10 +619,7 @@ input{
   color:#343a42;
 }
 
-
-/* =========================================================
-   DRAG INFO
-========================================================= */
+/* DRAG INFO */
 
 .drag-info{
   position:absolute;
@@ -622,10 +653,7 @@ input{
   opacity:.75;
 }
 
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+/* RESPONSIVE */
 
 @media(max-width:900px){
 
@@ -651,31 +679,44 @@ input{
     max-width:92vw;
   }
 }
-
 </style>
 </head>
-
 
 <body>
 
 <div class="app">
 
+<aside class="sidebar">
+
+  <div class="brand">
+    <div class="brand-title">ZONE SPORT</div>
+    <div class="brand-sub">MATCH & POSTER GENERATOR</div>
+  </div>
+
+  <!-- MODE -->
+
+  <div class="mode-switch">
+
+    <button
+      class="mode-btn active"
+      id="matchModeBtn">
+      FULL TIME
+    </button>
+
+    <button
+      class="mode-btn"
+      id="posterModeBtn">
+      POSTER
+    </button>
+
+  </div>
+
+
   <!-- =====================================================
-       SIDEBAR
+       MATCH MODE
   ====================================================== -->
 
-  <aside class="sidebar">
-
-    <div class="brand">
-      <div class="brand-title">
-        ZONE SPORT
-      </div>
-
-      <div class="brand-sub">
-        MATCH GRAPHIC GENERATOR
-      </div>
-    </div>
-
+  <div id="matchPanel">
 
     <!-- BACKGROUND -->
 
@@ -689,23 +730,20 @@ input{
 
         <span
           class="upload-name"
-          id="bgFileName"
-        >
+          id="bgFileName">
           Upload photo
         </span>
 
         <span
           class="upload-status"
-          id="bgStatus"
-        >
+          id="bgStatus">
           —
         </span>
 
         <input
           id="bgInput"
           type="file"
-          accept="image/*"
-        >
+          accept="image/*">
 
       </label>
 
@@ -724,23 +762,20 @@ input{
 
         <span
           class="upload-name"
-          id="homeLogoName"
-        >
+          id="homeLogoName">
           Al Ahly logo
         </span>
 
         <span
           class="upload-status"
-          id="homeLogoStatus"
-        >
+          id="homeLogoStatus">
           —
         </span>
 
         <input
           id="homeLogoInput"
           type="file"
-          accept="image/*"
-        >
+          accept="image/*">
 
       </label>
 
@@ -749,23 +784,20 @@ input{
 
         <span
           class="upload-name"
-          id="awayLogoName"
-        >
+          id="awayLogoName">
           Opponent logo
         </span>
 
         <span
           class="upload-status"
-          id="awayLogoStatus"
-        >
+          id="awayLogoStatus">
           —
         </span>
 
         <input
           id="awayLogoInput"
           type="file"
-          accept="image/*"
-        >
+          accept="image/*">
 
       </label>
 
@@ -780,7 +812,6 @@ input{
         Score
       </div>
 
-
       <div class="team">
 
         <div class="team-name">
@@ -791,24 +822,15 @@ input{
 
           <button
             class="small-btn"
-            id="homeMinus"
-          >
-            −
-          </button>
+            id="homeMinus">−</button>
 
           <div
             class="value"
-            id="homeScore"
-          >
-            0
-          </div>
+            id="homeScore">0</div>
 
           <button
             class="small-btn"
-            id="homePlus"
-          >
-            +
-          </button>
+            id="homePlus">+</button>
 
         </div>
 
@@ -825,24 +847,15 @@ input{
 
           <button
             class="small-btn"
-            id="awayMinus"
-          >
-            −
-          </button>
+            id="awayMinus">−</button>
 
           <div
             class="value"
-            id="awayScore"
-          >
-            0
-          </div>
+            id="awayScore">0</div>
 
           <button
             class="small-btn"
-            id="awayPlus"
-          >
-            +
-          </button>
+            id="awayPlus">+</button>
 
         </div>
 
@@ -863,16 +876,11 @@ input{
 
         <div class="control-title">
 
-          <span>
-            Number Size
-          </span>
+          <span>Number Size</span>
 
           <span
             class="control-value"
-            id="scoreScale"
-          >
-            100%
-          </span>
+            id="scoreScale">100%</span>
 
         </div>
 
@@ -880,22 +888,17 @@ input{
 
           <button
             class="small-btn"
-            id="scoreMinus"
-          >
-            −
-          </button>
+            id="scoreMinus">−</button>
 
-          <div class="value"
-               style="font-family:'Archivo';font-size:10px;color:#69717c;letter-spacing:1px;">
+          <div
+            class="value"
+            style="font-family:'Archivo';font-size:10px;color:#69717c;letter-spacing:1px;">
             SCORE
           </div>
 
           <button
             class="small-btn"
-            id="scorePlus"
-          >
-            +
-          </button>
+            id="scorePlus">+</button>
 
         </div>
 
@@ -904,7 +907,7 @@ input{
     </div>
 
 
-    <!-- SCORE FONT -->
+    <!-- FONT -->
 
     <div class="group">
 
@@ -914,8 +917,7 @@ input{
 
       <select
         class="font-select"
-        id="fontSelect"
-      >
+        id="fontSelect">
 
         <option value="Anton">
           Anton — Athletic
@@ -943,11 +945,9 @@ input{
 
       </select>
 
-
       <div
         class="font-preview"
-        id="fontPreview"
-      >
+        id="fontPreview">
         10 - 2
       </div>
 
@@ -966,16 +966,11 @@ input{
 
         <div class="control-title">
 
-          <span>
-            Both Logos
-          </span>
+          <span>Both Logos</span>
 
           <span
             class="control-value"
-            id="logoScale"
-          >
-            100%
-          </span>
+            id="logoScale">100%</span>
 
         </div>
 
@@ -983,22 +978,17 @@ input{
 
           <button
             class="small-btn"
-            id="logoMinus"
-          >
-            −
-          </button>
+            id="logoMinus">−</button>
 
-          <div class="value"
-               style="font-family:'Archivo';font-size:10px;color:#69717c;letter-spacing:1px;">
+          <div
+            class="value"
+            style="font-family:'Archivo';font-size:10px;color:#69717c;letter-spacing:1px;">
             LOGOS
           </div>
 
           <button
             class="small-btn"
-            id="logoPlus"
-          >
-            +
-          </button>
+            id="logoPlus">+</button>
 
         </div>
 
@@ -1007,7 +997,7 @@ input{
     </div>
 
 
-    <!-- FULL TIME -->
+    <!-- FULL TIME SIZE -->
 
     <div class="group">
 
@@ -1019,14 +1009,274 @@ input{
 
         <div class="control-title">
 
-          <span>
-            FULL TIME Size
-          </span>
+          <span>FULL TIME Size</span>
 
           <span
             class="control-value"
-            id="fullTimeScale"
-          >
+            id="fullTimeScale">100%</span>
+
+        </div>
+
+        <div class="controls">
+
+          <button
+            class="small-btn"
+            id="ftMinus">−</button>
+
+          <div
+            class="value"
+            style="font-family:'Archivo';font-size:10px;color:#69717c;letter-spacing:1px;">
+            TITLE
+          </div>
+
+          <button
+            class="small-btn"
+            id="ftPlus">+</button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="group">
+
+      <button
+        class="reset-position"
+        id="resetPositions">
+        RESET POSITIONS
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       POSTER MODE
+  ====================================================== -->
+
+  <div
+    id="posterPanel"
+    class="hidden">
+
+    <div class="group">
+
+      <div class="label">
+        Poster Design
+      </div>
+
+      <div
+        class="control-card"
+        style="text-align:center;">
+
+        <div
+          style="
+          font-family:'Anton';
+          font-size:22px;
+          letter-spacing:1px;">
+          KICK OFF
+        </div>
+
+        <div
+          style="
+          margin-top:4px;
+          color:#69717c;
+          font-size:9px;
+          letter-spacing:1.5px;
+          font-weight:800;">
+          BEGINNING OF THE MATCH
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- BACKGROUND -->
+
+    <div class="group">
+
+      <div class="label">
+        Background
+      </div>
+
+      <label class="upload">
+
+        <span
+          class="upload-name"
+          id="posterBgName">
+          Upload background
+        </span>
+
+        <span
+          class="upload-status"
+          id="posterBgStatus">
+          —
+        </span>
+
+        <input
+          id="posterBgInput"
+          type="file"
+          accept="image/*">
+
+      </label>
+
+    </div>
+
+
+    <!-- PLAYER 1 -->
+
+    <div class="group">
+
+      <div class="label">
+        Main Image 01
+      </div>
+
+      <label class="upload">
+
+        <span
+          class="upload-name"
+          id="player1Name">
+          Player / Team 01
+        </span>
+
+        <span
+          class="upload-status"
+          id="player1Status">
+          —
+        </span>
+
+        <input
+          id="player1Input"
+          type="file"
+          accept="image/*">
+
+      </label>
+
+    </div>
+
+
+    <!-- PLAYER 2 -->
+
+    <div class="group">
+
+      <div class="label">
+        Main Image 02
+      </div>
+
+      <label class="upload">
+
+        <span
+          class="upload-name"
+          id="player2Name">
+          Player / Team 02
+        </span>
+
+        <span
+          class="upload-status"
+          id="player2Status">
+          —
+        </span>
+
+        <input
+          id="player2Input"
+          type="file"
+          accept="image/*">
+
+      </label>
+
+    </div>
+
+
+    <!-- CLUB LOGOS -->
+
+    <div class="group">
+
+      <div class="label">
+        Club Logos
+      </div>
+
+      <label class="upload">
+
+        <span
+          class="upload-name"
+          id="posterLogo1Name">
+          Club Logo 01
+        </span>
+
+        <span
+          class="upload-status"
+          id="posterLogo1Status">
+          —
+        </span>
+
+        <input
+          id="posterLogo1Input"
+          type="file"
+          accept="image/*">
+
+      </label>
+
+
+      <label class="upload">
+
+        <span
+          class="upload-name"
+          id="posterLogo2Name">
+          Club Logo 02
+        </span>
+
+        <span
+          class="upload-status"
+          id="posterLogo2Status">
+          —
+        </span>
+
+        <input
+          id="posterLogo2Input"
+          type="file"
+          accept="image/*">
+
+      </label>
+
+    </div>
+
+
+    <!-- TITLE -->
+
+    <div class="group">
+
+      <div class="label">
+        Poster Title
+      </div>
+
+      <input
+        class="poster-title-input"
+        id="posterTitleInput"
+        value="بداية المباراة">
+
+    </div>
+
+
+    <!-- PLAYER SIZE -->
+
+    <div class="group">
+
+      <div class="label">
+        Main Images Size
+      </div>
+
+      <div class="control-card">
+
+        <div class="control-title">
+
+          <span>Players</span>
+
+          <span
+            class="control-value"
+            id="posterPlayerScale">
             100%
           </span>
 
@@ -1036,22 +1286,17 @@ input{
 
           <button
             class="small-btn"
-            id="ftMinus"
-          >
-            −
-          </button>
+            id="posterPlayerMinus">−</button>
 
-          <div class="value"
-               style="font-family:'Archivo';font-size:10px;color:#69717c;letter-spacing:1px;">
-            TITLE
+          <div
+            class="value"
+            style="font-family:'Archivo';font-size:10px;color:#69717c;letter-spacing:1px;">
+            IMAGES
           </div>
 
           <button
             class="small-btn"
-            id="ftPlus"
-          >
-            +
-          </button>
+            id="posterPlayerPlus">+</button>
 
         </div>
 
@@ -1060,79 +1305,165 @@ input{
     </div>
 
 
-    <!-- RESET POSITIONS -->
+    <!-- LOGO SIZE -->
+
+    <div class="group">
+
+      <div class="label">
+        Poster Logo Size
+      </div>
+
+      <div class="control-card">
+
+        <div class="control-title">
+
+          <span>Club Logos</span>
+
+          <span
+            class="control-value"
+            id="posterLogoScale">
+            100%
+          </span>
+
+        </div>
+
+        <div class="controls">
+
+          <button
+            class="small-btn"
+            id="posterLogoMinus">−</button>
+
+          <div
+            class="value"
+            style="font-family:'Archivo';font-size:10px;color:#69717c;letter-spacing:1px;">
+            LOGOS
+          </div>
+
+          <button
+            class="small-btn"
+            id="posterLogoPlus">+</button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- TITLE SIZE -->
+
+    <div class="group">
+
+      <div class="label">
+        Title Size
+      </div>
+
+      <div class="control-card">
+
+        <div class="control-title">
+
+          <span>Poster Title</span>
+
+          <span
+            class="control-value"
+            id="posterTitleScale">
+            100%
+          </span>
+
+        </div>
+
+        <div class="controls">
+
+          <button
+            class="small-btn"
+            id="posterTitleMinus">−</button>
+
+          <div
+            class="value"
+            style="font-family:'Archivo';font-size:10px;color:#69717c;letter-spacing:1px;">
+            TITLE
+          </div>
+
+          <button
+            class="small-btn"
+            id="posterTitlePlus">+</button>
+
+        </div>
+
+      </div>
+
+    </div>
+
 
     <div class="group">
 
       <button
         class="reset-position"
-        id="resetPositions"
-      >
-        RESET POSITIONS
+        id="resetPosterPositions">
+        RESET POSTER POSITIONS
       </button>
 
     </div>
 
-
-    <!-- ACTIONS -->
-
-    <div class="actions">
-
-      <button
-        class="export"
-        id="exportBtn"
-      >
-        EXPORT PNG
-      </button>
-
-      <button
-        class="reset"
-        id="resetBtn"
-      >
-        RESET EVERYTHING
-      </button>
-
-    </div>
-
-  </aside>
+  </div>
 
 
-  <!-- =====================================================
-       PREVIEW
-  ====================================================== -->
+  <!-- ACTIONS -->
 
-  <main class="stage">
+  <div class="actions">
 
-    <div class="canvas-wrap">
+    <button
+      class="export"
+      id="exportBtn">
+      EXPORT PNG
+    </button>
 
-      <canvas
-        id="canvas"
-        width="1080"
-        height="1350"
-      ></canvas>
+    <button
+      class="reset"
+      id="resetBtn">
+      RESET EVERYTHING
+    </button>
 
-      <div
-        class="empty"
-        id="emptyHint"
-      >
+  </div>
 
-        <strong>
-          NO PHOTO LOADED
-        </strong>
+</aside>
 
-        <span>
-          Upload a background photo to begin
-        </span>
 
-      </div>
+<!-- PREVIEW -->
 
-      <div class="drag-info">
-        DRAG LOGOS • SCORE • FULL TIME
-      </div>
+<main class="stage">
+
+  <div class="canvas-wrap">
+
+    <canvas
+      id="canvas"
+      width="1080"
+      height="1350">
+    </canvas>
+
+    <div
+      class="empty"
+      id="emptyHint">
+
+      <strong>
+        NO PHOTO LOADED
+      </strong>
+
+      <span>
+        Upload a background photo to begin
+      </span>
 
     </div>
 
-  </main>
+    <div
+      class="drag-info"
+      id="dragInfo">
+      DRAG ELEMENTS DIRECTLY
+    </div>
+
+  </div>
+
+</main>
 
 </div>
 
@@ -1150,35 +1481,56 @@ input{
 
 const state = {
 
+  mode:"match",
+
+  /* MATCH */
+
   bgImage:null,
 
   homeLogo:null,
-
   awayLogo:null,
 
   homeScore:0,
-
   awayScore:0,
 
   scoreScale:1,
-
   logoScale:1,
-
   fullTimeScale:1,
 
   scoreFont:"Anton",
 
   positions:{
-
     homeLogo:null,
-
     awayLogo:null,
-
     score:null,
-
     fullTime:null
-
   },
+
+
+  /* POSTER */
+
+  posterBg:null,
+
+  player1:null,
+  player2:null,
+
+  posterLogo1:null,
+  posterLogo2:null,
+
+  posterTitle:"بداية المباراة",
+
+  posterPlayerScale:1,
+  posterLogoScale:1,
+  posterTitleScale:1,
+
+  posterPositions:{
+    player1:null,
+    player2:null,
+    logo1:null,
+    logo2:null,
+    title:null
+  },
+
 
   drag:null
 
@@ -1189,60 +1541,65 @@ const state = {
    LIMITS
 ========================================================= */
 
-const SCORE_MIN = .65;
-const SCORE_MAX = 1.55;
+const SCORE_MIN=.65;
+const SCORE_MAX=1.55;
 
-const LOGO_MIN = .65;
-const LOGO_MAX = 1.60;
+const LOGO_MIN=.65;
+const LOGO_MAX=1.60;
 
-const FT_MIN = .65;
-const FT_MAX = 1.60;
+const FT_MIN=.65;
+const FT_MAX=1.60;
 
-const STEP = .05;
+const PLAYER_MIN=.55;
+const PLAYER_MAX=1.60;
+
+const POSTER_LOGO_MIN=.60;
+const POSTER_LOGO_MAX=1.60;
+
+const POSTER_TITLE_MIN=.65;
+const POSTER_TITLE_MAX=1.60;
+
+const STEP=.05;
 
 
 /* =========================================================
    DOM
 ========================================================= */
 
-const canvas =
-  document.getElementById("canvas");
+const canvas=document.getElementById("canvas");
+const ctx=canvas.getContext("2d");
 
-const ctx =
-  canvas.getContext("2d");
+const emptyHint=document.getElementById("emptyHint");
+const dragInfo=document.getElementById("dragInfo");
 
-const emptyHint =
-  document.getElementById("emptyHint");
+const matchPanel=document.getElementById("matchPanel");
+const posterPanel=document.getElementById("posterPanel");
+
+const matchModeBtn=document.getElementById("matchModeBtn");
+const posterModeBtn=document.getElementById("posterModeBtn");
 
 
 /* =========================================================
-   LOAD IMAGE
+   IMAGE LOADER
 ========================================================= */
 
-function loadImage(file, callback){
+function loadImage(file,callback){
 
-  if(!file) return;
+  if(!file)return;
 
-  const reader =
-    new FileReader();
+  const reader=new FileReader();
 
-  reader.onload =
-    function(e){
+  reader.onload=function(e){
 
-      const img =
-        new Image();
+    const img=new Image();
 
-      img.onload =
-        function(){
-
-          callback(img);
-
-        };
-
-      img.src =
-        e.target.result;
-
+    img.onload=function(){
+      callback(img);
     };
+
+    img.src=e.target.result;
+
+  };
 
   reader.readAsDataURL(file);
 
@@ -1250,30 +1607,64 @@ function loadImage(file, callback){
 
 
 /* =========================================================
-   DEFAULT POSITIONS
+   IMAGE DRAW DIMENSIONS
+========================================================= */
+
+function getContainDimensions(img,target){
+
+  if(!img)return{
+    width:0,
+    height:0
+  };
+
+  const ratio=img.naturalWidth/img.naturalHeight;
+
+  let width;
+  let height;
+
+  if(ratio>=1){
+
+    width=target;
+    height=target/ratio;
+
+  }else{
+
+    height=target;
+    width=target*ratio;
+
+  }
+
+  return{
+    width,
+    height
+  };
+
+}
+
+
+/* =========================================================
+   MATCH DEFAULT POSITIONS
 ========================================================= */
 
 function getDefaultPositions(){
 
-  const w = canvas.width;
-  const h = canvas.height;
-  const min = Math.min(w,h);
+  const w=canvas.width;
+  const h=canvas.height;
+  const min=Math.min(w,h);
 
-  const scoreY =
-    h - min * .115;
+  const scoreY=h-min*.115;
 
-  const matchupY =
-    scoreY - min * .205;
+  const matchupY=scoreY-min*.205;
 
-  return {
+  return{
 
     homeLogo:{
-      x:w/2 - min*.09,
+      x:w/2-min*.09,
       y:matchupY
     },
 
     awayLogo:{
-      x:w/2 + min*.09,
+      x:w/2+min*.09,
       y:matchupY
     },
 
@@ -1284,7 +1675,7 @@ function getDefaultPositions(){
 
     fullTime:{
       x:w/2,
-      y:scoreY - min*.145
+      y:scoreY-min*.145
     }
 
   };
@@ -1292,26 +1683,93 @@ function getDefaultPositions(){
 }
 
 
-function ensurePositions(){
+/* =========================================================
+   POSTER DEFAULT POSITIONS
+========================================================= */
+
+function getDefaultPosterPositions(){
+
+  const w=canvas.width;
+  const h=canvas.height;
+  const min=Math.min(w,h);
+
+  return{
+
+    player1:{
+      x:w*.31,
+      y:h*.48
+    },
+
+    player2:{
+      x:w*.69,
+      y:h*.48
+    },
+
+    logo1:{
+      x:w*.44,
+      y:h*.88
+    },
+
+    logo2:{
+      x:w*.56,
+      y:h*.88
+    },
+
+    title:{
+      x:w/2,
+      y:h*.73
+    }
+
+  };
+
+}
+
+
+/* =========================================================
+   ENSURE POSITIONS
+========================================================= */
+
+function ensureMatchPositions(){
 
   if(!state.positions.homeLogo){
+    state.positions=getDefaultPositions();
+  }
 
-    state.positions =
-      getDefaultPositions();
+}
 
+
+function ensurePosterPositions(){
+
+  if(!state.posterPositions.player1){
+    state.posterPositions=
+      getDefaultPosterPositions();
   }
 
 }
 
 
 /* =========================================================
-   RESET POSITIONS
+   RESET MATCH POSITIONS
 ========================================================= */
 
 function resetPositions(){
 
-  state.positions =
+  state.positions=
     getDefaultPositions();
+
+  render();
+
+}
+
+
+/* =========================================================
+   RESET POSTER POSITIONS
+========================================================= */
+
+function resetPosterPositions(){
+
+  state.posterPositions=
+    getDefaultPosterPositions();
 
   render();
 
@@ -1322,12 +1780,12 @@ function resetPositions(){
    BACKGROUND
 ========================================================= */
 
-function drawBackground(){
+function drawBackground(img){
 
-  if(!state.bgImage) return;
+  if(!img)return;
 
   ctx.drawImage(
-    state.bgImage,
+    img,
     0,
     0,
     canvas.width,
@@ -1338,21 +1796,18 @@ function drawBackground(){
 
 
 /* =========================================================
-   OVERLAY
+   CINEMATIC OVERLAY
 ========================================================= */
 
 function drawOverlay(){
 
-  const w =
-    canvas.width;
+  const w=canvas.width;
+  const h=canvas.height;
 
-  const h =
-    canvas.height;
-
-  const bottom =
+  const bottom=
     ctx.createLinearGradient(
       0,
-      h*.42,
+      h*.35,
       0,
       h
     );
@@ -1363,22 +1818,21 @@ function drawOverlay(){
   );
 
   bottom.addColorStop(
-    .55,
-    "rgba(0,0,0,.10)"
+    .50,
+    "rgba(0,0,0,.08)"
   );
 
   bottom.addColorStop(
-    .78,
-    "rgba(0,0,0,.38)"
+    .75,
+    "rgba(0,0,0,.30)"
   );
 
   bottom.addColorStop(
     1,
-    "rgba(0,0,0,.64)"
+    "rgba(0,0,0,.68)"
   );
 
-  ctx.fillStyle =
-    bottom;
+  ctx.fillStyle=bottom;
 
   ctx.fillRect(
     0,
@@ -1388,13 +1842,12 @@ function drawOverlay(){
   );
 
 
-  const min =
-    Math.min(w,h);
+  const min=Math.min(w,h);
 
-  const vignette =
+  const vignette=
     ctx.createRadialGradient(
       w/2,
-      h*.42,
+      h*.43,
       min*.15,
       w/2,
       h*.5,
@@ -1408,11 +1861,10 @@ function drawOverlay(){
 
   vignette.addColorStop(
     1,
-    "rgba(0,0,0,.30)"
+    "rgba(0,0,0,.35)"
   );
 
-  ctx.fillStyle =
-    vignette;
+  ctx.fillStyle=vignette;
 
   ctx.fillRect(
     0,
@@ -1425,43 +1877,7 @@ function drawOverlay(){
 
 
 /* =========================================================
-   LOGO BOUNDS
-========================================================= */
-
-function getLogoDimensions(
-  img,
-  target
-){
-
-  const ratio =
-    img.naturalWidth /
-    img.naturalHeight;
-
-  let width;
-  let height;
-
-  if(ratio >= 1){
-
-    width = target;
-    height = target / ratio;
-
-  }else{
-
-    height = target;
-    width = target * ratio;
-
-  }
-
-  return {
-    width,
-    height
-  };
-
-}
-
-
-/* =========================================================
-   DRAW LOGO
+   MATCH LOGO
 ========================================================= */
 
 function drawLogo(
@@ -1470,43 +1886,32 @@ function drawLogo(
   target
 ){
 
-  if(!img) return;
+  if(!img)return;
 
-  const size =
-    getLogoDimensions(
+  const size=
+    getContainDimensions(
       img,
       target
     );
 
   ctx.save();
 
+  ctx.shadowColor=
+    "rgba(0,0,0,.88)";
 
-  ctx.shadowColor =
-    "rgba(0,0,0,.78)";
+  ctx.shadowBlur=
+    target*.13;
 
-  ctx.shadowBlur =
-    target*.12;
-
-  ctx.shadowOffsetX =
-    0;
-
-  ctx.shadowOffsetY =
+  ctx.shadowOffsetY=
     target*.045;
-
 
   ctx.drawImage(
     img,
-
-    position.x -
-      size.width/2,
-
-    position.y -
-      size.height/2,
-
+    position.x-size.width/2,
+    position.y-size.height/2,
     size.width,
     size.height
   );
-
 
   ctx.restore();
 
@@ -1514,59 +1919,46 @@ function drawLogo(
 
 
 /* =========================================================
-   DRAW FULL TIME
+   FULL TIME
 ========================================================= */
 
 function drawFullTime(){
 
-  const min =
-    Math.min(
-      canvas.width,
-      canvas.height
-    );
+  const min=Math.min(
+    canvas.width,
+    canvas.height
+  );
 
-  const pos =
-    state.positions.fullTime;
+  const pos=state.positions.fullTime;
 
-
-  const size =
+  const size=
     min*.052*
     state.fullTimeScale;
 
-
   ctx.save();
 
+  ctx.font=
+    `800 ${size}px 'Archivo',sans-serif`;
 
-  ctx.font =
-    `700 ${size}px 'Archivo', sans-serif`;
+  ctx.textAlign="center";
+  ctx.textBaseline="middle";
 
-  ctx.textAlign =
-    "center";
+  ctx.fillStyle="#ffffff";
 
-  ctx.textBaseline =
-    "middle";
+  ctx.shadowColor=
+    "rgba(0,0,0,.90)";
 
+  ctx.shadowBlur=
+    size*.30;
 
-  ctx.fillStyle =
-    "#ffffff";
-
-
-  ctx.shadowColor =
-    "rgba(0,0,0,.85)";
-
-  ctx.shadowBlur =
-    size*.25;
-
-  ctx.shadowOffsetY =
+  ctx.shadowOffsetY=
     size*.055;
-
 
   ctx.fillText(
     "FULL TIME",
     pos.x,
     pos.y
   );
-
 
   ctx.restore();
 
@@ -1579,112 +1971,79 @@ function drawFullTime(){
 
 function drawScore(){
 
-  const min =
-    Math.min(
-      canvas.width,
-      canvas.height
-    );
+  const min=Math.min(
+    canvas.width,
+    canvas.height
+  );
 
-  const pos =
-    state.positions.score;
+  const pos=state.positions.score;
 
-
-  const scoreSize =
+  const scoreSize=
     min*.185*
     state.scoreScale;
 
-
-  const homeText =
+  const homeText=
     String(state.homeScore);
 
-  const awayText =
+  const awayText=
     String(state.awayScore);
-
 
   ctx.save();
 
+  ctx.font=
+    `700 ${scoreSize}px '${state.scoreFont}',sans-serif`;
 
-  ctx.font =
-    `700 ${scoreSize}px '${state.scoreFont}', sans-serif`;
+  ctx.textBaseline="middle";
 
-  ctx.textBaseline =
-    "middle";
-
-
-  const homeWidth =
+  const homeWidth=
     ctx.measureText(homeText).width;
 
-  const awayWidth =
+  const awayWidth=
     ctx.measureText(awayText).width;
 
-  const dashWidth =
+  const dashWidth=
     ctx.measureText("-").width;
 
+  const gap=min*.055;
 
-  /*
-    Dynamic spacing for
-    multi-digit scores.
-  */
-
-  const gap =
-    min*.055;
-
-
-  const total =
-    homeWidth +
-    gap +
-    dashWidth +
-    gap +
+  const total=
+    homeWidth+
+    gap+
+    dashWidth+
+    gap+
     awayWidth;
 
+  const start=
+    pos.x-total/2;
 
-  const start =
-    pos.x -
-    total/2;
+  const homeX=
+    start+homeWidth;
 
-
-  const homeX =
-    start +
-    homeWidth;
-
-
-  const dashX =
-    start +
-    homeWidth +
-    gap +
+  const dashX=
+    start+
+    homeWidth+
+    gap+
     dashWidth/2;
 
-
-  const awayX =
-    start +
-    homeWidth +
-    gap +
-    dashWidth +
+  const awayX=
+    start+
+    homeWidth+
+    gap+
+    dashWidth+
     gap;
 
+  ctx.shadowColor=
+    "rgba(0,0,0,.92)";
 
-  /*
-    Strong black sports shadow.
-  */
+  ctx.shadowBlur=
+    scoreSize*.11;
 
-  ctx.shadowColor =
-    "rgba(0,0,0,.88)";
-
-  ctx.shadowBlur =
-    scoreSize*.105;
-
-  ctx.shadowOffsetX =
-    0;
-
-  ctx.shadowOffsetY =
+  ctx.shadowOffsetY=
     scoreSize*.035;
 
-  ctx.fillStyle =
-    "#ffffff";
+  ctx.fillStyle="#ffffff";
 
-
-  ctx.textAlign =
-    "right";
+  ctx.textAlign="right";
 
   ctx.fillText(
     homeText,
@@ -1692,12 +2051,10 @@ function drawScore(){
     pos.y
   );
 
+  ctx.textAlign="center";
 
-  ctx.textAlign =
-    "center";
-
-  ctx.fillStyle =
-    "rgba(255,255,255,.92)";
+  ctx.fillStyle=
+    "rgba(255,255,255,.90)";
 
   ctx.fillText(
     "-",
@@ -1705,19 +2062,15 @@ function drawScore(){
     pos.y
   );
 
+  ctx.textAlign="left";
 
-  ctx.textAlign =
-    "left";
-
-  ctx.fillStyle =
-    "#ffffff";
+  ctx.fillStyle="#ffffff";
 
   ctx.fillText(
     awayText,
     awayX,
     pos.y
   );
-
 
   ctx.restore();
 
@@ -1730,17 +2083,14 @@ function drawScore(){
 
 function drawMatchup(){
 
-  const min =
-    Math.min(
-      canvas.width,
-      canvas.height
-    );
+  const min=Math.min(
+    canvas.width,
+    canvas.height
+  );
 
-
-  const logoSize =
+  const logoSize=
     min*.135*
     state.logoScale;
-
 
   if(state.homeLogo){
 
@@ -1751,7 +2101,6 @@ function drawMatchup(){
     );
 
   }
-
 
   if(state.awayLogo){
 
@@ -1764,43 +2113,37 @@ function drawMatchup(){
   }
 
 
-  /*
-    VS stays between logos.
-  */
+  const x=
+    (
+      state.positions.homeLogo.x+
+      state.positions.awayLogo.x
+    )/2;
 
-  const x =
-    (state.positions.homeLogo.x +
-     state.positions.awayLogo.x) / 2;
+  const y=
+    (
+      state.positions.homeLogo.y+
+      state.positions.awayLogo.y
+    )/2;
 
-
-  const y =
-    (state.positions.homeLogo.y +
-     state.positions.awayLogo.y) / 2;
-
-
-  const vsSize =
+  const vsSize=
     min*.034;
-
 
   ctx.save();
 
-  ctx.font =
-    `700 ${vsSize}px 'Archivo',sans-serif`;
+  ctx.font=
+    `800 ${vsSize}px 'Archivo',sans-serif`;
 
-  ctx.textAlign =
-    "center";
+  ctx.textAlign="center";
+  ctx.textBaseline="middle";
 
-  ctx.textBaseline =
-    "middle";
-
-  ctx.fillStyle =
+  ctx.fillStyle=
     "rgba(255,255,255,.82)";
 
-  ctx.shadowColor =
-    "rgba(0,0,0,.7)";
+  ctx.shadowColor=
+    "rgba(0,0,0,.85)";
 
-  ctx.shadowBlur =
-    vsSize*.35;
+  ctx.shadowBlur=
+    vsSize*.40;
 
   ctx.fillText(
     "VS",
@@ -1809,6 +2152,283 @@ function drawMatchup(){
   );
 
   ctx.restore();
+
+}
+
+
+/* =========================================================
+   POSTER SUBJECT
+========================================================= */
+
+function drawPosterSubject(
+  img,
+  position,
+  target
+){
+
+  if(!img)return;
+
+  const size=
+    getContainDimensions(
+      img,
+      target
+    );
+
+  ctx.save();
+
+  /*
+    Strong cinematic black separation.
+  */
+
+  ctx.shadowColor=
+    "rgba(0,0,0,.94)";
+
+  ctx.shadowBlur=
+    target*.075;
+
+  ctx.shadowOffsetX=0;
+  ctx.shadowOffsetY=
+    target*.045;
+
+  ctx.drawImage(
+    img,
+    position.x-size.width/2,
+    position.y-size.height/2,
+    size.width,
+    size.height
+  );
+
+  ctx.restore();
+
+}
+
+
+/* =========================================================
+   POSTER LOGO
+========================================================= */
+
+function drawPosterLogo(
+  img,
+  position,
+  target
+){
+
+  if(!img)return;
+
+  const size=
+    getContainDimensions(
+      img,
+      target
+    );
+
+  ctx.save();
+
+  ctx.shadowColor=
+    "rgba(0,0,0,.95)";
+
+  ctx.shadowBlur=
+    target*.16;
+
+  ctx.shadowOffsetY=
+    target*.045;
+
+  ctx.drawImage(
+    img,
+    position.x-size.width/2,
+    position.y-size.height/2,
+    size.width,
+    size.height
+  );
+
+  ctx.restore();
+
+}
+
+
+/* =========================================================
+   POSTER TITLE
+========================================================= */
+
+function drawPosterTitle(){
+
+  const min=Math.min(
+    canvas.width,
+    canvas.height
+  );
+
+  const pos=
+    state.posterPositions.title;
+
+  const size=
+    min*.067*
+    state.posterTitleScale;
+
+  ctx.save();
+
+  ctx.font=
+    `800 ${size}px 'Archivo',sans-serif`;
+
+  ctx.textAlign="center";
+  ctx.textBaseline="middle";
+
+  ctx.fillStyle="#ffffff";
+
+  ctx.shadowColor=
+    "rgba(0,0,0,.95)";
+
+  ctx.shadowBlur=
+    size*.30;
+
+  ctx.shadowOffsetY=
+    size*.07;
+
+  ctx.fillText(
+    state.posterTitle || "بداية المباراة",
+    pos.x,
+    pos.y
+  );
+
+  ctx.restore();
+
+}
+
+
+/* =========================================================
+   POSTER CENTER TREATMENT
+========================================================= */
+
+function drawPosterCenter(){
+
+  const min=Math.min(
+    canvas.width,
+    canvas.height
+  );
+
+  const x=canvas.width/2;
+
+  const y=canvas.height*.57;
+
+  const size=min*.038;
+
+  ctx.save();
+
+  ctx.font=
+    `800 ${size}px 'Archivo',sans-serif`;
+
+  ctx.textAlign="center";
+  ctx.textBaseline="middle";
+
+  ctx.fillStyle=
+    "rgba(255,255,255,.78)";
+
+  ctx.shadowColor=
+    "rgba(0,0,0,.92)";
+
+  ctx.shadowBlur=
+    size*.55;
+
+  ctx.fillText(
+    "VS",
+    x,
+    y
+  );
+
+  ctx.restore();
+
+}
+
+
+/* =========================================================
+   POSTER RENDER
+========================================================= */
+
+function drawPoster(){
+
+  ensurePosterPositions();
+
+  drawBackground(
+    state.posterBg
+  );
+
+  if(!state.posterBg)return;
+
+  drawOverlay();
+
+
+  const min=Math.min(
+    canvas.width,
+    canvas.height
+  );
+
+
+  /*
+    Main players.
+    Large enough to create a
+    real sports poster feeling.
+  */
+
+  const playerTarget=
+    min*.48*
+    state.posterPlayerScale;
+
+
+  if(state.player1){
+
+    drawPosterSubject(
+      state.player1,
+      state.posterPositions.player1,
+      playerTarget
+    );
+
+  }
+
+
+  if(state.player2){
+
+    drawPosterSubject(
+      state.player2,
+      state.posterPositions.player2,
+      playerTarget
+    );
+
+  }
+
+
+  drawPosterCenter();
+
+  drawPosterTitle();
+
+
+  /*
+    Club logos remain together
+    near the bottom.
+  */
+
+  const logoTarget=
+    min*.105*
+    state.posterLogoScale;
+
+
+  if(state.posterLogo1){
+
+    drawPosterLogo(
+      state.posterLogo1,
+      state.posterPositions.logo1,
+      logoTarget
+    );
+
+  }
+
+
+  if(state.posterLogo2){
+
+    drawPosterLogo(
+      state.posterLogo2,
+      state.posterPositions.logo2,
+      logoTarget
+    );
+
+  }
 
 }
 
@@ -1827,32 +2447,45 @@ function render(){
   );
 
 
-  if(!state.bgImage){
+  const activeBg=
+    state.mode==="match"
+      ? state.bgImage
+      : state.posterBg;
 
-    emptyHint.style.display =
-      "flex";
+
+  if(!activeBg){
+
+    emptyHint.style.display="flex";
 
     return;
 
   }
 
 
-  emptyHint.style.display =
-    "none";
+  emptyHint.style.display="none";
 
 
-  ensurePositions();
+  if(state.mode==="match"){
 
+    ensureMatchPositions();
 
-  drawBackground();
+    drawBackground(
+      state.bgImage
+    );
 
-  drawOverlay();
+    drawOverlay();
 
-  drawFullTime();
+    drawFullTime();
 
-  drawMatchup();
+    drawMatchup();
 
-  drawScore();
+    drawScore();
+
+  }else{
+
+    drawPoster();
+
+  }
 
 }
 
@@ -1865,7 +2498,7 @@ function updateScaleUI(){
 
   document.getElementById(
     "scoreScale"
-  ).textContent =
+  ).textContent=
     Math.round(
       state.scoreScale*100
     )+"%";
@@ -1873,7 +2506,7 @@ function updateScaleUI(){
 
   document.getElementById(
     "logoScale"
-  ).textContent =
+  ).textContent=
     Math.round(
       state.logoScale*100
     )+"%";
@@ -1881,32 +2514,60 @@ function updateScaleUI(){
 
   document.getElementById(
     "fullTimeScale"
-  ).textContent =
+  ).textContent=
     Math.round(
       state.fullTimeScale*100
+    )+"%";
+
+
+  document.getElementById(
+    "posterPlayerScale"
+  ).textContent=
+    Math.round(
+      state.posterPlayerScale*100
+    )+"%";
+
+
+  document.getElementById(
+    "posterLogoScale"
+  ).textContent=
+    Math.round(
+      state.posterLogoScale*100
+    )+"%";
+
+
+  document.getElementById(
+    "posterTitleScale"
+  ).textContent=
+    Math.round(
+      state.posterTitleScale*100
     )+"%";
 
 }
 
 
 /* =========================================================
-   SCORE
+   SCORE UI
 ========================================================= */
 
 function updateScores(){
 
   document.getElementById(
     "homeScore"
-  ).textContent =
+  ).textContent=
     state.homeScore;
 
   document.getElementById(
     "awayScore"
-  ).textContent =
+  ).textContent=
     state.awayScore;
 
 }
 
+
+/* =========================================================
+   SCORE BUTTONS
+========================================================= */
 
 document
 .getElementById("homePlus")
@@ -1925,7 +2586,7 @@ document
 .addEventListener(
   "click",
   ()=>{
-    state.homeScore =
+    state.homeScore=
       Math.max(
         0,
         state.homeScore-1
@@ -1954,7 +2615,7 @@ document
 .addEventListener(
   "click",
   ()=>{
-    state.awayScore =
+    state.awayScore=
       Math.max(
         0,
         state.awayScore-1
@@ -1967,23 +2628,44 @@ document
 
 
 /* =========================================================
-   SCORE SIZE
+   GENERIC SCALE
 ========================================================= */
+
+function changeScale(
+  property,
+  min,
+  max,
+  direction
+){
+
+  state[property]=
+    Math.min(
+      max,
+      Math.max(
+        min,
+        state[property]+
+        STEP*direction
+      )
+    );
+
+  updateScaleUI();
+  render();
+
+}
+
+
+/* MATCH SCALES */
 
 document
 .getElementById("scorePlus")
 .addEventListener(
   "click",
-  ()=>{
-    state.scoreScale =
-      Math.min(
-        SCORE_MAX,
-        state.scoreScale+STEP
-      );
-
-    updateScaleUI();
-    render();
-  }
+  ()=>changeScale(
+    "scoreScale",
+    SCORE_MIN,
+    SCORE_MAX,
+    1
+  )
 );
 
 
@@ -1991,37 +2673,25 @@ document
 .getElementById("scoreMinus")
 .addEventListener(
   "click",
-  ()=>{
-    state.scoreScale =
-      Math.max(
-        SCORE_MIN,
-        state.scoreScale-STEP
-      );
-
-    updateScaleUI();
-    render();
-  }
+  ()=>changeScale(
+    "scoreScale",
+    SCORE_MIN,
+    SCORE_MAX,
+    -1
+  )
 );
 
-
-/* =========================================================
-   LOGO SIZE
-========================================================= */
 
 document
 .getElementById("logoPlus")
 .addEventListener(
   "click",
-  ()=>{
-    state.logoScale =
-      Math.min(
-        LOGO_MAX,
-        state.logoScale+STEP
-      );
-
-    updateScaleUI();
-    render();
-  }
+  ()=>changeScale(
+    "logoScale",
+    LOGO_MIN,
+    LOGO_MAX,
+    1
+  )
 );
 
 
@@ -2029,37 +2699,25 @@ document
 .getElementById("logoMinus")
 .addEventListener(
   "click",
-  ()=>{
-    state.logoScale =
-      Math.max(
-        LOGO_MIN,
-        state.logoScale-STEP
-      );
-
-    updateScaleUI();
-    render();
-  }
+  ()=>changeScale(
+    "logoScale",
+    LOGO_MIN,
+    LOGO_MAX,
+    -1
+  )
 );
 
-
-/* =========================================================
-   FULL TIME SIZE
-========================================================= */
 
 document
 .getElementById("ftPlus")
 .addEventListener(
   "click",
-  ()=>{
-    state.fullTimeScale =
-      Math.min(
-        FT_MAX,
-        state.fullTimeScale+STEP
-      );
-
-    updateScaleUI();
-    render();
-  }
+  ()=>changeScale(
+    "fullTimeScale",
+    FT_MIN,
+    FT_MAX,
+    1
+  )
 );
 
 
@@ -2067,29 +2725,105 @@ document
 .getElementById("ftMinus")
 .addEventListener(
   "click",
-  ()=>{
-    state.fullTimeScale =
-      Math.max(
-        FT_MIN,
-        state.fullTimeScale-STEP
-      );
+  ()=>changeScale(
+    "fullTimeScale",
+    FT_MIN,
+    FT_MAX,
+    -1
+  )
+);
 
-    updateScaleUI();
-    render();
-  }
+
+/* POSTER SCALES */
+
+document
+.getElementById("posterPlayerPlus")
+.addEventListener(
+  "click",
+  ()=>changeScale(
+    "posterPlayerScale",
+    PLAYER_MIN,
+    PLAYER_MAX,
+    1
+  )
+);
+
+
+document
+.getElementById("posterPlayerMinus")
+.addEventListener(
+  "click",
+  ()=>changeScale(
+    "posterPlayerScale",
+    PLAYER_MIN,
+    PLAYER_MAX,
+    -1
+  )
+);
+
+
+document
+.getElementById("posterLogoPlus")
+.addEventListener(
+  "click",
+  ()=>changeScale(
+    "posterLogoScale",
+    POSTER_LOGO_MIN,
+    POSTER_LOGO_MAX,
+    1
+  )
+);
+
+
+document
+.getElementById("posterLogoMinus")
+.addEventListener(
+  "click",
+  ()=>changeScale(
+    "posterLogoScale",
+    POSTER_LOGO_MIN,
+    POSTER_LOGO_MAX,
+    -1
+  )
+);
+
+
+document
+.getElementById("posterTitlePlus")
+.addEventListener(
+  "click",
+  ()=>changeScale(
+    "posterTitleScale",
+    POSTER_TITLE_MIN,
+    POSTER_TITLE_MAX,
+    1
+  )
+);
+
+
+document
+.getElementById("posterTitleMinus")
+.addEventListener(
+  "click",
+  ()=>changeScale(
+    "posterTitleScale",
+    POSTER_TITLE_MIN,
+    POSTER_TITLE_MAX,
+    -1
+  )
 );
 
 
 /* =========================================================
-   FONT SELECT
+   FONT
 ========================================================= */
 
-const fontSelect =
+const fontSelect=
   document.getElementById(
     "fontSelect"
   );
 
-const fontPreview =
+const fontPreview=
   document.getElementById(
     "fontPreview"
   );
@@ -2099,11 +2833,11 @@ fontSelect.addEventListener(
   "change",
   function(){
 
-    state.scoreFont =
+    state.scoreFont=
       this.value;
 
-    fontPreview.style.fontFamily =
-      `'${this.value}', sans-serif`;
+    fontPreview.style.fontFamily=
+      `'${this.value}',sans-serif`;
 
     render();
 
@@ -2112,7 +2846,80 @@ fontSelect.addEventListener(
 
 
 /* =========================================================
-   UPLOAD BACKGROUND
+   MODE SWITCH
+========================================================= */
+
+function setMode(mode){
+
+  state.mode=mode;
+
+  if(mode==="match"){
+
+    matchPanel.classList.remove(
+      "hidden"
+    );
+
+    posterPanel.classList.add(
+      "hidden"
+    );
+
+    matchModeBtn.classList.add(
+      "active"
+    );
+
+    posterModeBtn.classList.remove(
+      "active"
+    );
+
+    dragInfo.textContent=
+      "DRAG LOGOS • SCORE • FULL TIME";
+
+  }else{
+
+    matchPanel.classList.add(
+      "hidden"
+    );
+
+    posterPanel.classList.remove(
+      "hidden"
+    );
+
+    matchModeBtn.classList.remove(
+      "active"
+    );
+
+    posterModeBtn.classList.add(
+      "active"
+    );
+
+    dragInfo.textContent=
+      "DRAG PLAYERS • LOGOS • TITLE";
+
+  }
+
+  render();
+
+}
+
+
+matchModeBtn.addEventListener(
+  "click",
+  ()=>{
+    setMode("match");
+  }
+);
+
+
+posterModeBtn.addEventListener(
+  "click",
+  ()=>{
+    setMode("poster");
+  }
+);
+
+
+/* =========================================================
+   MATCH BACKGROUND
 ========================================================= */
 
 document
@@ -2121,42 +2928,32 @@ document
   "change",
   function(e){
 
-    const file =
-      e.target.files[0];
+    const file=e.target.files[0];
 
-    if(!file) return;
-
+    if(!file)return;
 
     loadImage(
       file,
       function(img){
 
-        state.bgImage =
-          img;
+        state.bgImage=img;
 
-
-        canvas.width =
+        canvas.width=
           img.naturalWidth;
 
-        canvas.height =
+        canvas.height=
           img.naturalHeight;
 
-
-        state.positions =
+        state.positions=
           getDefaultPositions();
-
 
         document.getElementById(
           "bgFileName"
-        ).textContent =
-          file.name;
-
+        ).textContent=file.name;
 
         document.getElementById(
           "bgStatus"
-        ).textContent =
-          "Loaded";
-
+        ).textContent="Loaded";
 
         render();
 
@@ -2168,7 +2965,7 @@ document
 
 
 /* =========================================================
-   HOME LOGO
+   MATCH HOME LOGO
 ========================================================= */
 
 document
@@ -2177,31 +2974,23 @@ document
   "change",
   function(e){
 
-    const file =
-      e.target.files[0];
+    const file=e.target.files[0];
 
-    if(!file) return;
-
+    if(!file)return;
 
     loadImage(
       file,
       function(img){
 
-        state.homeLogo =
-          img;
-
+        state.homeLogo=img;
 
         document.getElementById(
           "homeLogoName"
-        ).textContent =
-          file.name;
-
+        ).textContent=file.name;
 
         document.getElementById(
           "homeLogoStatus"
-        ).textContent =
-          "Loaded";
-
+        ).textContent="Loaded";
 
         render();
 
@@ -2213,7 +3002,7 @@ document
 
 
 /* =========================================================
-   AWAY LOGO
+   MATCH AWAY LOGO
 ========================================================= */
 
 document
@@ -2222,31 +3011,23 @@ document
   "change",
   function(e){
 
-    const file =
-      e.target.files[0];
+    const file=e.target.files[0];
 
-    if(!file) return;
-
+    if(!file)return;
 
     loadImage(
       file,
       function(img){
 
-        state.awayLogo =
-          img;
-
+        state.awayLogo=img;
 
         document.getElementById(
           "awayLogoName"
-        ).textContent =
-          file.name;
-
+        ).textContent=file.name;
 
         document.getElementById(
           "awayLogoStatus"
-        ).textContent =
-          "Loaded";
-
+        ).textContent="Loaded";
 
         render();
 
@@ -2258,27 +3039,237 @@ document
 
 
 /* =========================================================
-   CANVAS POINTER COORDINATES
+   POSTER BACKGROUND
+========================================================= */
+
+document
+.getElementById("posterBgInput")
+.addEventListener(
+  "change",
+  function(e){
+
+    const file=e.target.files[0];
+
+    if(!file)return;
+
+    loadImage(
+      file,
+      function(img){
+
+        state.posterBg=img;
+
+        canvas.width=
+          img.naturalWidth;
+
+        canvas.height=
+          img.naturalHeight;
+
+        state.posterPositions=
+          getDefaultPosterPositions();
+
+        document.getElementById(
+          "posterBgName"
+        ).textContent=file.name;
+
+        document.getElementById(
+          "posterBgStatus"
+        ).textContent="Loaded";
+
+        render();
+
+      }
+    );
+
+  }
+);
+
+
+/* =========================================================
+   POSTER PLAYER 1
+========================================================= */
+
+document
+.getElementById("player1Input")
+.addEventListener(
+  "change",
+  function(e){
+
+    const file=e.target.files[0];
+
+    if(!file)return;
+
+    loadImage(
+      file,
+      function(img){
+
+        state.player1=img;
+
+        document.getElementById(
+          "player1Name"
+        ).textContent=file.name;
+
+        document.getElementById(
+          "player1Status"
+        ).textContent="Loaded";
+
+        render();
+
+      }
+    );
+
+  }
+);
+
+
+/* =========================================================
+   POSTER PLAYER 2
+========================================================= */
+
+document
+.getElementById("player2Input")
+.addEventListener(
+  "change",
+  function(e){
+
+    const file=e.target.files[0];
+
+    if(!file)return;
+
+    loadImage(
+      file,
+      function(img){
+
+        state.player2=img;
+
+        document.getElementById(
+          "player2Name"
+        ).textContent=file.name;
+
+        document.getElementById(
+          "player2Status"
+        ).textContent="Loaded";
+
+        render();
+
+      }
+    );
+
+  }
+);
+
+
+/* =========================================================
+   POSTER LOGO 1
+========================================================= */
+
+document
+.getElementById("posterLogo1Input")
+.addEventListener(
+  "change",
+  function(e){
+
+    const file=e.target.files[0];
+
+    if(!file)return;
+
+    loadImage(
+      file,
+      function(img){
+
+        state.posterLogo1=img;
+
+        document.getElementById(
+          "posterLogo1Name"
+        ).textContent=file.name;
+
+        document.getElementById(
+          "posterLogo1Status"
+        ).textContent="Loaded";
+
+        render();
+
+      }
+    );
+
+  }
+);
+
+
+/* =========================================================
+   POSTER LOGO 2
+========================================================= */
+
+document
+.getElementById("posterLogo2Input")
+.addEventListener(
+  "change",
+  function(e){
+
+    const file=e.target.files[0];
+
+    if(!file)return;
+
+    loadImage(
+      file,
+      function(img){
+
+        state.posterLogo2=img;
+
+        document.getElementById(
+          "posterLogo2Name"
+        ).textContent=file.name;
+
+        document.getElementById(
+          "posterLogo2Status"
+        ).textContent="Loaded";
+
+        render();
+
+      }
+    );
+
+  }
+);
+
+
+/* =========================================================
+   POSTER TITLE
+========================================================= */
+
+document
+.getElementById("posterTitleInput")
+.addEventListener(
+  "input",
+  function(){
+
+    state.posterTitle=
+      this.value;
+
+    render();
+
+  }
+);
+
+
+/* =========================================================
+   CANVAS POINT
 ========================================================= */
 
 function getCanvasPoint(e){
 
-  const rect =
+  const rect=
     canvas.getBoundingClientRect();
 
-
-  return {
+  return{
 
     x:
-      (e.clientX -
-       rect.left) *
-      canvas.width /
+      (e.clientX-rect.left)*
+      canvas.width/
       rect.width,
 
     y:
-      (e.clientY -
-       rect.top) *
-      canvas.height /
+      (e.clientY-rect.top)*
+      canvas.height/
       rect.height
 
   };
@@ -2287,7 +3278,7 @@ function getCanvasPoint(e){
 
 
 /* =========================================================
-   HIT TEST — LOGO
+   HIT LOGO
 ========================================================= */
 
 function hitLogo(
@@ -2297,33 +3288,28 @@ function hitLogo(
   point
 ){
 
-  if(!img) return false;
+  if(!img || !position)
+    return false;
 
-
-  const size =
-    getLogoDimensions(
+  const size=
+    getContainDimensions(
       img,
       target
     );
 
-
-  return (
+  return(
 
     point.x >=
-      position.x -
-      size.width/2 &&
+      position.x-size.width/2 &&
 
     point.x <=
-      position.x +
-      size.width/2 &&
+      position.x+size.width/2 &&
 
     point.y >=
-      position.y -
-      size.height/2 &&
+      position.y-size.height/2 &&
 
     point.y <=
-      position.y +
-      size.height/2
+      position.y+size.height/2
 
   );
 
@@ -2331,57 +3317,94 @@ function hitLogo(
 
 
 /* =========================================================
-   HIT TEST — SCORE
+   HIT SUBJECT
+========================================================= */
+
+function hitSubject(
+  img,
+  position,
+  target,
+  point
+){
+
+  if(!img || !position)
+    return false;
+
+  const size=
+    getContainDimensions(
+      img,
+      target
+    );
+
+  return(
+
+    point.x >=
+      position.x-size.width/2 &&
+
+    point.x <=
+      position.x+size.width/2 &&
+
+    point.y >=
+      position.y-size.height/2 &&
+
+    point.y <=
+      position.y+size.height/2
+
+  );
+
+}
+
+
+/* =========================================================
+   HIT MATCH SCORE
 ========================================================= */
 
 function hitScore(point){
 
-  const min =
-    Math.min(
-      canvas.width,
-      canvas.height
-    );
+  if(!state.positions.score)
+    return false;
 
+  const min=Math.min(
+    canvas.width,
+    canvas.height
+  );
 
-  const size =
+  const size=
     min*.185*
     state.scoreScale;
 
-
-  const text =
-    state.homeScore +
-    " - " +
+  const text=
+    state.homeScore+
+    " - "+
     state.awayScore;
-
 
   ctx.save();
 
-  ctx.font =
+  ctx.font=
     `700 ${size}px '${state.scoreFont}',sans-serif`;
 
-  const width =
+  const width=
     ctx.measureText(text).width;
 
   ctx.restore();
 
-
-  return (
+  return(
 
     point.x >=
-      state.positions.score.x -
-      width*.65 &&
+      state.positions.score.x-
+      width*.70 &&
 
     point.x <=
-      state.positions.score.x +
-      width*.65 &&
+      state.positions.score.x+
+      width*.70 &&
 
     point.y >=
-      state.positions.score.y -
-      size*.6 &&
+      state.positions.score.y-
+      size*.65 &&
 
     point.y <=
-      state.positions.score.y +
-      size*.6
+      state.positions.score.y+
+      size*.65
 
   );
 
@@ -2389,40 +3412,73 @@ function hitScore(point){
 
 
 /* =========================================================
-   HIT TEST — FULL TIME
+   HIT FULL TIME
 ========================================================= */
 
 function hitFullTime(point){
 
-  const min =
-    Math.min(
-      canvas.width,
-      canvas.height
-    );
+  if(!state.positions.fullTime)
+    return false;
 
+  const min=Math.min(
+    canvas.width,
+    canvas.height
+  );
 
-  const size =
+  const size=
     min*.052*
     state.fullTimeScale;
 
-
-  return (
+  return(
 
     point.x >=
-      state.positions.fullTime.x -
-      min*.16 &&
+      state.positions.fullTime.x-min*.18 &&
 
     point.x <=
-      state.positions.fullTime.x +
-      min*.16 &&
+      state.positions.fullTime.x+min*.18 &&
 
     point.y >=
-      state.positions.fullTime.y -
-      size &&
+      state.positions.fullTime.y-size &&
 
     point.y <=
-      state.positions.fullTime.y +
-      size
+      state.positions.fullTime.y+size
+
+  );
+
+}
+
+
+/* =========================================================
+   HIT POSTER TITLE
+========================================================= */
+
+function hitPosterTitle(point){
+
+  if(!state.posterPositions.title)
+    return false;
+
+  const min=Math.min(
+    canvas.width,
+    canvas.height
+  );
+
+  const size=
+    min*.067*
+    state.posterTitleScale;
+
+  return(
+
+    point.x >=
+      state.posterPositions.title.x-min*.25 &&
+
+    point.x <=
+      state.posterPositions.title.x+min*.25 &&
+
+    point.y >=
+      state.posterPositions.title.y-size &&
+
+    point.y <=
+      state.posterPositions.title.y+size
 
   );
 
@@ -2437,114 +3493,197 @@ canvas.addEventListener(
   "pointerdown",
   function(e){
 
-    if(!state.bgImage)
+    const activeBg=
+      state.mode==="match"
+        ? state.bgImage
+        : state.posterBg;
+
+    if(!activeBg)
       return;
 
-
-    ensurePositions();
-
-
-    const point =
+    const point=
       getCanvasPoint(e);
 
+    let target=null;
 
-    const min =
-      Math.min(
+
+    if(state.mode==="match"){
+
+      ensureMatchPositions();
+
+      const min=Math.min(
         canvas.width,
         canvas.height
       );
 
-
-    const logoSize =
-      min*.135*
-      state.logoScale;
-
-
-    /*
-      Check order:
-      Full Time
-      Score
-      Home Logo
-      Away Logo
-    */
-
-    let target = null;
+      const logoSize=
+        min*.135*
+        state.logoScale;
 
 
-    if(
-      hitFullTime(point)
-    ){
+      if(hitFullTime(point)){
 
-      target =
-        "fullTime";
+        target="fullTime";
+
+      }
+      else if(hitScore(point)){
+
+        target="score";
+
+      }
+      else if(
+        hitLogo(
+          state.awayLogo,
+          state.positions.awayLogo,
+          logoSize,
+          point
+        )
+      ){
+
+        target="awayLogo";
+
+      }
+      else if(
+        hitLogo(
+          state.homeLogo,
+          state.positions.homeLogo,
+          logoSize,
+          point
+        )
+      ){
+
+        target="homeLogo";
+
+      }
+
+
+      if(!target)
+        return;
+
+
+      state.drag={
+
+        type:"match",
+
+        target,
+
+        offsetX:
+          point.x-
+          state.positions[target].x,
+
+        offsetY:
+          point.y-
+          state.positions[target].y
+
+      };
+
+    }else{
+
+      ensurePosterPositions();
+
+      const min=Math.min(
+        canvas.width,
+        canvas.height
+      );
+
+      const playerSize=
+        min*.48*
+        state.posterPlayerScale;
+
+      const logoSize=
+        min*.105*
+        state.posterLogoScale;
+
+
+      /*
+        Reverse drawing order
+        for intuitive selection.
+      */
+
+      if(hitPosterTitle(point)){
+
+        target="title";
+
+      }
+      else if(
+        hitLogo(
+          state.posterLogo2,
+          state.posterPositions.logo2,
+          logoSize,
+          point
+        )
+      ){
+
+        target="logo2";
+
+      }
+      else if(
+        hitLogo(
+          state.posterLogo1,
+          state.posterPositions.logo1,
+          logoSize,
+          point
+        )
+      ){
+
+        target="logo1";
+
+      }
+      else if(
+        hitSubject(
+          state.player2,
+          state.posterPositions.player2,
+          playerSize,
+          point
+        )
+      ){
+
+        target="player2";
+
+      }
+      else if(
+        hitSubject(
+          state.player1,
+          state.posterPositions.player1,
+          playerSize,
+          point
+        )
+      ){
+
+        target="player1";
+
+      }
+
+
+      if(!target)
+        return;
+
+
+      state.drag={
+
+        type:"poster",
+
+        target,
+
+        offsetX:
+          point.x-
+          state.posterPositions[target].x,
+
+        offsetY:
+          point.y-
+          state.posterPositions[target].y
+
+      };
 
     }
-
-    else if(
-      hitScore(point)
-    ){
-
-      target =
-        "score";
-
-    }
-
-    else if(
-      hitLogo(
-        state.awayLogo,
-        state.positions.awayLogo,
-        logoSize,
-        point
-      )
-    ){
-
-      target =
-        "awayLogo";
-
-    }
-
-    else if(
-      hitLogo(
-        state.homeLogo,
-        state.positions.homeLogo,
-        logoSize,
-        point
-      )
-    ){
-
-      target =
-        "homeLogo";
-
-    }
-
-
-    if(!target)
-      return;
-
-
-    state.drag = {
-
-      target,
-
-      offsetX:
-        point.x -
-        state.positions[target].x,
-
-      offsetY:
-        point.y -
-        state.positions[target].y
-
-    };
 
 
     canvas.setPointerCapture(
       e.pointerId
     );
 
-
-    canvas.style.cursor =
+    canvas.style.cursor=
       "grabbing";
-
 
     e.preventDefault();
 
@@ -2560,31 +3699,35 @@ canvas.addEventListener(
   "pointermove",
   function(e){
 
-    if(!state.bgImage)
+    const activeBg=
+      state.mode==="match"
+        ? state.bgImage
+        : state.posterBg;
+
+    if(!activeBg)
       return;
 
-
-    const point =
+    const point=
       getCanvasPoint(e);
 
 
-    /*
-      Active dragging.
-    */
-
     if(state.drag){
 
-      const target =
+      const target=
         state.drag.target;
 
+      const positions=
+        state.drag.type==="match"
+          ? state.positions
+          : state.posterPositions;
 
-      state.positions[target].x =
-        point.x -
+
+      positions[target].x=
+        point.x-
         state.drag.offsetX;
 
-
-      state.positions[target].y =
-        point.y -
+      positions[target].y=
+        point.y-
         state.drag.offsetY;
 
 
@@ -2595,70 +3738,117 @@ canvas.addEventListener(
     }
 
 
-    /*
-      Hover cursor detection.
-    */
+    let hovering=false;
 
-    const min =
-      Math.min(
+
+    if(state.mode==="match"){
+
+      ensureMatchPositions();
+
+      const min=Math.min(
         canvas.width,
         canvas.height
       );
 
+      const logoSize=
+        min*.135*
+        state.logoScale;
 
-    const logoSize =
-      min*.135*
-      state.logoScale;
 
+      hovering=
 
-    const hovering =
+        hitFullTime(point) ||
 
-      hitFullTime(point) ||
+        hitScore(point) ||
 
-      hitScore(point) ||
+        hitLogo(
+          state.homeLogo,
+          state.positions.homeLogo,
+          logoSize,
+          point
+        ) ||
 
-      hitLogo(
-        state.homeLogo,
-        state.positions.homeLogo,
-        logoSize,
-        point
-      ) ||
+        hitLogo(
+          state.awayLogo,
+          state.positions.awayLogo,
+          logoSize,
+          point
+        );
 
-      hitLogo(
-        state.awayLogo,
-        state.positions.awayLogo,
-        logoSize,
-        point
+    }else{
+
+      ensurePosterPositions();
+
+      const min=Math.min(
+        canvas.width,
+        canvas.height
       );
 
+      const playerSize=
+        min*.48*
+        state.posterPlayerScale;
 
-    canvas.style.cursor =
-      hovering ?
-      "grab" :
-      "default";
+      const logoSize=
+        min*.105*
+        state.posterLogoScale;
+
+
+      hovering=
+
+        hitPosterTitle(point) ||
+
+        hitLogo(
+          state.posterLogo1,
+          state.posterPositions.logo1,
+          logoSize,
+          point
+        ) ||
+
+        hitLogo(
+          state.posterLogo2,
+          state.posterPositions.logo2,
+          logoSize,
+          point
+        ) ||
+
+        hitSubject(
+          state.player1,
+          state.posterPositions.player1,
+          playerSize,
+          point
+        ) ||
+
+        hitSubject(
+          state.player2,
+          state.posterPositions.player2,
+          playerSize,
+          point
+        );
+
+    }
+
+
+    canvas.style.cursor=
+      hovering
+        ? "grab"
+        : "default";
 
   }
 );
 
 
 /* =========================================================
-   POINTER UP
+   STOP DRAG
 ========================================================= */
 
-function stopDrag(e){
+function stopDrag(){
 
-  if(state.drag){
+  state.drag=null;
 
-    state.drag =
-      null;
-
-    canvas.style.cursor =
-      "default";
-
-  }
+  canvas.style.cursor=
+    "default";
 
 }
-
 
 canvas.addEventListener(
   "pointerup",
@@ -2670,23 +3860,9 @@ canvas.addEventListener(
   stopDrag
 );
 
-canvas.addEventListener(
-  "pointerleave",
-  function(){
-
-    if(!state.drag){
-
-      canvas.style.cursor =
-        "default";
-
-    }
-
-  }
-);
-
 
 /* =========================================================
-   RESET POSITIONS BUTTON
+   RESET POSITIONS
 ========================================================= */
 
 document
@@ -2694,6 +3870,14 @@ document
 .addEventListener(
   "click",
   resetPositions
+);
+
+
+document
+.getElementById("resetPosterPositions")
+.addEventListener(
+  "click",
+  resetPosterPositions
 );
 
 
@@ -2707,7 +3891,12 @@ document
   "click",
   function(){
 
-    if(!state.bgImage){
+    const activeBg=
+      state.mode==="match"
+        ? state.bgImage
+        : state.posterBg;
+
+    if(!activeBg){
 
       alert(
         "Upload a background photo before exporting."
@@ -2718,15 +3907,17 @@ document
     }
 
 
-    const link =
+    const link=
       document.createElement("a");
 
 
-    link.download =
-      "zone-sport-match-graphic.png";
+    link.download=
+      state.mode==="match"
+        ? "zone-sport-full-time.png"
+        : "zone-sport-kick-off.png";
 
 
-    link.href =
+    link.href=
       canvas.toDataURL(
         "image/png"
       );
@@ -2748,25 +3939,39 @@ document
   "click",
   function(){
 
-    state.bgImage = null;
+    state.mode="match";
 
-    state.homeLogo = null;
+    state.bgImage=null;
 
-    state.awayLogo = null;
+    state.homeLogo=null;
+    state.awayLogo=null;
 
-    state.homeScore = 0;
+    state.homeScore=0;
+    state.awayScore=0;
 
-    state.awayScore = 0;
+    state.scoreScale=1;
+    state.logoScale=1;
+    state.fullTimeScale=1;
 
-    state.scoreScale = 1;
+    state.scoreFont="Anton";
 
-    state.logoScale = 1;
 
-    state.fullTimeScale = 1;
+    state.posterBg=null;
 
-    state.scoreFont = "Anton";
+    state.player1=null;
+    state.player2=null;
 
-    state.positions = {
+    state.posterLogo1=null;
+    state.posterLogo2=null;
+
+    state.posterTitle="بداية المباراة";
+
+    state.posterPlayerScale=1;
+    state.posterLogoScale=1;
+    state.posterTitleScale=1;
+
+
+    state.positions={
       homeLogo:null,
       awayLogo:null,
       score:null,
@@ -2774,65 +3979,124 @@ document
     };
 
 
-    document.getElementById(
-      "bgInput"
-    ).value = "";
+    state.posterPositions={
+      player1:null,
+      player2:null,
+      logo1:null,
+      logo2:null,
+      title:null
+    };
 
-    document.getElementById(
-      "homeLogoInput"
-    ).value = "";
 
-    document.getElementById(
-      "awayLogoInput"
-    ).value = "";
+    state.drag=null;
+
+
+    const ids=[
+
+      "bgInput",
+      "homeLogoInput",
+      "awayLogoInput",
+
+      "posterBgInput",
+      "player1Input",
+      "player2Input",
+
+      "posterLogo1Input",
+      "posterLogo2Input"
+
+    ];
+
+
+    ids.forEach(
+      id=>{
+        document.getElementById(
+          id
+        ).value="";
+      }
+    );
 
 
     document.getElementById(
       "bgFileName"
-    ).textContent =
+    ).textContent=
       "Upload photo";
 
     document.getElementById(
       "homeLogoName"
-    ).textContent =
+    ).textContent=
       "Al Ahly logo";
 
     document.getElementById(
       "awayLogoName"
-    ).textContent =
+    ).textContent=
       "Opponent logo";
 
 
     document.getElementById(
-      "bgStatus"
-    ).textContent =
-      "—";
+      "posterBgName"
+    ).textContent=
+      "Upload background";
 
     document.getElementById(
-      "homeLogoStatus"
-    ).textContent =
-      "—";
+      "player1Name"
+    ).textContent=
+      "Player / Team 01";
 
     document.getElementById(
-      "awayLogoStatus"
-    ).textContent =
-      "—";
+      "player2Name"
+    ).textContent=
+      "Player / Team 02";
+
+    document.getElementById(
+      "posterLogo1Name"
+    ).textContent=
+      "Club Logo 01";
+
+    document.getElementById(
+      "posterLogo2Name"
+    ).textContent=
+      "Club Logo 02";
 
 
-    canvas.width = 1080;
-    canvas.height = 1350;
+    [
+      "bgStatus",
+      "homeLogoStatus",
+      "awayLogoStatus",
+      "posterBgStatus",
+      "player1Status",
+      "player2Status",
+      "posterLogo1Status",
+      "posterLogo2Status"
+    ].forEach(
+      id=>{
+        document.getElementById(
+          id
+        ).textContent="—";
+      }
+    );
 
 
-    fontSelect.value =
-      "Anton";
+    document.getElementById(
+      "posterTitleInput"
+    ).value=
+      "بداية المباراة";
 
-    fontPreview.style.fontFamily =
+
+    canvas.width=1080;
+    canvas.height=1350;
+
+
+    fontSelect.value="Anton";
+
+    fontPreview.style.fontFamily=
       "'Anton',sans-serif";
 
 
     updateScores();
 
     updateScaleUI();
+
+    setMode("match");
 
     render();
 
@@ -2841,15 +4105,14 @@ document
 
 
 /* =========================================================
-   INIT
+   INITIALIZE
 ========================================================= */
 
 updateScores();
 
 updateScaleUI();
 
-
-fontPreview.style.fontFamily =
+fontPreview.style.fontFamily=
   "'Anton',sans-serif";
 
 
@@ -2869,9 +4132,8 @@ render();
 
 
 })();
-
 </script>
 
 </body>
 </html>
-```
+

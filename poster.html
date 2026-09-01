@@ -1,0 +1,2877 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ZONE SPORT — Match Graphic Generator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&family=Archivo+Black&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+  --bg:#07080a;
+  --panel:#0d0f12;
+  --card:#14171b;
+  --card-hover:#191d22;
+  --line:#262b32;
+
+  --text:#f4f5f7;
+  --muted:#858d98;
+  --muted2:#555d68;
+
+  --radius:12px;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  margin:0;
+  width:100%;
+  height:100%;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Archivo',sans-serif;
+}
+
+body{
+  overflow:hidden;
+}
+
+button,
+select,
+input{
+  font:inherit;
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
+.app{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:350px 1fr;
+
+  background:
+    radial-gradient(
+      circle at 75% 20%,
+      rgba(255,255,255,.035),
+      transparent 35%
+    ),
+    #07080a;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar{
+  height:100vh;
+  overflow-y:auto;
+
+  padding:27px 21px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #101216,
+      #0b0d10
+    );
+
+  border-right:1px solid var(--line);
+
+  scrollbar-width:thin;
+}
+
+.sidebar::-webkit-scrollbar{
+  width:5px;
+}
+
+.sidebar::-webkit-scrollbar-thumb{
+  background:#2c3239;
+  border-radius:20px;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand{
+  padding:3px 2px 22px;
+  border-bottom:1px solid #1d2126;
+}
+
+.brand-title{
+  font-family:'Anton',sans-serif;
+  font-size:25px;
+  letter-spacing:.8px;
+}
+
+.brand-sub{
+  margin-top:6px;
+  font-size:9px;
+  letter-spacing:2px;
+  color:#737b86;
+  font-weight:800;
+}
+
+
+/* =========================================================
+   GROUPS
+========================================================= */
+
+.group{
+  margin-top:21px;
+}
+
+.label{
+  margin-bottom:9px;
+  padding-left:2px;
+
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1px;
+
+  color:#858d97;
+  text-transform:uppercase;
+}
+
+
+/* =========================================================
+   UPLOAD
+========================================================= */
+
+.upload{
+  position:relative;
+
+  min-height:50px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0 14px;
+
+  background:#14171b;
+
+  border:1px solid var(--line);
+  border-radius:11px;
+
+  cursor:pointer;
+
+  transition:
+    .18s ease;
+}
+
+.upload:hover{
+  background:#191d22;
+  border-color:#3a4149;
+}
+
+.upload-name{
+  max-width:75%;
+
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+
+  font-size:12px;
+  font-weight:600;
+}
+
+.upload-status{
+  font-size:9px;
+  color:#646c76;
+  text-transform:uppercase;
+}
+
+.upload input{
+  position:absolute;
+  inset:0;
+
+  opacity:0;
+  cursor:pointer;
+}
+
+
+/* =========================================================
+   CONTROL CARD
+========================================================= */
+
+.control-card{
+  padding:14px;
+
+  background:#14171b;
+
+  border:1px solid var(--line);
+  border-radius:11px;
+}
+
+.control-title{
+  margin-bottom:13px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1px;
+  text-transform:uppercase;
+
+  color:#cbd0d6;
+}
+
+.control-value{
+  font-family:'Anton',sans-serif;
+  font-size:18px;
+  color:#f2f3f5;
+}
+
+
+/* =========================================================
+   TEAM SCORE
+========================================================= */
+
+.team{
+  padding:13px;
+
+  background:#111418;
+
+  border:1px solid #20252b;
+  border-radius:10px;
+
+  margin-bottom:9px;
+}
+
+.team:last-child{
+  margin-bottom:0;
+}
+
+.team-name{
+  margin-bottom:11px;
+
+  font-size:9px;
+  font-weight:800;
+
+  letter-spacing:1px;
+
+  color:#858d97;
+
+  text-transform:uppercase;
+}
+
+.controls{
+  display:grid;
+  grid-template-columns:40px 1fr 40px;
+  align-items:center;
+  gap:9px;
+}
+
+.small-btn{
+  width:40px;
+  height:38px;
+
+  border:1px solid #292e35;
+  border-radius:9px;
+
+  background:#0d0f12;
+
+  color:white;
+
+  font-size:18px;
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.13s ease;
+}
+
+.small-btn:hover{
+  background:#1b1f24;
+  border-color:#3c434c;
+}
+
+.small-btn:active{
+  transform:scale(.94);
+}
+
+.value{
+  text-align:center;
+
+  font-family:'Anton',sans-serif;
+  font-size:23px;
+
+  color:#f4f5f7;
+}
+
+
+/* =========================================================
+   FONT SELECT
+========================================================= */
+
+.font-select{
+  width:100%;
+  height:44px;
+
+  padding:0 12px;
+
+  color:#eceef1;
+  background:#0f1114;
+
+  border:1px solid #292e35;
+  border-radius:9px;
+
+  outline:none;
+
+  cursor:pointer;
+
+  transition:.15s ease;
+}
+
+.font-select:hover,
+.font-select:focus{
+  border-color:#414850;
+  background:#15181c;
+}
+
+.font-preview{
+  margin-top:10px;
+
+  padding:12px 8px;
+
+  text-align:center;
+
+  border:1px solid #20252b;
+  border-radius:9px;
+
+  background:#0b0d10;
+
+  color:white;
+
+  font-size:27px;
+}
+
+
+/* =========================================================
+   RESET POSITIONS
+========================================================= */
+
+.reset-position{
+  width:100%;
+  height:42px;
+
+  border:1px solid #292e35;
+  border-radius:9px;
+
+  background:transparent;
+
+  color:#8b939e;
+
+  font-size:10px;
+  font-weight:800;
+
+  letter-spacing:1px;
+
+  cursor:pointer;
+
+  transition:.15s ease;
+}
+
+.reset-position:hover{
+  color:white;
+  background:#15181c;
+  border-color:#3b424b;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.actions{
+  margin-top:24px;
+
+  padding-top:20px;
+
+  border-top:1px solid #1c2025;
+}
+
+.export{
+  width:100%;
+  height:48px;
+
+  border:none;
+  border-radius:11px;
+
+  background:#f2f3f5;
+
+  color:#08090b;
+
+  font-size:11px;
+  font-weight:800;
+
+  letter-spacing:1px;
+
+  cursor:pointer;
+
+  transition:.15s ease;
+}
+
+.export:hover{
+  background:white;
+  box-shadow:0 8px 25px rgba(0,0,0,.25);
+}
+
+.reset{
+  width:100%;
+  height:43px;
+
+  margin-top:9px;
+
+  border:1px solid #292e35;
+  border-radius:11px;
+
+  background:transparent;
+
+  color:#777f8a;
+
+  font-size:10px;
+  font-weight:800;
+
+  letter-spacing:1px;
+
+  cursor:pointer;
+
+  transition:.15s ease;
+}
+
+.reset:hover{
+  color:white;
+  background:#15181c;
+}
+
+
+/* =========================================================
+   STAGE
+========================================================= */
+
+.stage{
+  position:relative;
+
+  min-width:0;
+  min-height:100vh;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:38px;
+
+  overflow:hidden;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(255,255,255,.035),
+      transparent 60%
+    ),
+    #08090b;
+}
+
+.stage::before{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  opacity:.12;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.035) 1px,
+      transparent 1px
+    );
+
+  background-size:55px 55px;
+
+  pointer-events:none;
+}
+
+
+/* =========================================================
+   CANVAS
+========================================================= */
+
+.canvas-wrap{
+  position:relative;
+  z-index:2;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  max-width:100%;
+  max-height:100%;
+
+  background:#000;
+
+  overflow:hidden;
+
+  border-radius:5px;
+
+  box-shadow:
+    0 35px 90px rgba(0,0,0,.7),
+    0 10px 30px rgba(0,0,0,.35);
+
+  outline:1px solid rgba(255,255,255,.05);
+
+  cursor:default;
+}
+
+#canvas{
+  display:block;
+
+  max-width:min(78vw,680px);
+  max-height:88vh;
+
+  width:auto;
+  height:auto;
+
+  touch-action:none;
+}
+
+.empty{
+  position:absolute;
+  inset:0;
+
+  display:flex;
+  flex-direction:column;
+
+  align-items:center;
+  justify-content:center;
+
+  gap:7px;
+
+  pointer-events:none;
+
+  color:#555d67;
+
+  font-size:11px;
+
+  text-align:center;
+}
+
+.empty strong{
+  font-family:'Anton',sans-serif;
+  font-size:17px;
+  letter-spacing:1px;
+  color:#343a42;
+}
+
+
+/* =========================================================
+   DRAG INFO
+========================================================= */
+
+.drag-info{
+  position:absolute;
+
+  z-index:5;
+
+  left:50%;
+  bottom:18px;
+
+  transform:translateX(-50%);
+
+  padding:7px 12px;
+
+  border:1px solid rgba(255,255,255,.08);
+
+  border-radius:20px;
+
+  background:rgba(8,9,11,.72);
+
+  backdrop-filter:blur(12px);
+
+  color:#8c949e;
+
+  font-size:9px;
+  font-weight:700;
+
+  letter-spacing:.5px;
+
+  pointer-events:none;
+
+  opacity:.75;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:900px){
+
+  body{
+    overflow:auto;
+  }
+
+  .app{
+    grid-template-columns:1fr;
+  }
+
+  .sidebar{
+    height:auto;
+    border-right:none;
+    border-bottom:1px solid var(--line);
+  }
+
+  .stage{
+    min-height:75vh;
+  }
+
+  #canvas{
+    max-width:92vw;
+  }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+  <!-- =====================================================
+       SIDEBAR
+  ====================================================== -->
+
+  <aside class="sidebar">
+
+    <div class="brand">
+      <div class="brand-title">
+        ZONE SPORT
+      </div>
+
+      <div class="brand-sub">
+        MATCH GRAPHIC GENERATOR
+      </div>
+    </div>
+
+
+    <!-- BACKGROUND -->
+
+    <div class="group">
+
+      <div class="label">
+        Background Photo
+      </div>
+
+      <label class="upload">
+
+        <span
+          class="upload-name"
+          id="bgFileName"
+        >
+          Upload photo
+        </span>
+
+        <span
+          class="upload-status"
+          id="bgStatus"
+        >
+          —
+        </span>
+
+        <input
+          id="bgInput"
+          type="file"
+          accept="image/*"
+        >
+
+      </label>
+
+    </div>
+
+
+    <!-- LOGOS -->
+
+    <div class="group">
+
+      <div class="label">
+        Team Logos
+      </div>
+
+      <label class="upload">
+
+        <span
+          class="upload-name"
+          id="homeLogoName"
+        >
+          Al Ahly logo
+        </span>
+
+        <span
+          class="upload-status"
+          id="homeLogoStatus"
+        >
+          —
+        </span>
+
+        <input
+          id="homeLogoInput"
+          type="file"
+          accept="image/*"
+        >
+
+      </label>
+
+
+      <label class="upload">
+
+        <span
+          class="upload-name"
+          id="awayLogoName"
+        >
+          Opponent logo
+        </span>
+
+        <span
+          class="upload-status"
+          id="awayLogoStatus"
+        >
+          —
+        </span>
+
+        <input
+          id="awayLogoInput"
+          type="file"
+          accept="image/*"
+        >
+
+      </label>
+
+    </div>
+
+
+    <!-- SCORE -->
+
+    <div class="group">
+
+      <div class="label">
+        Score
+      </div>
+
+
+      <div class="team">
+
+        <div class="team-name">
+          Al Ahly
+        </div>
+
+        <div class="controls">
+
+          <button
+            class="small-btn"
+            id="homeMinus"
+          >
+            −
+          </button>
+
+          <div
+            class="value"
+            id="homeScore"
+          >
+            0
+          </div>
+
+          <button
+            class="small-btn"
+            id="homePlus"
+          >
+            +
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="team">
+
+        <div class="team-name">
+          Opponent
+        </div>
+
+        <div class="controls">
+
+          <button
+            class="small-btn"
+            id="awayMinus"
+          >
+            −
+          </button>
+
+          <div
+            class="value"
+            id="awayScore"
+          >
+            0
+          </div>
+
+          <button
+            class="small-btn"
+            id="awayPlus"
+          >
+            +
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- SCORE SIZE -->
+
+    <div class="group">
+
+      <div class="label">
+        Score Size
+      </div>
+
+      <div class="control-card">
+
+        <div class="control-title">
+
+          <span>
+            Number Size
+          </span>
+
+          <span
+            class="control-value"
+            id="scoreScale"
+          >
+            100%
+          </span>
+
+        </div>
+
+        <div class="controls">
+
+          <button
+            class="small-btn"
+            id="scoreMinus"
+          >
+            −
+          </button>
+
+          <div class="value"
+               style="font-family:'Archivo';font-size:10px;color:#69717c;letter-spacing:1px;">
+            SCORE
+          </div>
+
+          <button
+            class="small-btn"
+            id="scorePlus"
+          >
+            +
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- SCORE FONT -->
+
+    <div class="group">
+
+      <div class="label">
+        Score Font
+      </div>
+
+      <select
+        class="font-select"
+        id="fontSelect"
+      >
+
+        <option value="Anton">
+          Anton — Athletic
+        </option>
+
+        <option value="Bebas Neue">
+          Bebas Neue — Sports
+        </option>
+
+        <option value="Oswald">
+          Oswald — Condensed
+        </option>
+
+        <option value="Teko">
+          Teko — Powerful
+        </option>
+
+        <option value="Rajdhani">
+          Rajdhani — Modern
+        </option>
+
+        <option value="Archivo Black">
+          Archivo Black — Bold
+        </option>
+
+      </select>
+
+
+      <div
+        class="font-preview"
+        id="fontPreview"
+      >
+        10 - 2
+      </div>
+
+    </div>
+
+
+    <!-- LOGO SIZE -->
+
+    <div class="group">
+
+      <div class="label">
+        Logo Size
+      </div>
+
+      <div class="control-card">
+
+        <div class="control-title">
+
+          <span>
+            Both Logos
+          </span>
+
+          <span
+            class="control-value"
+            id="logoScale"
+          >
+            100%
+          </span>
+
+        </div>
+
+        <div class="controls">
+
+          <button
+            class="small-btn"
+            id="logoMinus"
+          >
+            −
+          </button>
+
+          <div class="value"
+               style="font-family:'Archivo';font-size:10px;color:#69717c;letter-spacing:1px;">
+            LOGOS
+          </div>
+
+          <button
+            class="small-btn"
+            id="logoPlus"
+          >
+            +
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- FULL TIME -->
+
+    <div class="group">
+
+      <div class="label">
+        Full Time
+      </div>
+
+      <div class="control-card">
+
+        <div class="control-title">
+
+          <span>
+            FULL TIME Size
+          </span>
+
+          <span
+            class="control-value"
+            id="fullTimeScale"
+          >
+            100%
+          </span>
+
+        </div>
+
+        <div class="controls">
+
+          <button
+            class="small-btn"
+            id="ftMinus"
+          >
+            −
+          </button>
+
+          <div class="value"
+               style="font-family:'Archivo';font-size:10px;color:#69717c;letter-spacing:1px;">
+            TITLE
+          </div>
+
+          <button
+            class="small-btn"
+            id="ftPlus"
+          >
+            +
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- RESET POSITIONS -->
+
+    <div class="group">
+
+      <button
+        class="reset-position"
+        id="resetPositions"
+      >
+        RESET POSITIONS
+      </button>
+
+    </div>
+
+
+    <!-- ACTIONS -->
+
+    <div class="actions">
+
+      <button
+        class="export"
+        id="exportBtn"
+      >
+        EXPORT PNG
+      </button>
+
+      <button
+        class="reset"
+        id="resetBtn"
+      >
+        RESET EVERYTHING
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =====================================================
+       PREVIEW
+  ====================================================== -->
+
+  <main class="stage">
+
+    <div class="canvas-wrap">
+
+      <canvas
+        id="canvas"
+        width="1080"
+        height="1350"
+      ></canvas>
+
+      <div
+        class="empty"
+        id="emptyHint"
+      >
+
+        <strong>
+          NO PHOTO LOADED
+        </strong>
+
+        <span>
+          Upload a background photo to begin
+        </span>
+
+      </div>
+
+      <div class="drag-info">
+        DRAG LOGOS • SCORE • FULL TIME
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+
+<script>
+
+(function(){
+
+"use strict";
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+const state = {
+
+  bgImage:null,
+
+  homeLogo:null,
+
+  awayLogo:null,
+
+  homeScore:0,
+
+  awayScore:0,
+
+  scoreScale:1,
+
+  logoScale:1,
+
+  fullTimeScale:1,
+
+  scoreFont:"Anton",
+
+  positions:{
+
+    homeLogo:null,
+
+    awayLogo:null,
+
+    score:null,
+
+    fullTime:null
+
+  },
+
+  drag:null
+
+};
+
+
+/* =========================================================
+   LIMITS
+========================================================= */
+
+const SCORE_MIN = .65;
+const SCORE_MAX = 1.55;
+
+const LOGO_MIN = .65;
+const LOGO_MAX = 1.60;
+
+const FT_MIN = .65;
+const FT_MAX = 1.60;
+
+const STEP = .05;
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const canvas =
+  document.getElementById("canvas");
+
+const ctx =
+  canvas.getContext("2d");
+
+const emptyHint =
+  document.getElementById("emptyHint");
+
+
+/* =========================================================
+   LOAD IMAGE
+========================================================= */
+
+function loadImage(file, callback){
+
+  if(!file) return;
+
+  const reader =
+    new FileReader();
+
+  reader.onload =
+    function(e){
+
+      const img =
+        new Image();
+
+      img.onload =
+        function(){
+
+          callback(img);
+
+        };
+
+      img.src =
+        e.target.result;
+
+    };
+
+  reader.readAsDataURL(file);
+
+}
+
+
+/* =========================================================
+   DEFAULT POSITIONS
+========================================================= */
+
+function getDefaultPositions(){
+
+  const w = canvas.width;
+  const h = canvas.height;
+  const min = Math.min(w,h);
+
+  const scoreY =
+    h - min * .115;
+
+  const matchupY =
+    scoreY - min * .205;
+
+  return {
+
+    homeLogo:{
+      x:w/2 - min*.09,
+      y:matchupY
+    },
+
+    awayLogo:{
+      x:w/2 + min*.09,
+      y:matchupY
+    },
+
+    score:{
+      x:w/2,
+      y:scoreY
+    },
+
+    fullTime:{
+      x:w/2,
+      y:scoreY - min*.145
+    }
+
+  };
+
+}
+
+
+function ensurePositions(){
+
+  if(!state.positions.homeLogo){
+
+    state.positions =
+      getDefaultPositions();
+
+  }
+
+}
+
+
+/* =========================================================
+   RESET POSITIONS
+========================================================= */
+
+function resetPositions(){
+
+  state.positions =
+    getDefaultPositions();
+
+  render();
+
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+function drawBackground(){
+
+  if(!state.bgImage) return;
+
+  ctx.drawImage(
+    state.bgImage,
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+}
+
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+function drawOverlay(){
+
+  const w =
+    canvas.width;
+
+  const h =
+    canvas.height;
+
+  const bottom =
+    ctx.createLinearGradient(
+      0,
+      h*.42,
+      0,
+      h
+    );
+
+  bottom.addColorStop(
+    0,
+    "rgba(0,0,0,0)"
+  );
+
+  bottom.addColorStop(
+    .55,
+    "rgba(0,0,0,.10)"
+  );
+
+  bottom.addColorStop(
+    .78,
+    "rgba(0,0,0,.38)"
+  );
+
+  bottom.addColorStop(
+    1,
+    "rgba(0,0,0,.64)"
+  );
+
+  ctx.fillStyle =
+    bottom;
+
+  ctx.fillRect(
+    0,
+    0,
+    w,
+    h
+  );
+
+
+  const min =
+    Math.min(w,h);
+
+  const vignette =
+    ctx.createRadialGradient(
+      w/2,
+      h*.42,
+      min*.15,
+      w/2,
+      h*.5,
+      min*.85
+    );
+
+  vignette.addColorStop(
+    0,
+    "rgba(0,0,0,0)"
+  );
+
+  vignette.addColorStop(
+    1,
+    "rgba(0,0,0,.30)"
+  );
+
+  ctx.fillStyle =
+    vignette;
+
+  ctx.fillRect(
+    0,
+    0,
+    w,
+    h
+  );
+
+}
+
+
+/* =========================================================
+   LOGO BOUNDS
+========================================================= */
+
+function getLogoDimensions(
+  img,
+  target
+){
+
+  const ratio =
+    img.naturalWidth /
+    img.naturalHeight;
+
+  let width;
+  let height;
+
+  if(ratio >= 1){
+
+    width = target;
+    height = target / ratio;
+
+  }else{
+
+    height = target;
+    width = target * ratio;
+
+  }
+
+  return {
+    width,
+    height
+  };
+
+}
+
+
+/* =========================================================
+   DRAW LOGO
+========================================================= */
+
+function drawLogo(
+  img,
+  position,
+  target
+){
+
+  if(!img) return;
+
+  const size =
+    getLogoDimensions(
+      img,
+      target
+    );
+
+  ctx.save();
+
+
+  ctx.shadowColor =
+    "rgba(0,0,0,.78)";
+
+  ctx.shadowBlur =
+    target*.12;
+
+  ctx.shadowOffsetX =
+    0;
+
+  ctx.shadowOffsetY =
+    target*.045;
+
+
+  ctx.drawImage(
+    img,
+
+    position.x -
+      size.width/2,
+
+    position.y -
+      size.height/2,
+
+    size.width,
+    size.height
+  );
+
+
+  ctx.restore();
+
+}
+
+
+/* =========================================================
+   DRAW FULL TIME
+========================================================= */
+
+function drawFullTime(){
+
+  const min =
+    Math.min(
+      canvas.width,
+      canvas.height
+    );
+
+  const pos =
+    state.positions.fullTime;
+
+
+  const size =
+    min*.052*
+    state.fullTimeScale;
+
+
+  ctx.save();
+
+
+  ctx.font =
+    `700 ${size}px 'Archivo', sans-serif`;
+
+  ctx.textAlign =
+    "center";
+
+  ctx.textBaseline =
+    "middle";
+
+
+  ctx.fillStyle =
+    "#ffffff";
+
+
+  ctx.shadowColor =
+    "rgba(0,0,0,.85)";
+
+  ctx.shadowBlur =
+    size*.25;
+
+  ctx.shadowOffsetY =
+    size*.055;
+
+
+  ctx.fillText(
+    "FULL TIME",
+    pos.x,
+    pos.y
+  );
+
+
+  ctx.restore();
+
+}
+
+
+/* =========================================================
+   SCORE
+========================================================= */
+
+function drawScore(){
+
+  const min =
+    Math.min(
+      canvas.width,
+      canvas.height
+    );
+
+  const pos =
+    state.positions.score;
+
+
+  const scoreSize =
+    min*.185*
+    state.scoreScale;
+
+
+  const homeText =
+    String(state.homeScore);
+
+  const awayText =
+    String(state.awayScore);
+
+
+  ctx.save();
+
+
+  ctx.font =
+    `700 ${scoreSize}px '${state.scoreFont}', sans-serif`;
+
+  ctx.textBaseline =
+    "middle";
+
+
+  const homeWidth =
+    ctx.measureText(homeText).width;
+
+  const awayWidth =
+    ctx.measureText(awayText).width;
+
+  const dashWidth =
+    ctx.measureText("-").width;
+
+
+  /*
+    Dynamic spacing for
+    multi-digit scores.
+  */
+
+  const gap =
+    min*.055;
+
+
+  const total =
+    homeWidth +
+    gap +
+    dashWidth +
+    gap +
+    awayWidth;
+
+
+  const start =
+    pos.x -
+    total/2;
+
+
+  const homeX =
+    start +
+    homeWidth;
+
+
+  const dashX =
+    start +
+    homeWidth +
+    gap +
+    dashWidth/2;
+
+
+  const awayX =
+    start +
+    homeWidth +
+    gap +
+    dashWidth +
+    gap;
+
+
+  /*
+    Strong black sports shadow.
+  */
+
+  ctx.shadowColor =
+    "rgba(0,0,0,.88)";
+
+  ctx.shadowBlur =
+    scoreSize*.105;
+
+  ctx.shadowOffsetX =
+    0;
+
+  ctx.shadowOffsetY =
+    scoreSize*.035;
+
+  ctx.fillStyle =
+    "#ffffff";
+
+
+  ctx.textAlign =
+    "right";
+
+  ctx.fillText(
+    homeText,
+    homeX,
+    pos.y
+  );
+
+
+  ctx.textAlign =
+    "center";
+
+  ctx.fillStyle =
+    "rgba(255,255,255,.92)";
+
+  ctx.fillText(
+    "-",
+    dashX,
+    pos.y
+  );
+
+
+  ctx.textAlign =
+    "left";
+
+  ctx.fillStyle =
+    "#ffffff";
+
+  ctx.fillText(
+    awayText,
+    awayX,
+    pos.y
+  );
+
+
+  ctx.restore();
+
+}
+
+
+/* =========================================================
+   MATCHUP
+========================================================= */
+
+function drawMatchup(){
+
+  const min =
+    Math.min(
+      canvas.width,
+      canvas.height
+    );
+
+
+  const logoSize =
+    min*.135*
+    state.logoScale;
+
+
+  if(state.homeLogo){
+
+    drawLogo(
+      state.homeLogo,
+      state.positions.homeLogo,
+      logoSize
+    );
+
+  }
+
+
+  if(state.awayLogo){
+
+    drawLogo(
+      state.awayLogo,
+      state.positions.awayLogo,
+      logoSize
+    );
+
+  }
+
+
+  /*
+    VS stays between logos.
+  */
+
+  const x =
+    (state.positions.homeLogo.x +
+     state.positions.awayLogo.x) / 2;
+
+
+  const y =
+    (state.positions.homeLogo.y +
+     state.positions.awayLogo.y) / 2;
+
+
+  const vsSize =
+    min*.034;
+
+
+  ctx.save();
+
+  ctx.font =
+    `700 ${vsSize}px 'Archivo',sans-serif`;
+
+  ctx.textAlign =
+    "center";
+
+  ctx.textBaseline =
+    "middle";
+
+  ctx.fillStyle =
+    "rgba(255,255,255,.82)";
+
+  ctx.shadowColor =
+    "rgba(0,0,0,.7)";
+
+  ctx.shadowBlur =
+    vsSize*.35;
+
+  ctx.fillText(
+    "VS",
+    x,
+    y
+  );
+
+  ctx.restore();
+
+}
+
+
+/* =========================================================
+   MASTER RENDER
+========================================================= */
+
+function render(){
+
+  ctx.clearRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+
+  if(!state.bgImage){
+
+    emptyHint.style.display =
+      "flex";
+
+    return;
+
+  }
+
+
+  emptyHint.style.display =
+    "none";
+
+
+  ensurePositions();
+
+
+  drawBackground();
+
+  drawOverlay();
+
+  drawFullTime();
+
+  drawMatchup();
+
+  drawScore();
+
+}
+
+
+/* =========================================================
+   SCALE UI
+========================================================= */
+
+function updateScaleUI(){
+
+  document.getElementById(
+    "scoreScale"
+  ).textContent =
+    Math.round(
+      state.scoreScale*100
+    )+"%";
+
+
+  document.getElementById(
+    "logoScale"
+  ).textContent =
+    Math.round(
+      state.logoScale*100
+    )+"%";
+
+
+  document.getElementById(
+    "fullTimeScale"
+  ).textContent =
+    Math.round(
+      state.fullTimeScale*100
+    )+"%";
+
+}
+
+
+/* =========================================================
+   SCORE
+========================================================= */
+
+function updateScores(){
+
+  document.getElementById(
+    "homeScore"
+  ).textContent =
+    state.homeScore;
+
+  document.getElementById(
+    "awayScore"
+  ).textContent =
+    state.awayScore;
+
+}
+
+
+document
+.getElementById("homePlus")
+.addEventListener(
+  "click",
+  ()=>{
+    state.homeScore++;
+    updateScores();
+    render();
+  }
+);
+
+
+document
+.getElementById("homeMinus")
+.addEventListener(
+  "click",
+  ()=>{
+    state.homeScore =
+      Math.max(
+        0,
+        state.homeScore-1
+      );
+
+    updateScores();
+    render();
+  }
+);
+
+
+document
+.getElementById("awayPlus")
+.addEventListener(
+  "click",
+  ()=>{
+    state.awayScore++;
+    updateScores();
+    render();
+  }
+);
+
+
+document
+.getElementById("awayMinus")
+.addEventListener(
+  "click",
+  ()=>{
+    state.awayScore =
+      Math.max(
+        0,
+        state.awayScore-1
+      );
+
+    updateScores();
+    render();
+  }
+);
+
+
+/* =========================================================
+   SCORE SIZE
+========================================================= */
+
+document
+.getElementById("scorePlus")
+.addEventListener(
+  "click",
+  ()=>{
+    state.scoreScale =
+      Math.min(
+        SCORE_MAX,
+        state.scoreScale+STEP
+      );
+
+    updateScaleUI();
+    render();
+  }
+);
+
+
+document
+.getElementById("scoreMinus")
+.addEventListener(
+  "click",
+  ()=>{
+    state.scoreScale =
+      Math.max(
+        SCORE_MIN,
+        state.scoreScale-STEP
+      );
+
+    updateScaleUI();
+    render();
+  }
+);
+
+
+/* =========================================================
+   LOGO SIZE
+========================================================= */
+
+document
+.getElementById("logoPlus")
+.addEventListener(
+  "click",
+  ()=>{
+    state.logoScale =
+      Math.min(
+        LOGO_MAX,
+        state.logoScale+STEP
+      );
+
+    updateScaleUI();
+    render();
+  }
+);
+
+
+document
+.getElementById("logoMinus")
+.addEventListener(
+  "click",
+  ()=>{
+    state.logoScale =
+      Math.max(
+        LOGO_MIN,
+        state.logoScale-STEP
+      );
+
+    updateScaleUI();
+    render();
+  }
+);
+
+
+/* =========================================================
+   FULL TIME SIZE
+========================================================= */
+
+document
+.getElementById("ftPlus")
+.addEventListener(
+  "click",
+  ()=>{
+    state.fullTimeScale =
+      Math.min(
+        FT_MAX,
+        state.fullTimeScale+STEP
+      );
+
+    updateScaleUI();
+    render();
+  }
+);
+
+
+document
+.getElementById("ftMinus")
+.addEventListener(
+  "click",
+  ()=>{
+    state.fullTimeScale =
+      Math.max(
+        FT_MIN,
+        state.fullTimeScale-STEP
+      );
+
+    updateScaleUI();
+    render();
+  }
+);
+
+
+/* =========================================================
+   FONT SELECT
+========================================================= */
+
+const fontSelect =
+  document.getElementById(
+    "fontSelect"
+  );
+
+const fontPreview =
+  document.getElementById(
+    "fontPreview"
+  );
+
+
+fontSelect.addEventListener(
+  "change",
+  function(){
+
+    state.scoreFont =
+      this.value;
+
+    fontPreview.style.fontFamily =
+      `'${this.value}', sans-serif`;
+
+    render();
+
+  }
+);
+
+
+/* =========================================================
+   UPLOAD BACKGROUND
+========================================================= */
+
+document
+.getElementById("bgInput")
+.addEventListener(
+  "change",
+  function(e){
+
+    const file =
+      e.target.files[0];
+
+    if(!file) return;
+
+
+    loadImage(
+      file,
+      function(img){
+
+        state.bgImage =
+          img;
+
+
+        canvas.width =
+          img.naturalWidth;
+
+        canvas.height =
+          img.naturalHeight;
+
+
+        state.positions =
+          getDefaultPositions();
+
+
+        document.getElementById(
+          "bgFileName"
+        ).textContent =
+          file.name;
+
+
+        document.getElementById(
+          "bgStatus"
+        ).textContent =
+          "Loaded";
+
+
+        render();
+
+      }
+    );
+
+  }
+);
+
+
+/* =========================================================
+   HOME LOGO
+========================================================= */
+
+document
+.getElementById("homeLogoInput")
+.addEventListener(
+  "change",
+  function(e){
+
+    const file =
+      e.target.files[0];
+
+    if(!file) return;
+
+
+    loadImage(
+      file,
+      function(img){
+
+        state.homeLogo =
+          img;
+
+
+        document.getElementById(
+          "homeLogoName"
+        ).textContent =
+          file.name;
+
+
+        document.getElementById(
+          "homeLogoStatus"
+        ).textContent =
+          "Loaded";
+
+
+        render();
+
+      }
+    );
+
+  }
+);
+
+
+/* =========================================================
+   AWAY LOGO
+========================================================= */
+
+document
+.getElementById("awayLogoInput")
+.addEventListener(
+  "change",
+  function(e){
+
+    const file =
+      e.target.files[0];
+
+    if(!file) return;
+
+
+    loadImage(
+      file,
+      function(img){
+
+        state.awayLogo =
+          img;
+
+
+        document.getElementById(
+          "awayLogoName"
+        ).textContent =
+          file.name;
+
+
+        document.getElementById(
+          "awayLogoStatus"
+        ).textContent =
+          "Loaded";
+
+
+        render();
+
+      }
+    );
+
+  }
+);
+
+
+/* =========================================================
+   CANVAS POINTER COORDINATES
+========================================================= */
+
+function getCanvasPoint(e){
+
+  const rect =
+    canvas.getBoundingClientRect();
+
+
+  return {
+
+    x:
+      (e.clientX -
+       rect.left) *
+      canvas.width /
+      rect.width,
+
+    y:
+      (e.clientY -
+       rect.top) *
+      canvas.height /
+      rect.height
+
+  };
+
+}
+
+
+/* =========================================================
+   HIT TEST — LOGO
+========================================================= */
+
+function hitLogo(
+  img,
+  position,
+  target,
+  point
+){
+
+  if(!img) return false;
+
+
+  const size =
+    getLogoDimensions(
+      img,
+      target
+    );
+
+
+  return (
+
+    point.x >=
+      position.x -
+      size.width/2 &&
+
+    point.x <=
+      position.x +
+      size.width/2 &&
+
+    point.y >=
+      position.y -
+      size.height/2 &&
+
+    point.y <=
+      position.y +
+      size.height/2
+
+  );
+
+}
+
+
+/* =========================================================
+   HIT TEST — SCORE
+========================================================= */
+
+function hitScore(point){
+
+  const min =
+    Math.min(
+      canvas.width,
+      canvas.height
+    );
+
+
+  const size =
+    min*.185*
+    state.scoreScale;
+
+
+  const text =
+    state.homeScore +
+    " - " +
+    state.awayScore;
+
+
+  ctx.save();
+
+  ctx.font =
+    `700 ${size}px '${state.scoreFont}',sans-serif`;
+
+  const width =
+    ctx.measureText(text).width;
+
+  ctx.restore();
+
+
+  return (
+
+    point.x >=
+      state.positions.score.x -
+      width*.65 &&
+
+    point.x <=
+      state.positions.score.x +
+      width*.65 &&
+
+    point.y >=
+      state.positions.score.y -
+      size*.6 &&
+
+    point.y <=
+      state.positions.score.y +
+      size*.6
+
+  );
+
+}
+
+
+/* =========================================================
+   HIT TEST — FULL TIME
+========================================================= */
+
+function hitFullTime(point){
+
+  const min =
+    Math.min(
+      canvas.width,
+      canvas.height
+    );
+
+
+  const size =
+    min*.052*
+    state.fullTimeScale;
+
+
+  return (
+
+    point.x >=
+      state.positions.fullTime.x -
+      min*.16 &&
+
+    point.x <=
+      state.positions.fullTime.x +
+      min*.16 &&
+
+    point.y >=
+      state.positions.fullTime.y -
+      size &&
+
+    point.y <=
+      state.positions.fullTime.y +
+      size
+
+  );
+
+}
+
+
+/* =========================================================
+   POINTER DOWN
+========================================================= */
+
+canvas.addEventListener(
+  "pointerdown",
+  function(e){
+
+    if(!state.bgImage)
+      return;
+
+
+    ensurePositions();
+
+
+    const point =
+      getCanvasPoint(e);
+
+
+    const min =
+      Math.min(
+        canvas.width,
+        canvas.height
+      );
+
+
+    const logoSize =
+      min*.135*
+      state.logoScale;
+
+
+    /*
+      Check order:
+      Full Time
+      Score
+      Home Logo
+      Away Logo
+    */
+
+    let target = null;
+
+
+    if(
+      hitFullTime(point)
+    ){
+
+      target =
+        "fullTime";
+
+    }
+
+    else if(
+      hitScore(point)
+    ){
+
+      target =
+        "score";
+
+    }
+
+    else if(
+      hitLogo(
+        state.awayLogo,
+        state.positions.awayLogo,
+        logoSize,
+        point
+      )
+    ){
+
+      target =
+        "awayLogo";
+
+    }
+
+    else if(
+      hitLogo(
+        state.homeLogo,
+        state.positions.homeLogo,
+        logoSize,
+        point
+      )
+    ){
+
+      target =
+        "homeLogo";
+
+    }
+
+
+    if(!target)
+      return;
+
+
+    state.drag = {
+
+      target,
+
+      offsetX:
+        point.x -
+        state.positions[target].x,
+
+      offsetY:
+        point.y -
+        state.positions[target].y
+
+    };
+
+
+    canvas.setPointerCapture(
+      e.pointerId
+    );
+
+
+    canvas.style.cursor =
+      "grabbing";
+
+
+    e.preventDefault();
+
+  }
+);
+
+
+/* =========================================================
+   POINTER MOVE
+========================================================= */
+
+canvas.addEventListener(
+  "pointermove",
+  function(e){
+
+    if(!state.bgImage)
+      return;
+
+
+    const point =
+      getCanvasPoint(e);
+
+
+    /*
+      Active dragging.
+    */
+
+    if(state.drag){
+
+      const target =
+        state.drag.target;
+
+
+      state.positions[target].x =
+        point.x -
+        state.drag.offsetX;
+
+
+      state.positions[target].y =
+        point.y -
+        state.drag.offsetY;
+
+
+      render();
+
+      return;
+
+    }
+
+
+    /*
+      Hover cursor detection.
+    */
+
+    const min =
+      Math.min(
+        canvas.width,
+        canvas.height
+      );
+
+
+    const logoSize =
+      min*.135*
+      state.logoScale;
+
+
+    const hovering =
+
+      hitFullTime(point) ||
+
+      hitScore(point) ||
+
+      hitLogo(
+        state.homeLogo,
+        state.positions.homeLogo,
+        logoSize,
+        point
+      ) ||
+
+      hitLogo(
+        state.awayLogo,
+        state.positions.awayLogo,
+        logoSize,
+        point
+      );
+
+
+    canvas.style.cursor =
+      hovering ?
+      "grab" :
+      "default";
+
+  }
+);
+
+
+/* =========================================================
+   POINTER UP
+========================================================= */
+
+function stopDrag(e){
+
+  if(state.drag){
+
+    state.drag =
+      null;
+
+    canvas.style.cursor =
+      "default";
+
+  }
+
+}
+
+
+canvas.addEventListener(
+  "pointerup",
+  stopDrag
+);
+
+canvas.addEventListener(
+  "pointercancel",
+  stopDrag
+);
+
+canvas.addEventListener(
+  "pointerleave",
+  function(){
+
+    if(!state.drag){
+
+      canvas.style.cursor =
+        "default";
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   RESET POSITIONS BUTTON
+========================================================= */
+
+document
+.getElementById("resetPositions")
+.addEventListener(
+  "click",
+  resetPositions
+);
+
+
+/* =========================================================
+   EXPORT
+========================================================= */
+
+document
+.getElementById("exportBtn")
+.addEventListener(
+  "click",
+  function(){
+
+    if(!state.bgImage){
+
+      alert(
+        "Upload a background photo before exporting."
+      );
+
+      return;
+
+    }
+
+
+    const link =
+      document.createElement("a");
+
+
+    link.download =
+      "zone-sport-match-graphic.png";
+
+
+    link.href =
+      canvas.toDataURL(
+        "image/png"
+      );
+
+
+    link.click();
+
+  }
+);
+
+
+/* =========================================================
+   RESET EVERYTHING
+========================================================= */
+
+document
+.getElementById("resetBtn")
+.addEventListener(
+  "click",
+  function(){
+
+    state.bgImage = null;
+
+    state.homeLogo = null;
+
+    state.awayLogo = null;
+
+    state.homeScore = 0;
+
+    state.awayScore = 0;
+
+    state.scoreScale = 1;
+
+    state.logoScale = 1;
+
+    state.fullTimeScale = 1;
+
+    state.scoreFont = "Anton";
+
+    state.positions = {
+      homeLogo:null,
+      awayLogo:null,
+      score:null,
+      fullTime:null
+    };
+
+
+    document.getElementById(
+      "bgInput"
+    ).value = "";
+
+    document.getElementById(
+      "homeLogoInput"
+    ).value = "";
+
+    document.getElementById(
+      "awayLogoInput"
+    ).value = "";
+
+
+    document.getElementById(
+      "bgFileName"
+    ).textContent =
+      "Upload photo";
+
+    document.getElementById(
+      "homeLogoName"
+    ).textContent =
+      "Al Ahly logo";
+
+    document.getElementById(
+      "awayLogoName"
+    ).textContent =
+      "Opponent logo";
+
+
+    document.getElementById(
+      "bgStatus"
+    ).textContent =
+      "—";
+
+    document.getElementById(
+      "homeLogoStatus"
+    ).textContent =
+      "—";
+
+    document.getElementById(
+      "awayLogoStatus"
+    ).textContent =
+      "—";
+
+
+    canvas.width = 1080;
+    canvas.height = 1350;
+
+
+    fontSelect.value =
+      "Anton";
+
+    fontPreview.style.fontFamily =
+      "'Anton',sans-serif";
+
+
+    updateScores();
+
+    updateScaleUI();
+
+    render();
+
+  }
+);
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+updateScores();
+
+updateScaleUI();
+
+
+fontPreview.style.fontFamily =
+  "'Anton',sans-serif";
+
+
+if(
+  document.fonts &&
+  document.fonts.ready
+){
+
+  document.fonts.ready.then(
+    render
+  );
+
+}
+
+
+render();
+
+
+})();
+
+</script>
+
+</body>
+</html>
+```

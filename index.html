@@ -505,29 +505,34 @@
 
         let draggingTarget = null;
 
-        const socialIcons = {
-            facebook: new Image(),
-            instagram: new Image(),
-            tiktok: new Image(),
-            youtube: new Image(),
-            loadedCount: 0
-        };
+        // رسم أيقونات السوشيال ميديا كأشكال هندسية نظيفة وملونة (تجنباً لمشاكل التحميل الخارجي CORS)
+        function drawVectorIcon(ctx, type, x, y, size) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            // خلفية دائرية زاهية للأيقونة
+            ctx.beginPath();
+            ctx.arc(0, 0, size/2, 0, Math.PI * 2);
+            if (type === 'facebook') ctx.fillStyle = '#1877f2';
+            else if (type === 'instagram') ctx.fillStyle = '#e1306c';
+            else if (type === 'tiktok') ctx.fillStyle = '#00f2fe';
+            else if (type === 'youtube') ctx.fillStyle = '#ff0000';
+            ctx.fill();
 
-        socialIcons.facebook.src = 'https://cdn-icons-png.flaticon.com/512/5968/5968764.png';
-        socialIcons.instagram.src = 'https://cdn-icons-png.flaticon.com/512/174/174855.png';
-        socialIcons.tiktok.src = 'https://cdn-icons-png.flaticon.com/512/3046/3046124.png';
-        socialIcons.youtube.src = 'https://cdn-icons-png.flaticon.com/512/1384/1384060.png';
-
-        Object.keys(socialIcons).forEach(key => {
-            if (key !== 'loadedCount') {
-                socialIcons[key].onload = () => {
-                    socialIcons.loadedCount++;
-                    if (socialIcons.loadedCount === 4) {
-                        renderCanvases();
-                    }
-                };
-            }
-        });
+            // حرف بسيط أو رمز داخل الدائرة
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = `bold ${size * 0.55}px sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            let label = 'F';
+            if (type === 'instagram') label = 'I';
+            else if (type === 'tiktok') label = 'T';
+            else if (type === 'youtube') label = 'Y';
+            
+            ctx.fillText(label, 0, 0);
+            ctx.restore();
+        }
 
         function switchMobileTab(tabId, element) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -829,46 +834,7 @@
             drawCustomLogo(ctx, w, h);
         }
 
-        function drawRealSocialLogosAndBrand(ctx, centerX, centerY, scale) {
-            const iconSize = 34 * scale;
-            const gap = 16 * scale;
-            
-            ctx.font = `bold ${24 * scale}px '${appState.fontFamily}', sans-serif`;
-            const textWidth = ctx.measureText('ZONE SPORT').width;
-            
-            const totalWidth = (iconSize * 4) + (gap * 3) + (26 * scale) + textWidth;
-            let startX = centerX - (totalWidth / 2);
-
-            if (socialIcons.facebook.complete) {
-                ctx.drawImage(socialIcons.facebook, startX, centerY - iconSize / 2, iconSize, iconSize);
-            }
-            startX += iconSize + gap;
-
-            if (socialIcons.instagram.complete) {
-                ctx.drawImage(socialIcons.instagram, startX, centerY - iconSize / 2, iconSize, iconSize);
-            }
-            startX += iconSize + gap;
-
-            if (socialIcons.tiktok.complete) {
-                ctx.drawImage(socialIcons.tiktok, startX, centerY - iconSize / 2, iconSize, iconSize);
-            }
-            startX += iconSize + gap;
-
-            if (socialIcons.youtube.complete) {
-                ctx.drawImage(socialIcons.youtube, startX, centerY - iconSize / 2, iconSize, iconSize);
-            }
-            startX += iconSize + (26 * scale);
-
-            ctx.save();
-            ctx.fillStyle = '#FFFFFF';
-            ctx.font = `bold ${24 * scale}px '${appState.fontFamily}', sans-serif`;
-            ctx.textAlign = 'left';
-            ctx.textBaseline = 'middle';
-            ctx.fillText('ZONE SPORT', startX, centerY);
-            ctx.restore();
-        }
-
-        // التصميم الثالث
+        // التصميم الثالث (تم استبدال الروابط الخارجية بأيقونات فيكتور آمنة 100% للتحميل)
         function drawTemplate3() {
             const canvas = document.getElementById('canvas3');
             const ctx = canvas.getContext('2d');
@@ -926,8 +892,33 @@
             ctx.lineTo(w * 0.85, lineY);
             ctx.stroke();
 
-            const socialY = lineY + (40 * scale);
-            drawRealSocialLogosAndBrand(ctx, w / 2, socialY, scale);
+            // رسم الأيقونات الفيكتور وبجانبها اسم المنصة
+            const iconSize = 40 * scale;
+            const gap = 18 * scale;
+            ctx.font = `bold ${24 * scale}px '${appState.fontFamily}', sans-serif`;
+            const textWidth = ctx.measureText('ZONE SPORT').width;
+            
+            const totalWidth = (iconSize * 4) + (gap * 3) + (26 * scale) + textWidth;
+            let startX = (w / 2) - (totalWidth / 2) + (iconSize / 2);
+            const socialY = lineY + (45 * scale);
+
+            drawVectorIcon(ctx, 'facebook', startX, socialY, iconSize);
+            startX += iconSize + gap;
+            drawVectorIcon(ctx, 'instagram', startX, socialY, iconSize);
+            startX += iconSize + gap;
+            drawVectorIcon(ctx, 'tiktok', startX, socialY, iconSize);
+            startX += iconSize + gap;
+            drawVectorIcon(ctx, 'youtube', startX, socialY, iconSize);
+            startX += iconSize + (26 * scale) - (iconSize / 2);
+
+            ctx.save();
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = `bold ${26 * scale}px '${appState.fontFamily}', sans-serif`;
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('ZONE SPORT', startX, socialY);
+            ctx.restore();
+
             drawCustomLogo(ctx, w, h);
         }
 
@@ -996,16 +987,13 @@
             window.addEventListener('touchend', stopDrag);
         }
 
-        // دالة تنزيل محسنة تدعم الأجهزة الذكية والمتصفحات المختلفة
+        // دالة تنزيل آمنة 100% تعمل على كافة المتصفحات والهواتف المحمولة
         function downloadSingleCanvas(canvasId, name) {
             const canvas = document.getElementById(canvasId);
             if (!canvas) return;
 
             try {
-                // تحويل الكانفاس إلى رابط بيانات صورة
                 const dataUrl = canvas.toDataURL('image/png');
-                
-                // إنشاء رابط تنزيل وهمي ونقره برمجياً
                 const link = document.createElement('a');
                 link.download = `ZONE_SPORT_${name}_${Date.now()}.png`;
                 link.href = dataUrl;
@@ -1018,7 +1006,6 @@
                 }, 100);
 
             } catch (err) {
-                // حل بديل في حال حظر التنزيل المباشر (فتح الصورة في نافذة جديدة ليقوم المستخدم بحفظها مطولاً)
                 const dataUrl = canvas.toDataURL('image/png');
                 const win = window.open();
                 if (win) {

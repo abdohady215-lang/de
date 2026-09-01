@@ -1,94 +1,975 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0A1128">
-  <meta name="description" content="ZONE SPORT AI News Designer">
-  <title>ZONE SPORT | مصمم الأخبار الذكي</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ZONE SPORT — Mobile Creator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@800;900&family=Cairo:wght@800;900&family=Changa:wght@800;900&family=Droid+Arabic+Kufi:wght@700;900&family=Kufam:wght@800;900&family=Tajawal:wght@800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        :root {
+            --bg-dark: #080b14;
+            --card-bg: #101625;
+            --gold: #d4af37;
+            --gold-glow: rgba(212, 175, 55, 0.3);
+            --text-main: #ffffff;
+            --text-muted: #8c9ba5;
+            --border-color: rgba(212, 175, 55, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Droid Arabic Kufi', 'Cairo', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            padding-bottom: 90px;
+            min-height: 100vh;
+        }
+
+        .mobile-appbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(8, 11, 20, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 14px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-appbar h1 {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--gold);
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 65px;
+            background: rgba(16, 22, 37, 0.98);
+            backdrop-filter: blur(16px);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 700;
+            gap: 4px;
+            width: 50%;
+        }
+
+        .nav-item.active {
+            color: var(--gold);
+        }
+
+        .nav-item i {
+            font-size: 1.2rem;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--gold);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 0.95rem;
+        }
+
+        .form-control option {
+            background: #101625;
+            color: #fff;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        textarea.form-control {
+            height: 90px;
+            resize: none;
+        }
+
+        .number-control {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .number-control input {
+            width: 100%;
+            text-align: center;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 800;
+            padding: 12px 0;
+        }
+
+        .number-control input:focus {
+            outline: none;
+        }
+
+        .num-btn {
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--gold);
+            border: none;
+            width: 40px;
+            height: 44px;
+            font-size: 1.1rem;
+            font-weight: 900;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+        }
+
+        .num-btn:active {
+            background: var(--gold);
+            color: #000;
+        }
+
+        .upload-btn {
+            border: 2px dashed var(--border-color);
+            padding: 14px;
+            text-align: center;
+            border-radius: 10px;
+            background: rgba(212, 175, 55, 0.02);
+            cursor: pointer;
+        }
+
+        .upload-btn i {
+            font-size: 1.4rem;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+
+        .btn-action {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--gold), #b38f2a);
+            color: #000;
+            font-weight: 900;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px var(--gold-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .designs-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .design-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .design-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 0 4px;
+        }
+
+        .design-title {
+            font-size: 0.85rem;
+            font-weight: 900;
+            color: var(--gold);
+        }
+
+        .canvas-wrapper {
+            width: 100%;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            touch-action: none;
+        }
+
+        canvas {
+            width: 100% !important;
+            height: auto !important;
+            display: block;
+            cursor: grab;
+        }
+
+        canvas:active {
+            cursor: grabbing;
+        }
+
+        .download-btn {
+            margin-top: 10px;
+            width: 100%;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
+            color: #fff;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .drag-hint {
+            font-size: 0.75rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+            display: block;
+            background: rgba(212, 175, 55, 0.08);
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px dashed var(--border-color);
+        }
+    </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand-lockup"><span class="brand-mark">Z</span><span><strong>ZONE <i>SPORT</i></strong><small>مصمم الأخبار الذكي</small></span></div>
-    <div class="topbar-meta"><span class="live-dot"></span><span>استوديو الأخبار</span><span class="topbar-date" id="todayDate"></span></div>
-  </header>
 
-  <main class="app-shell">
-    <aside class="control-panel">
-      <div class="panel-heading"><div><span class="eyebrow">AI NEWS DESIGNER</span><h1>اصنع الخبر بصريًا</h1></div><span class="version">01</span></div>
-      <div class="defaults-toolbar" aria-label="إعدادات المحرر الافتراضية"><button id="saveDefaults" class="default-action save-defaults" type="button"><span>▣</span> حفظ كإعدادات افتراضية</button><button id="resetDefaults" class="default-action reset-defaults" type="button"><span>↺</span> استعادة الضبط الأصلي</button></div>
-      <section class="control-section">
-        <div class="section-title"><span class="step">01</span><h2>محتوى الخبر</h2><span class="ai-chip">AI SMART</span></div>
-        <label class="field-label" for="headline">العنوان الرئيسي</label>
-        <input id="headline" class="text-input" type="text" maxlength="120" placeholder="اكتب عنوان الخبر هنا..." value="" autocomplete="off">
-        <div class="field-row"><label class="field-label" for="category">التصنيف</label><button id="classifyBtn" class="text-button" type="button">تصنيف ذكي <span>✦</span></button></div>
-        <select id="category" class="text-input select-input"></select>
-        <label class="field-label" for="story">تفاصيل الخبر <span class="optional">اختياري</span></label>
-        <textarea id="story" class="text-input story-input" maxlength="380" placeholder="أضف سطرًا توضيحيًا أو تفاصيل إضافية..."></textarea>
-        <div class="char-count"><span id="charCount">0</span> / 380</div>
-      </section>
+    <header class="mobile-appbar">
+        <h1>ZONE SPORT</h1>
+        <span style="font-size: 0.75rem; background: rgba(212,175,55,0.15); color: var(--gold); padding: 4px 8px; border-radius: 4px; font-weight:700;">صانع التصميمات</span>
+    </header>
 
-      <section class="control-section">
-        <div class="section-title"><span class="step">02</span><h2>الصورة الخلفية</h2></div>
-        <div id="dropZone" class="drop-zone"><input id="imageInput" type="file" accept="image/png,image/jpeg,image/webp"><span class="upload-icon">↥</span><strong>اسحب الصورة إلى هنا</strong><small>أو انقر للاختيار · PNG / JPG / WEBP</small></div>
-        <div id="imageTools" class="image-tools hidden"><span class="file-name" id="fileName">الصورة المضافة</span><button id="removeImage" class="icon-button" type="button" title="إزالة الصورة">×</button><label>تكبير <input id="imageZoom" type="range" min="100" max="180" value="100"></label><label>المحاذاة <select id="imagePosition"><option value="center">وسط</option><option value="top">أعلى</option><option value="bottom">أسفل</option><option value="right">يمين</option><option value="left">يسار</option></select></label></div>
-      </section>
+    <div class="container">
 
-      <section class="control-section compact-section">
-        <div class="section-title"><span class="step">03</span><h2>ضبط التصميم</h2></div>
-        <div class="range-row"><label for="fontSize">حجم العنوان</label><output id="fontSizeValue">64</output><input id="fontSize" type="range" min="34" max="92" value="64"></div>
-        <div class="range-row"><label for="kickerSize">حجم العنوان الصغير</label><output id="kickerSizeValue">22px</output><input id="kickerSize" type="range" min="12" max="48" value="22"></div>
-        <div class="range-row"><label for="lineHeight">تباعد السطور</label><output id="lineHeightValue">1.15</output><input id="lineHeight" type="range" min="0.9" max="1.5" value="1.15" step="0.05"></div>
-        <div class="range-row"><label for="contrast">قوة التعتيم</label><output id="contrastValue">66%</output><input id="contrast" type="range" min="35" max="90" value="66"></div>
-        <div class="range-row"><label for="badgePosition">موضع الشارة</label><select id="badgePosition" class="mini-select"><option value="top">أعلى يمين</option><option value="bottom">أسفل يمين</option><option value="left">أعلى يسار</option></select></div>
-      </section>
+        <!-- TAB 1: الإدخال والبيانات وخيارات الخط -->
+        <section id="tab-create" class="tab-content active">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-edit"></i> أدخل بيانات الخبر واللوجو</div>
+                
+                <div class="form-group">
+                    <label>عنوان الخبر</label>
+                    <input type="text" id="newsTitle" class="form-control" placeholder="أدخل عنوان الخبر...">
+                </div>
 
-      <section class="control-section position-section">
-        <div class="section-title"><span class="step">04</span><h2>موضع النصوص</h2><span class="ai-chip">LIVE</span></div>
-        <div class="position-grid">
-          <label>المحاذاة الرأسية<select id="textVertical" class="mini-select"><option value="top">أعلى</option><option value="center" selected>منتصف</option><option value="bottom">أسفل</option></select></label>
-          <label>المحاذاة الأفقية<select id="textHorizontal" class="mini-select"><option value="right" selected>يمين</option><option value="center">وسط</option><option value="left">يسار</option></select></label>
-        </div>
-        <div class="range-row position-range"><label for="textY">موضع رأسي <output id="textYValue">50%</output></label><input id="textY" type="range" min="0" max="100" value="50"></div>
-        <div class="range-row position-range"><label for="textX">موضع أفقي <output id="textXValue">85%</output></label><input id="textX" type="range" min="0" max="100" value="85"></div>
-      </section>
-      <section class="control-section variation-section"><div class="section-title"><span class="step">05</span><h2>الأسلوب البصري</h2></div><div id="variationGrid" class="variation-grid"></div></section>
-      <section class="control-section logo-section">
-        <div class="section-title"><span class="step">06</span><h2>الشعار والهوية</h2><span class="ai-chip">BRAND</span></div>
-        <label class="toggle-row"><span>إظهار الشعار</span><input id="logoVisible" type="checkbox" checked><i></i></label>
-        <div id="logoDropZone" class="logo-drop-zone"><input id="logoInput" type="file" accept="image/png,image/svg+xml"><span>＋</span><strong>رفع شعار مخصص</strong><small>PNG / SVG</small></div>
-        <div class="position-grid logo-presets"><label>الموضع<select id="logoPreset" class="mini-select"><option value="top-right">أعلى يمين</option><option value="top-left">أعلى يسار</option><option value="bottom-right">أسفل يمين</option><option value="bottom-left">أسفل يسار</option></select></label><span id="logoName" class="file-name">ZONE SPORT</span></div>
-        <div class="range-row position-range"><label for="logoX">إزاحة أفقية <output id="logoXValue">90%</output></label><input id="logoX" type="range" min="0" max="100" value="90"></div>
-        <div class="range-row position-range"><label for="logoY">إزاحة رأسية <output id="logoYValue">8%</output></label><input id="logoY" type="range" min="0" max="100" value="8"></div>
-        <div class="range-row position-range"><label for="logoSize">حجم الشعار <output id="logoSizeValue">90px</output></label><input id="logoSize" type="range" min="20" max="250" value="90"></div>
-        <div class="range-row position-range"><label for="logoOpacity">شفافية الشعار <output id="logoOpacityValue">100%</output></label><input id="logoOpacity" type="range" min="10" max="100" value="100"></div>
-      </section>
-      <section class="control-section overlay-section">
-        <div class="section-title"><span class="step">07</span><h2>الشادو والتعتيم</h2></div>
-        <div class="range-row position-range"><label for="shadowOpacity">قوة التعتيم <output id="shadowOpacityValue">66%</output></label><input id="shadowOpacity" type="range" min="0" max="100" value="66"></div>
-        <div class="range-row position-range"><label for="shadowCoverage">تغطية الشادو <output id="shadowCoverageValue">75%</output></label><input id="shadowCoverage" type="range" min="10" max="100" value="75"></div>
-        <label class="field-label" for="shadowDirection">اتجاه التدرج</label><select id="shadowDirection" class="text-input select-input"><option value="bottom-top">من أسفل إلى أعلى</option><option value="top-bottom">من أعلى إلى أسفل</option><option value="radial">مركزي دائري</option><option value="lateral">جانبي</option></select>
-        <div class="range-row position-range"><label for="shadowBlur">نعومة التدرج <output id="shadowBlurValue">60%</output></label><input id="shadowBlur" type="range" min="0" max="100" value="60"></div>
-      </section>
-      <section class="control-section layers-section">
-        <div class="section-title"><span class="step">08</span><h2>إدارة عناصر التصميم</h2><span class="ai-chip">LAYERS</span></div>
-        <div id="layersList" class="layers-list" aria-live="polite"></div>
-        <button id="restoreLayers" class="restore-button" type="button">↻ استعادة العناصر الافتراضية</button>
-      </section>
-      <div class="panel-actions"><button id="saveBtn" class="secondary-button" type="button"><span>♡</span> حفظ التصميم</button><button id="exportBtn" class="primary-button" type="button"><span>⇩</span> تصدير PNG</button></div>
-      <button id="savedBtn" class="saved-link" type="button">التصاميم المحفوظة <span id="savedCount">0</span> <b>←</b></button>
-    </aside>
+                <div class="form-group">
+                    <label>تفاصيل الخبر (اختياري)</label>
+                    <textarea id="newsContent" class="form-control" placeholder="أدخل النص الإضافي إن وجد..."></textarea>
+                </div>
 
-    <section class="preview-area" aria-label="المعاينة المباشرة">
-      <div class="preview-header"><div><span class="eyebrow">LIVE PREVIEW / 1080 × 1350</span><h2>المعاينة المباشرة</h2></div><div class="preview-tools"><button id="previewZoomOut" class="icon-button" type="button" title="تصغير">−</button><span id="previewZoomValue">74%</span><button id="previewZoomIn" class="icon-button" type="button" title="تكبير">+</button></div></div>
-      <div class="canvas-stage"><div class="canvas-frame"><canvas id="newsCanvas" width="1080" height="1350"></canvas></div></div>
-      <div class="preview-footer"><span><i class="status-dot"></i> يتم التحديث لحظيًا</span><span>صيغة التصدير: PNG عالي الدقة</span></div>
-    </section>
-  </main>
-  <div id="toast" class="toast" role="status"></div>
-  <div id="savedModal" class="modal hidden"><div class="modal-card"><div class="modal-header"><h2>التصاميم المحفوظة</h2><button id="closeModal" class="icon-button" type="button">×</button></div><div id="savedList" class="saved-list"></div></div></div>
-  <script src="brand-config.js"></script>
-  <script src="app.js"></script>
+                <!-- نوع الخط -->
+                <div class="form-group">
+                    <label style="color:var(--gold);"><i class="fas fa-font"></i> نوع الخط (Bold)</label>
+                    <select id="fontSelect" class="form-control" onchange="changeSelectedFont(this.value)">
+                        <option value="Droid Arabic Kufi" selected>خط درويد كوفي (Droid Kufi)</option>
+                        <option value="Changa">خط شانجا (Changa)</option>
+                        <option value="Kufam">خط كوفام (Kufam)</option>
+                        <option value="Almarai">خط المراعي (Almarai)</option>
+                        <option value="Cairo">خط القاهرة (Cairo)</option>
+                        <option value="Tajawal">خط تجوال (Tajawal)</option>
+                    </select>
+                </div>
+
+                <!-- حجم النص والمسافة بين السطور -->
+                <div class="grid-2col">
+                    <div class="form-group">
+                        <label style="color:var(--gold);"><i class="fas fa-text-height"></i> حجم النص (px)</label>
+                        <div class="number-control">
+                            <button class="num-btn" onclick="stepValue('fontSizeInput', -2)">-</button>
+                            <input type="number" id="fontSizeInput" value="50" min="20" max="100" onchange="updateFontSizeFromInput()">
+                            <button class="num-btn" onclick="stepValue('fontSizeInput', 2)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label style="color:var(--gold);"><i class="fas fa-arrows-alt-v"></i> تباعد الأسطر</label>
+                        <div class="number-control">
+                            <button class="num-btn" onclick="stepValue('lineHeightInput', -0.1)">-</button>
+                            <input type="number" id="lineHeightInput" value="1.3" step="0.1" min="0.8" max="2.5" onchange="updateLineHeightFromInput()">
+                            <button class="num-btn" onclick="stepValue('lineHeightInput', 0.1)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-2col">
+                    <div class="form-group">
+                        <label>صورة الخبر</label>
+                        <div class="upload-btn" onclick="document.getElementById('imgInput').click()">
+                            <i class="fas fa-camera"></i>
+                            <div id="uploadText" style="font-size: 0.75rem; font-weight: 700;">اختيار صورة الخبر</div>
+                            <input type="file" id="imgInput" accept="image/*" style="display:none;" onchange="loadUserImage(event)">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>صورة اللوغو (ZS)</label>
+                        <div class="upload-btn" onclick="document.getElementById('logoInput').click()">
+                            <i class="fas fa-shield-alt"></i>
+                            <div id="uploadLogoText" style="font-size: 0.75rem; font-weight: 700;">رفع شعار ZS</div>
+                            <input type="file" id="logoInput" accept="image/*" style="display:none;" onchange="loadLogoImage(event)">
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-action" onclick="generateAllDesigns()">
+                    <i class="fas fa-magic"></i> توليد التصميمات
+                </button>
+            </div>
+        </section>
+
+        <!-- TAB 2: التصميمات ومعاينة السحب -->
+        <section id="tab-designs" class="tab-content">
+            
+            <span class="drag-hint">
+                <i class="fas fa-arrows-alt"></i> <b>التحريك الحر:</b> اضغط وامسك بأحد العناصر (اللوغو، النص، الشادو الأسود) وحركه في المكان الذي تريده!
+            </span>
+
+            <div class="designs-grid">
+                
+                <!-- DESIGN 01 -->
+                <div class="design-card">
+                    <div class="design-card-header">
+                        <span class="design-title">🎨 01 — التدرج الأسود الاحترافي</span>
+                    </div>
+                    <div class="canvas-wrapper">
+                        <canvas id="canvas1"></canvas>
+                    </div>
+                    <button class="download-btn" onclick="downloadSingleCanvas('canvas1', 'Design_01')"><i class="fas fa-download"></i> تحميل التصميم</button>
+                </div>
+
+                <!-- DESIGN 02 -->
+                <div class="design-card">
+                    <div class="design-card-header">
+                        <span class="design-title">🎨 02 — الكارت مع الظل الداكن</span>
+                    </div>
+                    <div class="canvas-wrapper">
+                        <canvas id="canvas2"></canvas>
+                    </div>
+                    <button class="download-btn" onclick="downloadSingleCanvas('canvas2', 'Design_02')"><i class="fas fa-download"></i> تحميل التصميم</button>
+                </div>
+
+                <!-- DESIGN 03 -->
+                <div class="design-card">
+                    <div class="design-card-header">
+                        <span class="design-title">🎨 03 — التدرج مع الخط الذهبي ولوجوهات السوشيال HD</span>
+                    </div>
+                    <div class="canvas-wrapper">
+                        <canvas id="canvas3"></canvas>
+                    </div>
+                    <button class="download-btn" onclick="downloadSingleCanvas('canvas3', 'Design_03')"><i class="fas fa-download"></i> تحميل التصميم</button>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active" id="nav-create" onclick="switchMobileTab('tab-create', this)">
+            <i class="fas fa-plus-circle"></i>
+            <span>إدخال الخبر</span>
+        </a>
+        <a href="#" class="nav-item" id="nav-designs" onclick="switchMobileTab('tab-designs', this)">
+            <i class="fas fa-layer-group"></i>
+            <span>التصميمات</span>
+        </a>
+    </nav>
+
+    <script>
+        const appState = {
+            title: 'الأهلي يعلن رسمياً حسم الصفقة الجديدة',
+            content: '',
+            image: null,
+            logoImage: null,
+            fontFamily: 'Droid Arabic Kufi',
+            baseFontSize: 50,
+            lineHeightFactor: 1.3,
+            width: 1080,
+            height: 1350,
+            logo: { x: 0.82, y: 0.05, size: 130 },
+            textY: 0.22,
+            shadowStartY: 0.45
+        };
+
+        // تحميل الصور الشفافة الحقيقية للوجوهات الرسمية (PNG HD)
+        const socialIcons = {
+            facebook: new Image(),
+            instagram: new Image(),
+            tiktok: new Image(),
+            youtube: new Image(),
+            loadedCount: 0
+        };
+
+        socialIcons.facebook.src = 'https://cdn-icons-png.flaticon.com/512/5968/5968764.png';
+        socialIcons.instagram.src = 'https://cdn-icons-png.flaticon.com/512/174/174855.png';
+        socialIcons.tiktok.src = 'https://cdn-icons-png.flaticon.com/512/3046/3046124.png';
+        socialIcons.youtube.src = 'https://cdn-icons-png.flaticon.com/512/1384/1384060.png';
+
+        Object.keys(socialIcons).forEach(key => {
+            if (key !== 'loadedCount') {
+                socialIcons[key].onload = () => {
+                    socialIcons.loadedCount++;
+                    if (socialIcons.loadedCount === 4) {
+                        renderCanvases();
+                    }
+                };
+            }
+        });
+
+        let draggingTarget = null;
+
+        function switchMobileTab(tabId, element) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            element.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function changeSelectedFont(newFont) {
+            appState.fontFamily = newFont;
+            renderCanvases();
+        }
+
+        function updateFontSizeFromInput() {
+            const val = parseFloat(document.getElementById('fontSizeInput').value);
+            if (val && val > 0) {
+                appState.baseFontSize = val;
+                renderCanvases();
+            }
+        }
+
+        function updateLineHeightFromInput() {
+            const val = parseFloat(document.getElementById('lineHeightInput').value);
+            if (val && val > 0) {
+                appState.lineHeightFactor = val;
+                renderCanvases();
+            }
+        }
+
+        function stepValue(inputId, step) {
+            const input = document.getElementById(inputId);
+            let val = parseFloat(input.value) || 0;
+            val = Math.round((val + step) * 10) / 10;
+            if (val >= parseFloat(input.min) && val <= parseFloat(input.max)) {
+                input.value = val;
+                if (inputId === 'fontSizeInput') updateFontSizeFromInput();
+                if (inputId === 'lineHeightInput') updateLineHeightFromInput();
+            }
+        }
+
+        function loadUserImage(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    appState.image = img;
+                    appState.width = img.width;
+                    appState.height = img.height;
+                    document.getElementById('uploadText').innerText = `تم رفع الصورة`;
+                    renderCanvases();
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function loadLogoImage(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    appState.logoImage = img;
+                    document.getElementById('uploadLogoText').innerText = `تم رفع اللوغو`;
+                    renderCanvases();
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function generateAllDesigns() {
+            const t = document.getElementById('newsTitle').value.trim();
+            const c = document.getElementById('newsContent').value.trim();
+
+            if (t) appState.title = t;
+            appState.content = c;
+
+            renderCanvases();
+            switchMobileTab('tab-designs', document.getElementById('nav-designs'));
+        }
+
+        function renderCanvases() {
+            setupCanvasDimensions('canvas1');
+            setupCanvasDimensions('canvas2');
+            setupCanvasDimensions('canvas3');
+
+            document.fonts.ready.then(() => {
+                drawTemplate1();
+                drawTemplate2();
+                drawTemplate3();
+            });
+        }
+
+        function setupCanvasDimensions(id) {
+            const cvs = document.getElementById(id);
+            cvs.width = appState.width;
+            cvs.height = appState.height;
+        }
+
+        function drawBackgroundImage(ctx, w, h) {
+            if (appState.image) {
+                ctx.drawImage(appState.image, 0, 0, w, h);
+            } else {
+                ctx.fillStyle = '#0a0a0a';
+                ctx.fillRect(0, 0, w, h);
+            }
+        }
+
+        function drawCustomLogo(ctx, w, h) {
+            const scale = w / 1080;
+            const size = appState.logo.size * scale;
+            const x = w * appState.logo.x;
+            const y = h * appState.logo.y;
+
+            ctx.save();
+            if (appState.logoImage) {
+                ctx.drawImage(appState.logoImage, x, y, size, size);
+            } else {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
+                ctx.beginPath();
+                ctx.arc(x + size / 2, y + size / 2, size / 2, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.strokeStyle = '#d4af37';
+                ctx.lineWidth = 3 * scale;
+                ctx.stroke();
+
+                ctx.fillStyle = '#FFFFFF';
+                ctx.font = `bold ${size * 0.4}px '${appState.fontFamily}', sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('ZS', x + size / 2, y + size / 2);
+            }
+            ctx.restore();
+        }
+
+        function drawTemplate1() {
+            const canvas = document.getElementById('canvas1');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width, h = canvas.height;
+
+            drawBackgroundImage(ctx, w, h);
+
+            const scale = w / 1080;
+            const titleSize = Math.max(18, Math.round(appState.baseFontSize * scale));
+            const contentSize = Math.max(14, Math.round((appState.baseFontSize * 0.55) * scale));
+
+            const titleLineHeight = titleSize * appState.lineHeightFactor;
+            const contentLineHeight = contentSize * appState.lineHeightFactor;
+
+            ctx.font = `bold ${titleSize}px '${appState.fontFamily}', sans-serif`;
+            const titleH = measureWrapTextHeight(ctx, appState.title, w * 0.85, titleLineHeight);
+
+            ctx.font = `bold ${contentSize}px '${appState.fontFamily}', sans-serif`;
+            const contentH = appState.content ? measureWrapTextHeight(ctx, appState.content, w * 0.85, contentLineHeight) : 0;
+
+            const totalTextH = titleH + (appState.content ? contentH + (20 * scale) : 0);
+            const startY = h - (h * appState.textY) - totalTextH;
+
+            const shadowStartY = h * appState.shadowStartY;
+            const grad = ctx.createLinearGradient(0, shadowStartY, 0, h);
+            grad.addColorStop(0, 'rgba(0, 0, 0, 0)');
+            grad.addColorStop(0.35, 'rgba(0, 0, 0, 0.78)');
+            grad.addColorStop(0.7, 'rgba(0, 0, 0, 0.96)');
+            grad.addColorStop(1, '#000000');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, shadowStartY, w, h - shadowStartY);
+
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = `bold ${titleSize}px '${appState.fontFamily}', sans-serif`;
+            ctx.textAlign = 'center';
+            wrapTextCentered(ctx, appState.title, w / 2, startY + (titleSize * 0.8), w * 0.85, titleLineHeight);
+
+            if (appState.content) {
+                ctx.fillStyle = '#d4af37';
+                ctx.font = `bold ${contentSize}px '${appState.fontFamily}', sans-serif`;
+                wrapTextCentered(ctx, appState.content, w / 2, startY + titleH + (20 * scale) + (contentSize * 0.8), w * 0.85, contentLineHeight);
+            }
+
+            drawCustomLogo(ctx, w, h);
+        }
+
+        function drawTemplate2() {
+            const canvas = document.getElementById('canvas2');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width, h = canvas.height;
+
+            drawBackgroundImage(ctx, w, h);
+
+            const scale = w / 1080;
+            const titleSize = Math.max(18, Math.round((appState.baseFontSize * 0.85) * scale));
+            const contentSize = Math.max(14, Math.round((appState.baseFontSize * 0.5) * scale));
+            const padding = 35 * scale;
+
+            const titleLineHeight = titleSize * appState.lineHeightFactor;
+            const contentLineHeight = contentSize * appState.lineHeightFactor;
+
+            ctx.font = `bold ${titleSize}px '${appState.fontFamily}', sans-serif`;
+            const titleH = measureWrapTextHeight(ctx, appState.title, w * 0.8, titleLineHeight);
+
+            ctx.font = `bold ${contentSize}px '${appState.fontFamily}', sans-serif`;
+            const contentH = appState.content ? measureWrapTextHeight(ctx, appState.content, w * 0.8, contentLineHeight) : 0;
+
+            const totalCardHeight = titleH + (appState.content ? contentH + (15 * scale) : 0) + (padding * 2);
+            const cardY = h - (h * appState.textY) - totalCardHeight;
+
+            const shadowStartY = h * appState.shadowStartY;
+            const grad = ctx.createLinearGradient(0, shadowStartY, 0, h);
+            grad.addColorStop(0, 'rgba(0, 0, 0, 0)');
+            grad.addColorStop(1, 'rgba(0, 0, 0, 0.88)');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, shadowStartY, w, h - shadowStartY);
+
+            ctx.fillStyle = 'rgba(12, 12, 12, 0.94)';
+            ctx.beginPath();
+            ctx.roundRect(w * 0.06, cardY, w * 0.88, totalCardHeight, 16 * scale);
+            ctx.fill();
+
+            ctx.strokeStyle = 'rgba(212, 175, 55, 0.4)';
+            ctx.lineWidth = Math.max(2, 3 * scale);
+            ctx.stroke();
+
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = `bold ${titleSize}px '${appState.fontFamily}', sans-serif`;
+            ctx.textAlign = 'center';
+            wrapTextCentered(ctx, appState.title, w / 2, cardY + padding + (titleSize * 0.8), w * 0.8, titleLineHeight);
+
+            if (appState.content) {
+                ctx.fillStyle = '#e2e8f0';
+                ctx.font = `bold ${contentSize}px '${appState.fontFamily}', sans-serif`;
+                wrapTextCentered(ctx, appState.content, w / 2, cardY + padding + titleH + (15 * scale) + (contentSize * 0.8), w * 0.8, contentLineHeight);
+            }
+
+            drawCustomLogo(ctx, w, h);
+        }
+
+        /* رسم صور اللوجوهات الرسمية شفافة الجودة PNG */
+        function drawRealSocialLogosAndBrand(ctx, centerX, centerY, scale) {
+            const iconSize = 34 * scale;
+            const gap = 16 * scale;
+            
+            ctx.font = `bold ${24 * scale}px '${appState.fontFamily}', sans-serif`;
+            const textWidth = ctx.measureText('ZONE SPORT').width;
+            
+            const totalWidth = (iconSize * 4) + (gap * 3) + (26 * scale) + textWidth;
+            let startX = centerX - (totalWidth / 2);
+
+            // 1. فيسبوك
+            if (socialIcons.facebook.complete) {
+                ctx.drawImage(socialIcons.facebook, startX, centerY - iconSize / 2, iconSize, iconSize);
+            }
+            startX += iconSize + gap;
+
+            // 2. إنستغرام
+            if (socialIcons.instagram.complete) {
+                ctx.drawImage(socialIcons.instagram, startX, centerY - iconSize / 2, iconSize, iconSize);
+            }
+            startX += iconSize + gap;
+
+            // 3. تيك توك
+            if (socialIcons.tiktok.complete) {
+                ctx.drawImage(socialIcons.tiktok, startX, centerY - iconSize / 2, iconSize, iconSize);
+            }
+            startX += iconSize + gap;
+
+            // 4. يوتيوب
+            if (socialIcons.youtube.complete) {
+                ctx.drawImage(socialIcons.youtube, startX, centerY - iconSize / 2, iconSize, iconSize);
+            }
+            startX += iconSize + (26 * scale);
+
+            // 5. النص ZONE SPORT على اليمين
+            ctx.save();
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = `bold ${24 * scale}px '${appState.fontFamily}', sans-serif`;
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('ZONE SPORT', startX, centerY);
+            ctx.restore();
+        }
+
+        /* DESIGN 03: التدرج مع الخط الذهبي ولوجوهات السوشيال HD */
+        function drawTemplate3() {
+            const canvas = document.getElementById('canvas3');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width, h = canvas.height;
+
+            drawBackgroundImage(ctx, w, h);
+
+            const scale = w / 1080;
+            const titleSize = Math.max(18, Math.round(appState.baseFontSize * scale));
+            const contentSize = Math.max(14, Math.round((appState.baseFontSize * 0.55) * scale));
+
+            const titleLineHeight = titleSize * appState.lineHeightFactor;
+            const contentLineHeight = contentSize * appState.lineHeightFactor;
+
+            ctx.font = `bold ${titleSize}px '${appState.fontFamily}', sans-serif`;
+            const titleH = measureWrapTextHeight(ctx, appState.title, w * 0.85, titleLineHeight);
+
+            ctx.font = `bold ${contentSize}px '${appState.fontFamily}', sans-serif`;
+            const contentH = appState.content ? measureWrapTextHeight(ctx, appState.content, w * 0.85, contentLineHeight) : 0;
+
+            const extraBottomSpace = 100 * scale;
+            const totalTextH = titleH + (appState.content ? contentH + (20 * scale) : 0) + extraBottomSpace;
+            const startY = h - (h * appState.textY) - totalTextH;
+
+            const shadowStartY = h * appState.shadowStartY;
+            const grad = ctx.createLinearGradient(0, shadowStartY, 0, h);
+            grad.addColorStop(0, 'rgba(0, 0, 0, 0)');
+            grad.addColorStop(0.35, 'rgba(0, 0, 0, 0.78)');
+            grad.addColorStop(0.7, 'rgba(0, 0, 0, 0.96)');
+            grad.addColorStop(1, '#000000');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, shadowStartY, w, h - shadowStartY);
+
+            // 1. عنوان الخبر
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = `bold ${titleSize}px '${appState.fontFamily}', sans-serif`;
+            ctx.textAlign = 'center';
+            wrapTextCentered(ctx, appState.title, w / 2, startY + (titleSize * 0.8), w * 0.85, titleLineHeight);
+
+            // 2. تفاصيل الخبر
+            let nextY = startY + titleH + (10 * scale);
+            if (appState.content) {
+                ctx.fillStyle = '#d4af37';
+                ctx.font = `bold ${contentSize}px '${appState.fontFamily}', sans-serif`;
+                nextY = wrapTextCentered(ctx, appState.content, w / 2, nextY + (contentSize * 0.8), w * 0.85, contentLineHeight);
+            }
+
+            // 3. الخط الذهبي الفاصل
+            const lineY = nextY + (25 * scale);
+            const lineGrad = ctx.createLinearGradient(w * 0.15, 0, w * 0.85, 0);
+            lineGrad.addColorStop(0, 'rgba(212, 175, 55, 0.05)');
+            lineGrad.addColorStop(0.5, 'rgba(212, 175, 55, 1)');
+            lineGrad.addColorStop(1, 'rgba(212, 175, 55, 0.05)');
+
+            ctx.strokeStyle = lineGrad;
+            ctx.lineWidth = 3.5 * scale;
+            ctx.beginPath();
+            ctx.moveTo(w * 0.15, lineY);
+            ctx.lineTo(w * 0.85, lineY);
+            ctx.stroke();
+
+            // 4. رسم الصور الحقيقية للوجوهات الرسمية جنبًا إلى جنب مع ZONE SPORT
+            const socialY = lineY + (40 * scale);
+            drawRealSocialLogosAndBrand(ctx, w / 2, socialY, scale);
+
+            drawCustomLogo(ctx, w, h);
+        }
+
+        function wrapTextCentered(ctx, text, x, y, maxWidth, lineHeight) {
+            const words = text.split(' ');
+            let line = '';
+            let currentY = y;
+            for (let n = 0; n < words.length; n++) {
+                let testLine = line + words[n] + ' ';
+                let metrics = ctx.measureText(testLine);
+                if (metrics.width > maxWidth && n > 0) {
+                    ctx.fillText(line, x, currentY);
+                    line = words[n] + ' ';
+                    currentY += lineHeight;
+                } else {
+                    line = testLine;
+                }
+            }
+            ctx.fillText(line, x, currentY);
+            return currentY;
+        }
+
+        function measureWrapTextHeight(ctx, text, maxWidth, lineHeight) {
+            const words = text.split(' ');
+            let line = '';
+            let lines = 1;
+            for (let n = 0; n < words.length; n++) {
+                let testLine = line + words[n] + ' ';
+                let metrics = ctx.measureText(testLine);
+                if (metrics.width > maxWidth && n > 0) {
+                    line = words[n] + ' ';
+                    lines++;
+                } else {
+                    line = testLine;
+                }
+            }
+            return lines * lineHeight;
+        }
+
+        function initSmartDragEvents(canvasId) {
+            const cvs = document.getElementById(canvasId);
+
+            function getEventPos(e) {
+                const rect = cvs.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                return {
+                    x: (clientX - rect.left) / rect.width,
+                    y: (clientY - rect.top) / rect.height
+                };
+            }
+
+            function startDrag(e) {
+                const pos = getEventPos(e);
+                const scale = appState.width / 1080;
+                const logoSizeRatio = (appState.logo.size * scale) / appState.width;
+
+                const logoDistX = pos.x - (appState.logo.x + logoSizeRatio / 2);
+                const logoDistY = pos.y - (appState.logo.y + logoSizeRatio / 2);
+                if (Math.abs(logoDistX) < logoSizeRatio && Math.abs(logoDistY) < logoSizeRatio) {
+                    draggingTarget = 'logo';
+                    return;
+                }
+
+                const textRegionY = 1 - appState.textY;
+                if (Math.abs(pos.y - textRegionY) < 0.18) {
+                    draggingTarget = 'text';
+                    return;
+                }
+
+                if (pos.y > 0.25) {
+                    draggingTarget = 'shadow';
+                }
+            }
+
+            function handleMove(e) {
+                if (!draggingTarget) return;
+                const pos = getEventPos(e);
+
+                if (draggingTarget === 'logo') {
+                    appState.logo.x = Math.max(0, Math.min(0.85, pos.x - 0.05));
+                    appState.logo.y = Math.max(0, Math.min(0.9, pos.y - 0.05));
+                } else if (draggingTarget === 'text') {
+                    appState.textY = Math.max(0.05, Math.min(0.45, 1 - pos.y));
+                } else if (draggingTarget === 'shadow') {
+                    appState.shadowStartY = Math.max(0.2, Math.min(0.7, pos.y));
+                }
+
+                renderCanvases();
+            }
+
+            function stopDrag() {
+                draggingTarget = null;
+            }
+
+            cvs.addEventListener('mousedown', startDrag);
+            cvs.addEventListener('mousemove', handleMove);
+            window.addEventListener('mouseup', stopDrag);
+
+            cvs.addEventListener('touchstart', startDrag, { passive: true });
+            cvs.addEventListener('touchmove', handleMove, { passive: true });
+            window.addEventListener('touchend', stopDrag);
+        }
+
+        function downloadSingleCanvas(canvasId, name) {
+            const canvas = document.getElementById(canvasId);
+            const link = document.createElement('a');
+            link.download = `ZONE_SPORT_${name}_${Date.now()}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        window.onload = function() {
+            initSmartDragEvents('canvas1');
+            initSmartDragEvents('canvas2');
+            initSmartDragEvents('canvas3');
+            generateAllDesigns();
+        };
+    </script>
 </body>
 </html>

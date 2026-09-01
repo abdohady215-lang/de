@@ -303,23 +303,26 @@
         .download-btn {
             margin-top: 10px;
             width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, rgba(255,42,133,0.2), rgba(0,242,254,0.2));
-            border: 1px solid rgba(255,255,255,0.2);
+            padding: 14px;
+            background: linear-gradient(135deg, rgba(255,42,133,0.3), rgba(0,242,254,0.3));
+            border: 1px solid rgba(255,255,255,0.3);
             color: #fff;
             border-radius: 10px;
-            font-weight: 800;
-            font-size: 0.85rem;
+            font-weight: 900;
+            font-size: 0.9rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 8px;
             transition: 0.3s;
+            position: relative;
+            z-index: 50;
         }
 
         .download-btn:active {
             background: var(--accent-pink);
+            transform: scale(0.98);
         }
 
         .grid-2col {
@@ -443,7 +446,7 @@
                     <div class="canvas-wrapper">
                         <canvas id="canvas1"></canvas>
                     </div>
-                    <button class="download-btn" onclick="downloadSingleCanvas('canvas1', 'Vibrant_01')"><i class="fas fa-download"></i> تحميل التصميم</button>
+                    <button class="download-btn" onclick="downloadSingleCanvas('canvas1', 'Vibrant_01')"><i class="fas fa-download"></i> تحميل التصميم الأول</button>
                 </div>
 
                 <!-- DESIGN 02 -->
@@ -454,7 +457,7 @@
                     <div class="canvas-wrapper">
                         <canvas id="canvas2"></canvas>
                     </div>
-                    <button class="download-btn" onclick="downloadSingleCanvas('canvas2', 'Glass_02')"><i class="fas fa-download"></i> تحميل التصميم</button>
+                    <button class="download-btn" onclick="downloadSingleCanvas('canvas2', 'Glass_02')"><i class="fas fa-download"></i> تحميل التصميم الثاني</button>
                 </div>
 
                 <!-- DESIGN 03 -->
@@ -465,7 +468,7 @@
                     <div class="canvas-wrapper">
                         <canvas id="canvas3"></canvas>
                     </div>
-                    <button class="download-btn" onclick="downloadSingleCanvas('canvas3', 'Neon_03')"><i class="fas fa-download"></i> تحميل التصميم</button>
+                    <button class="download-btn" onclick="downloadSingleCanvas('canvas3', 'Neon_03')"><i class="fas fa-download"></i> تحميل التصميم الثالث</button>
                 </div>
 
             </div>
@@ -709,7 +712,7 @@
             return lines * lineHeight;
         }
 
-        // التصميم الأول: تدرجات زاهية وحيوية
+        // التصميم الأول
         function drawTemplate1() {
             const canvas = document.getElementById('canvas1');
             const ctx = canvas.getContext('2d');
@@ -742,7 +745,6 @@
             ctx.fillStyle = grad;
             ctx.fillRect(0, shadowStartY, w, h - shadowStartY);
 
-            // لمسة لونية زاهية (إضاءة نيون تحت العنوان)
             const glowGrad = ctx.createLinearGradient(w * 0.2, 0, w * 0.8, 0);
             glowGrad.addColorStop(0, 'rgba(255, 42, 133, 0)');
             glowGrad.addColorStop(0.5, 'rgba(0, 242, 254, 0.8)');
@@ -764,7 +766,7 @@
             drawCustomLogo(ctx, w, h);
         }
 
-        // التصميم الثاني: كارت زجاجي ملون وراقي
+        // التصميم الثاني
         function drawTemplate2() {
             const canvas = document.getElementById('canvas2');
             const ctx = canvas.getContext('2d');
@@ -796,7 +798,6 @@
             ctx.fillStyle = grad;
             ctx.fillRect(0, shadowStartY, w, h - shadowStartY);
 
-            // كارت زجاجي خلفي بألوان زاهية خفيفة
             ctx.fillStyle = 'rgba(15, 23, 42, 0.82)';
             ctx.beginPath();
             if (ctx.roundRect) {
@@ -806,7 +807,6 @@
             }
             ctx.fill();
 
-            // إطار زجاجي متدرج زاهي
             const borderGrad = ctx.createLinearGradient(w * 0.06, cardY, w * 0.94, cardY + totalCardHeight);
             borderGrad.addColorStop(0, '#00f2fe');
             borderGrad.addColorStop(0.5, '#f39c12');
@@ -868,7 +868,7 @@
             ctx.restore();
         }
 
-        // التصميم الثالث: نيون مع وشاح سوشيال ميديا زاهي
+        // التصميم الثالث
         function drawTemplate3() {
             const canvas = document.getElementById('canvas3');
             const ctx = canvas.getContext('2d');
@@ -996,16 +996,37 @@
             window.addEventListener('touchend', stopDrag);
         }
 
+        // دالة تنزيل محسنة تدعم الأجهزة الذكية والمتصفحات المختلفة
         function downloadSingleCanvas(canvasId, name) {
             const canvas = document.getElementById(canvasId);
             if (!canvas) return;
 
-            const link = document.createElement('a');
-            link.download = `ZONE_SPORT_${name}_${Date.now()}.png`;
-            link.href = canvas.toDataURL('image/png');
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            try {
+                // تحويل الكانفاس إلى رابط بيانات صورة
+                const dataUrl = canvas.toDataURL('image/png');
+                
+                // إنشاء رابط تنزيل وهمي ونقره برمجياً
+                const link = document.createElement('a');
+                link.download = `ZONE_SPORT_${name}_${Date.now()}.png`;
+                link.href = dataUrl;
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                
+                setTimeout(() => {
+                    document.body.removeChild(link);
+                }, 100);
+
+            } catch (err) {
+                // حل بديل في حال حظر التنزيل المباشر (فتح الصورة في نافذة جديدة ليقوم المستخدم بحفظها مطولاً)
+                const dataUrl = canvas.toDataURL('image/png');
+                const win = window.open();
+                if (win) {
+                    win.document.write(`<iframe src="${dataUrl}" frameborder="0" style="border:0; top:0; left:0; bottom:0; right:0; width:100%; height:100%;" allowfullscreen></iframe>`);
+                } else {
+                    alert('يرجى الضغط مطولاً على الصورة داخل التصميم ثم اختيار "حفظ الصورة".');
+                }
+            }
         }
 
         window.onload = function() {

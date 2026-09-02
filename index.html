@@ -51,6 +51,7 @@
             font-size: 1.3rem;
             font-weight: 900;
             background: linear-gradient(45deg, var(--accent-cyan), var(--gold), var(--accent-pink));
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -331,6 +332,59 @@
             gap: 10px;
         }
 
+        .accent-color-group {
+            margin-top: 4px;
+        }
+
+        .accent-color-label {
+            display: flex !important;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--accent-cyan) !important;
+        }
+
+        .accent-color-value {
+            direction: ltr;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .color-palette {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .color-swatch {
+            width: 34px;
+            height: 34px;
+            padding: 0;
+            border: 2px solid rgba(255, 255, 255, 0.28);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.28);
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .color-swatch:hover,
+        .color-swatch.active {
+            transform: scale(1.12);
+            border-color: #fff;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.16), 0 4px 16px rgba(0, 0, 0, 0.35);
+        }
+
+        .custom-color-input {
+            width: 38px;
+            height: 38px;
+            padding: 3px;
+            border: 2px solid rgba(255, 255, 255, 0.28);
+            border-radius: 50%;
+            background: transparent;
+            cursor: pointer;
+        }
+
         .drag-hint {
             font-size: 0.75rem;
             color: var(--accent-pink);
@@ -342,6 +396,190 @@
             border: 1px dashed rgba(255, 42, 133, 0.3);
             text-align: center;
             font-weight: 700;
+        }
+
+        /* ZONE SPORT STUDIO responsive shell */
+        :root {
+            --studio-bg: #080b13;
+            --studio-panel: rgba(17, 23, 36, 0.82);
+            --studio-panel-strong: rgba(21, 29, 45, 0.96);
+            --studio-line: rgba(255, 255, 255, 0.1);
+            --studio-cyan: #68e8f4;
+            --studio-pink: #ff5ca8;
+        }
+
+        html {
+            background: var(--studio-bg);
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at 8% 8%, rgba(104, 232, 244, 0.08), transparent 26rem),
+                radial-gradient(circle at 92% 38%, rgba(255, 92, 168, 0.06), transparent 24rem),
+                linear-gradient(145deg, #080b13 0%, #111a2b 100%);
+            color: #f7fbff;
+            font-family: 'Cairo', 'Droid Arabic Kufi', sans-serif;
+        }
+
+        .mobile-appbar {
+            padding: 18px clamp(18px, 4vw, 48px);
+            background: rgba(8, 11, 19, 0.78);
+            border-bottom: 1px solid var(--studio-line);
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.16);
+        }
+
+        .mobile-appbar h1 {
+            font-family: 'Cairo', sans-serif;
+            letter-spacing: 0.08em;
+            font-size: clamp(1.1rem, 2vw, 1.55rem);
+        }
+
+        .mobile-appbar span {
+            letter-spacing: 0.04em;
+        }
+
+        .container {
+            width: min(1380px, 100%);
+            margin: 0 auto;
+            padding: clamp(18px, 3vw, 42px);
+        }
+
+        .card,
+        .design-card {
+            background: var(--studio-panel);
+            border: 1px solid var(--studio-line);
+            border-radius: 18px;
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+        }
+
+        .card {
+            max-width: 860px;
+            margin: 0 auto 22px;
+            padding: clamp(20px, 3vw, 34px);
+        }
+
+        .card-title {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--studio-line);
+        }
+
+        .form-control,
+        .number-control,
+        .upload-btn {
+            background: rgba(4, 8, 16, 0.58);
+            border-color: var(--studio-line);
+        }
+
+        .form-control,
+        .number-control input {
+            font-family: 'Cairo', 'Droid Arabic Kufi', sans-serif;
+        }
+
+        .upload-btn {
+            min-height: 86px;
+            display: grid;
+            place-content: center;
+            gap: 5px;
+        }
+
+        .btn-action {
+            border-radius: 12px;
+            background: linear-gradient(110deg, var(--studio-cyan), #3b8cff);
+            box-shadow: 0 12px 28px rgba(59, 140, 255, 0.24);
+        }
+
+        .designs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .design-card {
+            padding: 15px;
+            margin-bottom: 0;
+            min-width: 0;
+        }
+
+        .design-card-header {
+            min-height: 42px;
+            align-items: flex-start;
+        }
+
+        .design-title {
+            color: var(--studio-cyan);
+            line-height: 1.55;
+            text-align: right;
+        }
+
+        .canvas-wrapper {
+            border-radius: 12px;
+            border-color: var(--studio-line);
+            background: #03050a;
+        }
+
+        .download-btn {
+            border-radius: 11px;
+            background: rgba(104, 232, 244, 0.08);
+            border-color: rgba(104, 232, 244, 0.24);
+        }
+
+        .bottom-nav {
+            height: 74px;
+            padding: 7px max(14px, env(safe-area-inset-left)) max(7px, env(safe-area-inset-bottom));
+            background: rgba(8, 11, 19, 0.9);
+            border-top-color: var(--studio-line);
+        }
+
+        .nav-item {
+            width: 33.333%;
+            max-width: 180px;
+            border-radius: 12px;
+            padding: 5px 8px;
+        }
+
+        .nav-item.active {
+            background: rgba(104, 232, 244, 0.1);
+        }
+
+        .tab-content.active {
+            animation: studio-reveal 0.32s ease both;
+        }
+
+        @keyframes studio-reveal {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 760px) {
+            .mobile-appbar span { font-size: 0.62rem !important; padding-inline: 7px !important; }
+            .container { padding: 18px 14px 96px; }
+            .grid-2col { grid-template-columns: 1fr; }
+            .designs-grid { grid-template-columns: 1fr; gap: 18px; }
+            .design-card { padding: 11px; }
+            .design-card-header { min-height: 34px; }
+            .design-title { font-size: 0.76rem; }
+            .drag-hint { line-height: 1.8; }
+        }
+
+        @media (min-width: 1100px) {
+            .bottom-nav {
+                top: 0;
+                bottom: auto;
+                left: auto;
+                right: 28px;
+                height: 78px;
+                width: min(480px, 42vw);
+                border-top: 0;
+                border-bottom: 1px solid var(--studio-line);
+                background: transparent;
+                box-shadow: none;
+            }
+
+            body { padding-bottom: 40px; }
+            .designs-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .design-card:first-child { grid-column: span 2; }
         }
     </style>
 </head>
@@ -400,6 +638,22 @@
                             <input type="number" id="lineHeightInput" value="1.3" step="0.1" min="0.8" max="2.5" onchange="updateLineHeightFromInput()">
                             <button class="num-btn" onclick="stepValue('lineHeightInput', 0.1)">+</button>
                         </div>
+                    </div>
+                </div>
+
+                <div class="form-group accent-color-group">
+                    <label class="accent-color-label">
+                        <span><i class="fas fa-palette"></i> لون التأثيرات</span>
+                        <span class="accent-color-value" id="accentColorValue">#F39C12</span>
+                    </label>
+                    <div class="color-palette" aria-label="اختيار لون التأثيرات">
+                        <button type="button" class="color-swatch active" style="background:#f39c12;" data-color="#f39c12" aria-label="أصفر" onclick="updateAccentColor('#f39c12', this)"></button>
+                        <button type="button" class="color-swatch" style="background:#111827;" data-color="#111827" aria-label="أسود" onclick="updateAccentColor('#111827', this)"></button>
+                        <button type="button" class="color-swatch" style="background:#ef4444;" data-color="#ef4444" aria-label="أحمر" onclick="updateAccentColor('#ef4444', this)"></button>
+                        <button type="button" class="color-swatch" style="background:#2563eb;" data-color="#2563eb" aria-label="أزرق" onclick="updateAccentColor('#2563eb', this)"></button>
+                        <button type="button" class="color-swatch" style="background:#22c55e;" data-color="#22c55e" aria-label="أخضر" onclick="updateAccentColor('#22c55e', this)"></button>
+                        <button type="button" class="color-swatch" style="background:#e11d8d;" data-color="#e11d8d" aria-label="وردي" onclick="updateAccentColor('#e11d8d', this)"></button>
+                        <input type="color" id="accentColorInput" class="custom-color-input" value="#f39c12" aria-label="اختيار لون مخصص" onchange="updateAccentColor(this.value)">
                     </div>
                 </div>
 
@@ -486,6 +740,23 @@
                      </button>
                     </div>
 
+                    <!-- DESIGN 05 -->
+<div class="design-card">
+    <div class="design-card-header">
+        <span class="design-title">🔥 05 — BREAKOUT HERO</span>
+    </div>
+
+    <div class="canvas-wrapper">
+        <canvas id="canvas5"></canvas>
+    </div>
+
+    <button class="download-btn"
+            onclick="downloadSingleCanvas('canvas5', 'Breakout_Hero_05')">
+        <i class="fas fa-download"></i>
+        تحميل التصميم الخامس
+    </button>
+</div>
+
                 
 
             </div>
@@ -494,11 +765,11 @@
     </div>
 
     <nav class="bottom-nav">
-    <a href="#" class="nav-item active" id="nav-create" onclick="switchMobileTab('tab-create', this)">
+    <a href="#" class="nav-item active" id="nav-create" onclick="switchMobileTab('tab-create', this); return false;">
         <i class="fas fa-plus-circle"></i>
         <span>ADD NEWS</span>
     </a>
-    <a href="#" class="nav-item" id="nav-designs" onclick="switchMobileTab('tab-designs', this)">
+    <a href="#" class="nav-item" id="nav-designs" onclick="switchMobileTab('tab-designs', this); return false;">
         <i class="fas fa-layer-group"></i>
         <span>NEWS</span>
     </a>
@@ -517,9 +788,12 @@
             fontFamily: 'Droid Arabic Kufi',
             baseFontSize: 50,
             lineHeightFactor: 1.3,
+            accentColor: '#f39c12',
             width: 1080,
             height: 1350,
             logo: { x: 0.82, y: 0.05, size: 130 },
+            kicker: { x: 0.93, y: 0.665 },
+            template5Title: { x: 0.5, y: 0.72 },
             textY: 0.22,
             shadowStartY: 0.45
         };
@@ -566,6 +840,18 @@
 
         function changeSelectedFont(newFont) {
             appState.fontFamily = newFont;
+            renderCanvases();
+        }
+
+        function updateAccentColor(color, swatch) {
+            if (!/^#[0-9a-f]{6}$/i.test(color)) return;
+
+            appState.accentColor = color;
+            document.getElementById('accentColorInput').value = color;
+            document.getElementById('accentColorValue').textContent = color.toUpperCase();
+            document.querySelectorAll('.color-swatch').forEach(button => {
+                button.classList.toggle('active', button === swatch || button.dataset.color.toLowerCase() === color.toLowerCase());
+            });
             renderCanvases();
         }
 
@@ -648,12 +934,15 @@
     setupCanvasDimensions('canvas2');
     setupCanvasDimensions('canvas3');
     setupCanvasDimensions('canvas4');
+    setupCanvasDimensions('canvas5');
+
 
     document.fonts.ready.then(() => {
         drawTemplate1();
         drawTemplate2();
         drawTemplate3();
         drawTemplate4();
+        drawTemplate5();
     });
 }
 
@@ -831,9 +1120,9 @@
             ctx.fill();
 
             const borderGrad = ctx.createLinearGradient(w * 0.06, cardY, w * 0.94, cardY + totalCardHeight);
-            borderGrad.addColorStop(0, '#00f2fe');
-            borderGrad.addColorStop(0.5, '#f39c12');
-            borderGrad.addColorStop(1, '#ff2a85');
+            borderGrad.addColorStop(0, appState.accentColor);
+            borderGrad.addColorStop(0.5, '#ffffff');
+            borderGrad.addColorStop(1, appState.accentColor);
             ctx.strokeStyle = borderGrad;
             ctx.lineWidth = Math.max(2, 3.5 * scale);
             ctx.stroke();
@@ -1059,16 +1348,16 @@ function drawTemplate3() {
 
     let nextY = startY + titleH + (10 * scale);
     if (appState.content) {
-        ctx.fillStyle = '#ff2a85';
+                ctx.fillStyle = appState.accentColor;
         ctx.font = `bold ${contentSize}px '${appState.fontFamily}', sans-serif`;
         nextY = wrapTextCentered(ctx, appState.content, w / 2, nextY + (contentSize * 0.8), w * 0.85, contentLineHeight);
     }
 
     const lineY = nextY + (25 * scale);
     const lineGrad = ctx.createLinearGradient(w * 0.15, 0, w * 0.85, 0);
-    lineGrad.addColorStop(0, 'rgba(0, 242, 254, 0)');
-    lineGrad.addColorStop(0.5, '#00f2fe');
-    lineGrad.addColorStop(1, 'rgba(0, 242, 254, 0)');
+    lineGrad.addColorStop(0, 'rgba(255, 255, 255, 0)');
+    lineGrad.addColorStop(0.5, appState.accentColor);
+    lineGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
 
     ctx.strokeStyle = lineGrad;
     ctx.lineWidth = 4 * scale;
@@ -1107,6 +1396,7 @@ function drawTemplate3() {
 
     drawCustomLogo(ctx, w, h);
 }
+
 // التصميم الرابع — EDITORIAL PRIME
 // فكرة احترافية: تغطية Full-Bleed بأسلوب البث الرياضي العالمي
 // (ESPN / Bleacher Report / The Athletic) بدل شكل الـ Portal السايبري.
@@ -1123,12 +1413,12 @@ function drawTemplate4() {
     // 00 — إعدادات التصميم (بدل الأرقام المبعثرة)
     // ==========================================
     const cfg = {
-        accent: '#f39c12',          // اللون المميز (كيكر / خط / تفاصيل)
+        accent: appState.accentColor, // اللون المميز (كيكر / خط / تفاصيل)
         accent2: '#00c2ff',         // لون ثانوي هادي للنص الفرعي
         margin: w * 0.07,           // الهامش الجانبي العام
         topBarY: h * 0.065,         // ارتفاع الشريط العلوي
         scrimStart: 0.42,           // بداية التدرج الغامق (نسبة من الارتفاع)
-        kickerY: h * 0.665,         // موضع الكيكر (التصنيف الصغير)
+        kickerY: h * appState.kicker.y, // موضع الكيكر (التصنيف الصغير)
         titleTopY: h * 0.715,       // بداية العنوان
         dividerGap: 26 * scale,     // مسافة الخط الفاصل تحت المحتوى
         footerY: h * 0.955,         // شريط أسفل الصفحة
@@ -1212,52 +1502,69 @@ function drawTemplate4() {
     ctx.textBaseline = 'middle';
     ctx.textAlign = 'right';
 
-    const kickerText = 'خبر جديد تعالا هنا';
+    const kickerText = 'خبر جديد تعالا هنا ';
     ctx.fillStyle = cfg.accent;
-    ctx.fillText(kickerText, w - cfg.margin - 16 * scale, cfg.kickerY);
+    ctx.fillText(kickerText, w * appState.kicker.x - 16 * scale, cfg.kickerY);
 
     // الخط العمودي المميز على يمين الكتلة النصية
     ctx.fillStyle = cfg.accent;
-    ctx.fillRect(w - cfg.margin - 4 * scale, cfg.kickerY - 14 * scale, 4 * scale, 28 * scale);
+    ctx.fillRect(w * appState.kicker.x - 4 * scale, cfg.kickerY - 14 * scale, 4 * scale, 28 * scale);
     ctx.restore();
 
     // ==========================================
-    // 06 — العنوان الرئيسي
+    // 06 — العنوان الرئيسي (اختياري)
+    // لو appState.title فاضي، الكود مش هيرسمه خالص،
+    // والنص الفرعي هياخد مكانه تلقائيًا بدل ما يسيب فراغ.
     // ==========================================
-    const titleSize = Math.max(
-        26,
-        Math.round(appState.baseFontSize * 0.82 * scale)
-    );
-    const titleLineHeight = titleSize * appState.lineHeightFactor;
     const titleMaxWidth = w - cfg.margin * 2 - 20 * scale;
+    const hasTitle =
+        appState.showTitle !== false &&
+        appState.title !== undefined &&
+        appState.title !== null &&
+        String(appState.title).trim() !== '';
 
-    ctx.font = `900 ${titleSize}px '${appState.fontFamily}', sans-serif`;
+    // cursorY بيتابع آخر نقطة اتكتب فيها، وبيبدأ من نفس موضع العنوان الأصلي
+    let cursorY = cfg.titleTopY;
 
-    const titleHeight = measureWrapTextHeight(
-        ctx,
-        appState.title,
-        titleMaxWidth,
-        titleLineHeight
-    );
+    if (hasTitle) {
+        const titleSize = Math.max(
+            26,
+            Math.round(appState.baseFontSize * 0.82 * scale)
+        );
+        const titleLineHeight = titleSize * appState.lineHeightFactor;
 
-    ctx.save();
-    ctx.fillStyle = '#FFFFFF';
-    ctx.textAlign = 'center';
-    ctx.font = `900 ${titleSize}px '${appState.fontFamily}', sans-serif`;
-    wrapTextCenter(
-        ctx,
-        appState.title,
-        w / 2,
-        cfg.titleTopY,
-        titleMaxWidth,
-        titleLineHeight
-    );
-    ctx.restore();
+        ctx.font = `900 ${titleSize}px '${appState.fontFamily}', sans-serif`;
 
-    let blockEndY = cfg.titleTopY + titleHeight;
+        const titleHeight = measureWrapTextHeight(
+            ctx,
+            appState.title,
+            titleMaxWidth,
+            titleLineHeight
+        );
+
+        ctx.save();
+        ctx.fillStyle = '#FFFFFF';
+        ctx.textAlign = 'center';
+        ctx.font = `900 ${titleSize}px '${appState.fontFamily}', sans-serif`;
+        wrapTextCenter(
+            ctx,
+            appState.title,
+            w / 2,
+            cursorY,
+            titleMaxWidth,
+            titleLineHeight
+        );
+        ctx.restore();
+
+        cursorY += titleHeight + 14 * scale;
+    }
+
+    let blockEndY = cursorY;
 
     // ==========================================
-    // 07 — النص الإضافي (subtitle)
+    // 07 — النص الإضافي (subtitle) — اختياري هو كمان
+    // بيبدأ من cursorY: لو العنوان موجود، بيكمل تحته؛
+    // لو العنوان اتشال، بياخد مكانه هو مباشرة.
     // ==========================================
     if (appState.content) {
         const contentSize = Math.max(
@@ -1265,7 +1572,7 @@ function drawTemplate4() {
             Math.round(appState.baseFontSize * 0.40 * scale)
         );
         const contentLineHeight = contentSize * appState.lineHeightFactor;
-        const contentMaxWidth = w - cfg.margin * 2 - 20 * scale;
+        const contentMaxWidth = titleMaxWidth;
 
         ctx.save();
         ctx.font = `600 ${contentSize}px '${appState.fontFamily}', sans-serif`;
@@ -1283,12 +1590,12 @@ function drawTemplate4() {
             ctx,
             appState.content,
             cfg.margin + 16 * scale,
-            blockEndY + 14 * scale + contentSize * 0.5,
+            cursorY + contentSize * 0.5,
             contentMaxWidth,
             contentLineHeight
         );
 
-        blockEndY += 14 * scale + contentHeight;
+        blockEndY = cursorY + contentHeight;
         ctx.restore();
     }
 
@@ -1318,9 +1625,228 @@ function drawTemplate4() {
 
     ctx.textAlign = 'right';
     ctx.fillStyle = cfg.accent;
-    ctx.fillText('NEWS', w - cfg.margin, cfg.footerY);
+    ctx.fillText('NEW NEWS', w - cfg.margin, cfg.footerY);
     ctx.restore();
 }
+
+
+
+// دالة مساعدة: التفاف نص محاذي للمنتصف (تُستخدم للعنوان الرئيسي)
+function wrapTextCenter(ctx, text, cx, y, maxWidth, lineHeight) {
+    const words = String(text).split(' ');
+    let line = '';
+    const lines = [];
+
+    for (let n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + ' ';
+        const testWidth = ctx.measureText(testLine).width;
+
+        if (testWidth > maxWidth && n > 0) {
+            lines.push(line.trim());
+            line = words[n] + ' ';
+        } else {
+            line = testLine;
+        }
+    }
+    lines.push(line.trim());
+
+    lines.forEach(function (l, i) {
+        ctx.fillText(l, cx, y + i * lineHeight);
+    });
+}
+
+// دالة مساعدة: التفاف نص محاذي لليسار (تُستخدم للنص الفرعي)
+function wrapTextLeft(ctx, text, x, y, maxWidth, lineHeight) {
+    const words = String(text).split(' ');
+    let line = '';
+    let currentY = y;
+
+    for (let n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + ' ';
+        const testWidth = ctx.measureText(testLine).width;
+
+        if (testWidth > maxWidth && n > 0) {
+            ctx.fillText(line.trim(), x, currentY);
+            line = words[n] + ' ';
+            currentY += lineHeight;
+        } else {
+            line = testLine;
+        }
+    }
+    ctx.fillText(line.trim(), x, currentY);
+}
+
+function drawTemplate5() {
+    const canvas = document.getElementById('canvas5');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+    const scale = w / 1080;
+
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = '#070b14';
+    ctx.fillRect(0, 0, w, h);
+
+    if (appState.image) {
+        const imageRatio = appState.image.width / appState.image.height;
+        const canvasRatio = w / h;
+        let drawWidth = w;
+        let drawHeight = h;
+        let drawX = 0;
+        let drawY = 0;
+
+        if (imageRatio > canvasRatio) {
+            drawWidth = h * imageRatio;
+            drawX = (w - drawWidth) / 2;
+        } else {
+            drawHeight = w / imageRatio;
+            drawY = (h - drawHeight) / 2;
+        }
+
+        ctx.drawImage(appState.image, drawX, drawY, drawWidth, drawHeight);
+    }
+
+    const bottomFade = ctx.createLinearGradient(0, h * 0.42, 0, h);
+    bottomFade.addColorStop(0, 'rgba(7, 11, 20, 0)');
+    bottomFade.addColorStop(0.45, 'rgba(7, 11, 20, 0.58)');
+    bottomFade.addColorStop(1, 'rgba(7, 11, 20, 0.98)');
+    ctx.fillStyle = bottomFade;
+    ctx.fillRect(0, h * 0.42, w, h * 0.58);
+
+    ctx.save();
+    ctx.font = `800 ${18 * scale}px 'Cairo', sans-serif`;
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#ffffff';
+    ctx.fillText('SPORT NEWS', w * 0.93, h * 0.065);
+    ctx.restore();
+
+    const titleSize = Math.max(25, Math.round(appState.baseFontSize * 0.78 * scale));
+    const titleLineHeight = titleSize * appState.lineHeightFactor;
+    const titleMaxWidth = w * 0.84;
+    ctx.font = `bold ${titleSize}px '${appState.fontFamily}', sans-serif`;
+    const titleHeight = measureWrapTextHeight(ctx, appState.title, titleMaxWidth, titleLineHeight);
+    const contentSize = Math.max(15, Math.round(appState.baseFontSize * 0.4 * scale));
+    const contentLineHeight = contentSize * appState.lineHeightFactor;
+    const contentHeight = appState.content ? measureWrapTextHeight(ctx, appState.content, titleMaxWidth, contentLineHeight) : 0;
+    const footerHeight = 58 * scale;
+    const blockHeight = titleHeight + (appState.content ? contentHeight + 18 * scale : 0) + footerHeight;
+    const titleStartY = Math.max(h * 0.5, Math.min(h * 0.82, h * appState.template5Title.y));
+    const titleCenterX = w * appState.template5Title.x;
+    const accentLineY = h * 0.69;
+
+    ctx.save();
+    ctx.fillStyle = appState.accentColor;
+    ctx.lineWidth = 7 * scale;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(0, accentLineY - 9 * scale);
+    ctx.lineTo(w, accentLineY + 9 * scale);
+    ctx.stroke();
+    ctx.restore();
+
+    ctx.save();
+    ctx.font = `bold ${titleSize}px '${appState.fontFamily}', sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#ffffff';
+    wrapTextCentered(ctx, appState.title, titleCenterX, titleStartY + titleSize * 0.8, titleMaxWidth, titleLineHeight);
+    ctx.restore();
+
+    let contentEndY = titleStartY + titleHeight;
+    if (appState.content) {
+        ctx.save();
+        ctx.font = `500 ${contentSize}px '${appState.fontFamily}', sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.78)';
+        wrapTextCentered(ctx, appState.content, w / 2, contentEndY + 18 * scale + contentSize * 0.8, titleMaxWidth, contentLineHeight);
+        contentEndY += 18 * scale + contentHeight;
+        ctx.restore();
+    }
+
+    const socialY = Math.min(h * 0.94, contentEndY + 54 * scale);
+    const iconSize = 36 * scale;
+    const gap = 20 * scale;
+    const brandSize = 24 * scale;
+    const rowStartX = w * 0.07;
+    let socialX = rowStartX + iconSize / 2;
+
+    ctx.save();
+    drawDarkSocialIcon(ctx, 'facebook', socialX, socialY, iconSize);
+    socialX += iconSize + gap;
+    drawDarkSocialIcon(ctx, 'x', socialX, socialY, iconSize);
+    socialX += iconSize + gap;
+    drawDarkSocialIcon(ctx, 'tiktok', socialX, socialY, iconSize);
+
+    ctx.font = `bold ${brandSize}px 'Cairo', sans-serif`;
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#ffffff';
+    ctx.fillText('ZONE SPORT', socialX + iconSize / 2 + 28 * scale, socialY);
+    ctx.restore();
+}
+
+function drawDarkSocialIcon(ctx, type, x, y, size) {
+    const scale = size / 40;
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.scale(scale, scale);
+
+    if (type === 'facebook') {
+        ctx.beginPath();
+        ctx.arc(0, 0, 20, 0, Math.PI * 2);
+        ctx.fillStyle = '#173b63';
+        ctx.fill();
+        ctx.fillStyle = '#d8eaff';
+        ctx.font = 'bold 26px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('f', 2, 2);
+    } else if (type === 'x') {
+        ctx.fillStyle = '#18202b';
+        ctx.beginPath();
+        ctx.arc(0, 0, 20, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#e6edf5';
+        ctx.font = '900 23px Arial, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('X', 0, 1);
+    } else if (type === 'tiktok') {
+        ctx.beginPath();
+        ctx.arc(0, 0, 20, 0, Math.PI * 2);
+        ctx.fillStyle = '#202936';
+        ctx.fill();
+
+        const drawNote = (color, offsetX, offsetY) => {
+            ctx.save();
+            ctx.translate(offsetX, offsetY);
+            ctx.strokeStyle = color;
+            ctx.fillStyle = color;
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.arc(-3, 5, 4, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.moveTo(1, 5);
+            ctx.lineTo(1, -9);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(7, -5, 6, Math.PI, Math.PI * 1.5, true);
+            ctx.stroke();
+            ctx.restore();
+        };
+
+        drawNote('#42617c', -1.5, -1.5);
+        drawNote('#7b405d', 1.5, 1.5);
+        drawNote('#dce5ee', 0, 0);
+    }
+
+    ctx.restore();
+}
+
 
 // دالة مساعدة: التفاف نص محاذي للمنتصف (تُستخدم للعنوان الرئيسي)
 function wrapTextCenter(ctx, text, cx, y, maxWidth, lineHeight) {
@@ -1407,8 +1933,29 @@ function wrapTextLeft(ctx, text, x, y, maxWidth, lineHeight) {
 
             function startDrag(e) {
                 const pos = getEventPos(e);
+                if (e.pointerId !== undefined && cvs.setPointerCapture) {
+                    cvs.setPointerCapture(e.pointerId);
+                }
                 const scale = appState.width / 1080;
                 const logoSizeRatio = (appState.logo.size * scale) / appState.width;
+
+                if (canvasId === 'canvas4') {
+                    const kickerX = appState.kicker.x;
+                    const kickerY = appState.kicker.y;
+                    if (pos.x > kickerX - 0.36 && pos.x < kickerX + 0.04 && Math.abs(pos.y - kickerY) < 0.07) {
+                        draggingTarget = 'kicker';
+                        return;
+                    }
+                }
+
+                if (canvasId === 'canvas5') {
+                    const titleX = appState.template5Title.x;
+                    const titleY = appState.template5Title.y;
+                    if (Math.abs(pos.x - titleX) < 0.48 && Math.abs(pos.y - titleY) < 0.22) {
+                        draggingTarget = 'template5Title';
+                        return;
+                    }
+                }
 
                 const logoDistX = pos.x - (appState.logo.x + logoSizeRatio / 2);
                 const logoDistY = pos.y - (appState.logo.y + logoSizeRatio / 2);
@@ -1435,6 +1982,12 @@ function wrapTextLeft(ctx, text, x, y, maxWidth, lineHeight) {
                 if (draggingTarget === 'logo') {
                     appState.logo.x = Math.max(0, Math.min(0.85, pos.x - 0.05));
                     appState.logo.y = Math.max(0, Math.min(0.9, pos.y - 0.05));
+                } else if (draggingTarget === 'kicker') {
+                    appState.kicker.x = Math.max(0.38, Math.min(0.96, pos.x));
+                    appState.kicker.y = Math.max(0.08, Math.min(0.9, pos.y));
+                } else if (draggingTarget === 'template5Title') {
+                    appState.template5Title.x = Math.max(0.12, Math.min(0.88, pos.x));
+                    appState.template5Title.y = Math.max(0.5, Math.min(0.82, pos.y));
                 } else if (draggingTarget === 'text') {
                     appState.textY = Math.max(0.05, Math.min(0.45, 1 - pos.y));
                 } else if (draggingTarget === 'shadow') {
@@ -1448,13 +2001,10 @@ function wrapTextLeft(ctx, text, x, y, maxWidth, lineHeight) {
                 draggingTarget = null;
             }
 
-            cvs.addEventListener('mousedown', startDrag);
-            cvs.addEventListener('mousemove', handleMove);
-            window.addEventListener('mouseup', stopDrag);
-
-            cvs.addEventListener('touchstart', startDrag, { passive: true });
-            cvs.addEventListener('touchmove', handleMove, { passive: true });
-            window.addEventListener('touchend', stopDrag);
+            cvs.addEventListener('pointerdown', startDrag);
+            cvs.addEventListener('pointermove', handleMove);
+            window.addEventListener('pointerup', stopDrag);
+            window.addEventListener('pointercancel', stopDrag);
         }
 
         // دالة تنزيل آمنة 100% تعمل على كافة المتصفحات والهواتف المحمولة
@@ -1491,6 +2041,7 @@ function wrapTextLeft(ctx, text, x, y, maxWidth, lineHeight) {
     initSmartDragEvents('canvas2');
     initSmartDragEvents('canvas3');
     initSmartDragEvents('canvas4');
+    initSmartDragEvents('canvas5');
     renderCanvases();
                                     };
     </script>

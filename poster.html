@@ -903,42 +903,10 @@ body{
 
 
   <!-- =====================================================
-       MATCH MODE
+       MATCH MODE (FULL TIME)
   ====================================================== -->
 
   <div id="matchPanel">
-
-    <!-- BACKGROUND -->
-
-    <div class="group">
-
-      <div class="label">
-        Background Photo
-      </div>
-
-      <label class="upload">
-
-        <span
-          class="upload-name"
-          id="bgFileName">
-          Upload photo
-        </span>
-
-        <span
-          class="upload-status"
-          id="bgStatus">
-          —
-        </span>
-
-        <input
-          id="bgInput"
-          type="file"
-          accept="image/*">
-
-      </label>
-
-    </div>
-
 
     <!-- LOGOS -->
 
@@ -1144,19 +1112,19 @@ body{
     </div>
 
 
-    <!-- LOGO SIZE -->
+    <!-- BADGES SIZE -->
 
     <div class="group">
 
       <div class="label">
-        Logo Size
+        Badges Size
       </div>
 
       <div class="control-card">
 
         <div class="control-title">
 
-          <span>Both Logos</span>
+          <span>Both Badges</span>
 
           <span
             class="control-value"
@@ -1173,7 +1141,7 @@ body{
           <div
             class="value"
             style="font-family:'Archivo';font-size:10px;color:#69717c;letter-spacing:1px;">
-            LOGOS
+            BADGES
           </div>
 
           <button
@@ -1187,12 +1155,76 @@ body{
     </div>
 
 
+    <!-- FULL TIME TEXT -->
+
+    <div class="group">
+
+      <div class="label">
+        Full Time Text
+      </div>
+
+      <input
+        class="poster-title-input"
+        id="fullTimeTitleInput"
+        style="direction:ltr;text-align:center;letter-spacing:1px;"
+        value="FULL TIME">
+
+    </div>
+
+
+    <!-- FULL TIME FONT -->
+
+    <div class="group">
+
+      <div class="label">
+        Full Time Font
+      </div>
+
+      <select
+        class="font-select"
+        id="fullTimeFontSelect">
+
+        <option value="Anton">
+          Anton — Athletic
+        </option>
+
+        <option value="Bebas Neue">
+          Bebas Neue — Sports
+        </option>
+
+        <option value="Oswald">
+          Oswald — Condensed
+        </option>
+
+        <option value="Teko">
+          Teko — Powerful
+        </option>
+
+        <option value="Rajdhani">
+          Rajdhani — Modern
+        </option>
+
+        <option value="Archivo Black">
+          Archivo Black — Bold
+        </option>
+
+      </select>
+
+      <div
+        class="font-preview"
+        id="fullTimeFontPreview">
+        FULL TIME
+      </div>
+
+    </div>
+
+
     <!-- FULL TIME SIZE -->
 
     <div class="group">
 
       <div class="label">
-        Full Time
+        Full Time Size
       </div>
 
       <div class="control-card">
@@ -1284,6 +1316,38 @@ body{
     </div>
 
 
+    <!-- AL AHLY LOGO -->
+
+    <div class="group">
+
+      <div class="label">
+        Al Ahly Logo
+      </div>
+
+      <label class="upload">
+
+        <span
+          class="upload-name"
+          id="posterHomeLogoName">
+          Upload Al Ahly logo
+        </span>
+
+        <span
+          class="upload-status"
+          id="posterHomeLogoStatus">
+          —
+        </span>
+
+        <input
+          id="posterHomeLogoInput"
+          type="file"
+          accept="image/*">
+
+      </label>
+
+    </div>
+
+
     <!-- OPPONENT LOGO -->
 
     <div class="group">
@@ -1312,15 +1376,6 @@ body{
           accept="image/*">
 
       </label>
-
-      <div
-        style="
-        margin-top:2px;
-        font-size:9px;
-        line-height:1.6;
-        color:#5b636d;">
-        Al Ahly badge stays fixed — it reuses the logo uploaded under FULL TIME → Team Logos.
-      </div>
 
     </div>
 
@@ -1767,20 +1822,6 @@ body{
     </canvas>
 
     <div
-      class="empty"
-      id="emptyHint">
-
-      <strong>
-        NO PHOTO LOADED
-      </strong>
-
-      <span>
-        Upload a background photo to begin
-      </span>
-
-    </div>
-
-    <div
       class="drag-info"
       id="dragInfo">
       DRAG ELEMENTS DIRECTLY
@@ -1814,9 +1855,7 @@ const state = {
 
   mode:"match",
 
-  /* MATCH */
-
-  bgImage:null,
+  /* MATCH / FULL TIME */
 
   homeLogo:null,
   awayLogo:null,
@@ -1830,16 +1869,21 @@ const state = {
 
   scoreFont:"Anton",
 
+  fullTimeText:"FULL TIME",
+  fullTimeFont:"Anton",
+
   positions:{
     homeLogo:null,
     awayLogo:null,
     score:null,
-    fullTime:null
+    fullTime:null,
+    social:null
   },
 
 
   /* POSTER — KICK OFF layout: two team badges + title + social row */
 
+  posterHomeLogo:null,
   posterAwayLogo:null,
 
   posterTitle:"KICK OFF",
@@ -1908,53 +1952,35 @@ const STEP=.05;
 
 
 /* =========================================================
-   STUDIO VISUAL CONSTANTS (shared by GOAL + POSTER)
+   STUDIO VISUAL CONSTANTS (shared by MATCH + GOAL + POSTER)
 ========================================================= */
 
 const GOAL_GOLD="#d9b25c";
 const GOAL_GOLD_BRIGHT="#f3d488";
 
-/*
-  Background base tones — a distinct
-  dark navy shade from the match / poster
-  overlays, so the GOAL / POSTER templates
-  read as their own identity.
-*/
-
 const GOAL_BG_TOP="#111a2e";
 const GOAL_BG_BOTTOM="#0a0f1d";
-
-/*
-  Precomputed ray burst — fixed values so
-  the pattern never flickers on re-render.
-*/
 
 const GOAL_RAYS=(function(){
 
   const rays=[];
-
   const count=30;
 
   for(let i=0;i<count;i++){
 
-    const seed=
-      i*137.51;
+    const seed=i*137.51;
 
     const angle=
-      (seed%360)*
-      (Math.PI/180);
+      (seed%360)*(Math.PI/180);
 
     const lengthRatio=
-      .55+
-      ((seed*7)%100)/100*.5;
+      .55+((seed*7)%100)/100*.5;
 
     const widthPx=
-      1+
-      ((seed*13)%100)/100*2.6;
+      1+((seed*13)%100)/100*2.6;
 
     const opacity=
-      .05+
-      ((seed*19)%100)/100*.16;
+      .05+((seed*19)%100)/100*.16;
 
     rays.push({
       angle,
@@ -1977,7 +2003,6 @@ const GOAL_RAYS=(function(){
 const canvas=document.getElementById("canvas");
 const ctx=canvas.getContext("2d");
 
-const emptyHint=document.getElementById("emptyHint");
 const dragInfo=document.getElementById("dragInfo");
 
 const matchPanel=document.getElementById("matchPanel");
@@ -2053,7 +2078,7 @@ function getContainDimensions(img,target){
 
 
 /* =========================================================
-   MATCH DEFAULT POSITIONS
+   MATCH / FULL TIME DEFAULT POSITIONS
 ========================================================= */
 
 function getDefaultPositions(){
@@ -2062,30 +2087,31 @@ function getDefaultPositions(){
   const h=canvas.height;
   const min=Math.min(w,h);
 
-  const scoreY=h-min*.115;
-
-  const matchupY=scoreY-min*.205;
-
   return{
 
     homeLogo:{
-      x:w/2-min*.09,
-      y:matchupY
+      x:w/2-min*.20,
+      y:h*.335
     },
 
     awayLogo:{
-      x:w/2+min*.09,
-      y:matchupY
-    },
-
-    score:{
-      x:w/2,
-      y:scoreY
+      x:w/2+min*.20,
+      y:h*.335
     },
 
     fullTime:{
       x:w/2,
-      y:scoreY-min*.145
+      y:h*.53
+    },
+
+    score:{
+      x:w/2,
+      y:h*.665
+    },
+
+    social:{
+      x:w/2,
+      y:h*.90
     }
 
   };
@@ -2195,7 +2221,7 @@ function ensureGoalPositions(){
 
 
 /* =========================================================
-   RESET MATCH POSITIONS
+   RESET POSITIONS (per mode)
 ========================================================= */
 
 function resetPositions(){
@@ -2207,10 +2233,6 @@ function resetPositions(){
 
 }
 
-
-/* =========================================================
-   RESET POSTER POSITIONS
-========================================================= */
 
 function resetPosterPositions(){
 
@@ -2233,108 +2255,8 @@ function resetGoalPositions(){
 
 
 /* =========================================================
-   BACKGROUND (match mode — uploaded photo)
-========================================================= */
-
-function drawBackground(img){
-
-  if(!img)return;
-
-  ctx.drawImage(
-    img,
-    0,
-    0,
-    canvas.width,
-    canvas.height
-  );
-
-}
-
-
-/* =========================================================
-   CINEMATIC OVERLAY (match mode)
-========================================================= */
-
-function drawOverlay(){
-
-  const w=canvas.width;
-  const h=canvas.height;
-
-  const bottom=
-    ctx.createLinearGradient(
-      0,
-      h*.35,
-      0,
-      h
-    );
-
-  bottom.addColorStop(
-    0,
-    "rgba(0,0,0,0)"
-  );
-
-  bottom.addColorStop(
-    .50,
-    "rgba(0,0,0,.08)"
-  );
-
-  bottom.addColorStop(
-    .75,
-    "rgba(0,0,0,.30)"
-  );
-
-  bottom.addColorStop(
-    1,
-    "rgba(0,0,0,.68)"
-  );
-
-  ctx.fillStyle=bottom;
-
-  ctx.fillRect(
-    0,
-    0,
-    w,
-    h
-  );
-
-
-  const min=Math.min(w,h);
-
-  const vignette=
-    ctx.createRadialGradient(
-      w/2,
-      h*.43,
-      min*.15,
-      w/2,
-      h*.5,
-      min*.85
-    );
-
-  vignette.addColorStop(
-    0,
-    "rgba(0,0,0,0)"
-  );
-
-  vignette.addColorStop(
-    1,
-    "rgba(0,0,0,.35)"
-  );
-
-  ctx.fillStyle=vignette;
-
-  ctx.fillRect(
-    0,
-    0,
-    w,
-    h
-  );
-
-}
-
-
-/* =========================================================
    STUDIO BACKGROUND — generated navy + golden rays
-   Shared by GOAL and POSTER (no uploaded photo needed)
+   Shared by MATCH, GOAL and POSTER (no uploaded photo needed)
 ========================================================= */
 
 function drawStudioBackground(
@@ -2346,12 +2268,7 @@ function drawStudioBackground(
   const h=canvas.height;
 
   const base=
-    ctx.createLinearGradient(
-      0,
-      0,
-      0,
-      h
-    );
+    ctx.createLinearGradient(0,0,0,h);
 
   base.addColorStop(0,GOAL_BG_TOP);
   base.addColorStop(1,GOAL_BG_BOTTOM);
@@ -2372,30 +2289,16 @@ function drawStudioBackground(
   GOAL_RAYS.forEach(
     function(ray){
 
-      const innerR=
-        radius*.10;
+      const innerR=radius*.10;
+      const outerR=radius*ray.lengthRatio;
 
-      const outerR=
-        radius*ray.lengthRatio;
+      const x1=centerX+Math.cos(ray.angle)*innerR;
+      const y1=centerY+Math.sin(ray.angle)*innerR;
 
-      const x1=
-        centerX+
-        Math.cos(ray.angle)*innerR;
+      const x2=centerX+Math.cos(ray.angle)*outerR;
+      const y2=centerY+Math.sin(ray.angle)*outerR;
 
-      const y1=
-        centerY+
-        Math.sin(ray.angle)*innerR;
-
-      const x2=
-        centerX+
-        Math.cos(ray.angle)*outerR;
-
-      const y2=
-        centerY+
-        Math.sin(ray.angle)*outerR;
-
-      ctx.globalAlpha=
-        ray.opacity;
+      ctx.globalAlpha=ray.opacity;
 
       ctx.lineWidth=
         ray.widthPx*(w/1080);
@@ -2421,15 +2324,8 @@ function drawStudioBackground(
       Math.max(w,h)*.85
     );
 
-  vignette.addColorStop(
-    0,
-    "rgba(0,0,0,0)"
-  );
-
-  vignette.addColorStop(
-    1,
-    "rgba(0,0,0,.45)"
-  );
+  vignette.addColorStop(0,"rgba(0,0,0,0)");
+  vignette.addColorStop(1,"rgba(0,0,0,.45)");
 
   ctx.fillStyle=vignette;
 
@@ -2449,7 +2345,7 @@ function drawGoalBackground(){
 
 
 /* =========================================================
-   MATCH LOGO
+   LOGO (drawn inside a badge frame)
 ========================================================= */
 
 function drawLogo(
@@ -2461,21 +2357,13 @@ function drawLogo(
   if(!img)return;
 
   const size=
-    getContainDimensions(
-      img,
-      target
-    );
+    getContainDimensions(img,target);
 
   ctx.save();
 
-  ctx.shadowColor=
-    "rgba(0,0,0,.88)";
-
-  ctx.shadowBlur=
-    target*.13;
-
-  ctx.shadowOffsetY=
-    target*.045;
+  ctx.shadowColor="rgba(0,0,0,.88)";
+  ctx.shadowBlur=target*.13;
+  ctx.shadowOffsetY=target*.045;
 
   ctx.drawImage(
     img,
@@ -2491,7 +2379,66 @@ function drawLogo(
 
 
 /* =========================================================
-   FULL TIME
+   TITLE TEXT — shared helper for FULL TIME + KICK OFF titles
+========================================================= */
+
+function drawTitleText(
+  pos,
+  text,
+  font,
+  size
+){
+
+  const min=Math.min(
+    canvas.width,
+    canvas.height
+  );
+
+  ctx.save();
+
+  ctx.font=
+    `800 ${size}px '${font}',sans-serif`;
+
+  ctx.textAlign="center";
+  ctx.textBaseline="middle";
+
+  ctx.fillStyle="#ffffff";
+
+  ctx.shadowColor="rgba(0,0,0,.55)";
+  ctx.shadowBlur=size*.14;
+  ctx.shadowOffsetY=size*.03;
+
+  ctx.fillText(text,pos.x,pos.y);
+
+  const textWidth=
+    ctx.measureText(text).width;
+
+  ctx.restore();
+
+
+  const halfLine=
+    Math.max(
+      min*.16,
+      textWidth*.42
+    );
+
+  ctx.save();
+
+  ctx.strokeStyle=GOAL_GOLD;
+  ctx.lineWidth=min*.0025;
+
+  ctx.beginPath();
+  ctx.moveTo(pos.x-halfLine,pos.y+size*.62);
+  ctx.lineTo(pos.x+halfLine,pos.y+size*.62);
+  ctx.stroke();
+
+  ctx.restore();
+
+}
+
+
+/* =========================================================
+   FULL TIME TITLE
 ========================================================= */
 
 function drawFullTime(){
@@ -2504,35 +2451,17 @@ function drawFullTime(){
   const pos=state.positions.fullTime;
 
   const size=
-    min*.052*
-    state.fullTimeScale;
+    min*.072*state.fullTimeScale;
 
-  ctx.save();
+  const text=
+    (state.fullTimeText || "FULL TIME").toUpperCase();
 
-  ctx.font=
-    `800 ${size}px 'Archivo',sans-serif`;
-
-  ctx.textAlign="center";
-  ctx.textBaseline="middle";
-
-  ctx.fillStyle="#ffffff";
-
-  ctx.shadowColor=
-    "rgba(0,0,0,.90)";
-
-  ctx.shadowBlur=
-    size*.30;
-
-  ctx.shadowOffsetY=
-    size*.055;
-
-  ctx.fillText(
-    "FULL TIME",
-    pos.x,
-    pos.y
+  drawTitleText(
+    pos,
+    text,
+    state.fullTimeFont,
+    size
   );
-
-  ctx.restore();
 
 }
 
@@ -2551,14 +2480,10 @@ function drawScore(){
   const pos=state.positions.score;
 
   const scoreSize=
-    min*.185*
-    state.scoreScale;
+    min*.15*state.scoreScale;
 
-  const homeText=
-    String(state.homeScore);
-
-  const awayText=
-    String(state.awayScore);
+  const homeText=String(state.homeScore);
+  const awayText=String(state.awayScore);
 
   ctx.save();
 
@@ -2567,161 +2492,41 @@ function drawScore(){
 
   ctx.textBaseline="middle";
 
-  const homeWidth=
-    ctx.measureText(homeText).width;
-
-  const awayWidth=
-    ctx.measureText(awayText).width;
-
-  const dashWidth=
-    ctx.measureText("-").width;
+  const homeWidth=ctx.measureText(homeText).width;
+  const awayWidth=ctx.measureText(awayText).width;
+  const dashWidth=ctx.measureText("-").width;
 
   const gap=min*.055;
 
   const total=
-    homeWidth+
-    gap+
-    dashWidth+
-    gap+
-    awayWidth;
+    homeWidth+gap+dashWidth+gap+awayWidth;
 
-  const start=
-    pos.x-total/2;
+  const start=pos.x-total/2;
 
-  const homeX=
-    start+homeWidth;
+  const homeX=start+homeWidth;
 
   const dashX=
-    start+
-    homeWidth+
-    gap+
-    dashWidth/2;
+    start+homeWidth+gap+dashWidth/2;
 
   const awayX=
-    start+
-    homeWidth+
-    gap+
-    dashWidth+
-    gap;
+    start+homeWidth+gap+dashWidth+gap;
 
-  ctx.shadowColor=
-    "rgba(0,0,0,.92)";
-
-  ctx.shadowBlur=
-    scoreSize*.11;
-
-  ctx.shadowOffsetY=
-    scoreSize*.035;
+  ctx.shadowColor="rgba(0,0,0,.92)";
+  ctx.shadowBlur=scoreSize*.11;
+  ctx.shadowOffsetY=scoreSize*.035;
 
   ctx.fillStyle="#ffffff";
 
   ctx.textAlign="right";
-
-  ctx.fillText(
-    homeText,
-    homeX,
-    pos.y
-  );
+  ctx.fillText(homeText,homeX,pos.y);
 
   ctx.textAlign="center";
-
-  ctx.fillStyle=
-    "rgba(255,255,255,.90)";
-
-  ctx.fillText(
-    "-",
-    dashX,
-    pos.y
-  );
+  ctx.fillStyle="rgba(255,255,255,.90)";
+  ctx.fillText("-",dashX,pos.y);
 
   ctx.textAlign="left";
-
   ctx.fillStyle="#ffffff";
-
-  ctx.fillText(
-    awayText,
-    awayX,
-    pos.y
-  );
-
-  ctx.restore();
-
-}
-
-
-/* =========================================================
-   MATCHUP
-========================================================= */
-
-function drawMatchup(){
-
-  const min=Math.min(
-    canvas.width,
-    canvas.height
-  );
-
-  const logoSize=
-    min*.135*
-    state.logoScale;
-
-  if(state.homeLogo){
-
-    drawLogo(
-      state.homeLogo,
-      state.positions.homeLogo,
-      logoSize
-    );
-
-  }
-
-  if(state.awayLogo){
-
-    drawLogo(
-      state.awayLogo,
-      state.positions.awayLogo,
-      logoSize
-    );
-
-  }
-
-
-  const x=
-    (
-      state.positions.homeLogo.x+
-      state.positions.awayLogo.x
-    )/2;
-
-  const y=
-    (
-      state.positions.homeLogo.y+
-      state.positions.awayLogo.y
-    )/2;
-
-  const vsSize=
-    min*.034;
-
-  ctx.save();
-
-  ctx.font=
-    `800 ${vsSize}px 'Archivo',sans-serif`;
-
-  ctx.textAlign="center";
-  ctx.textBaseline="middle";
-
-  ctx.fillStyle=
-    "rgba(255,255,255,.82)";
-
-  ctx.shadowColor=
-    "rgba(0,0,0,.85)";
-
-  ctx.shadowBlur=
-    vsSize*.40;
-
-  ctx.fillText(
-    "VS",
-    x,
-    y
-  );
+  ctx.fillText(awayText,awayX,pos.y);
 
   ctx.restore();
 
@@ -2730,7 +2535,7 @@ function drawMatchup(){
 
 /* =========================================================
    BADGE FRAME — square golden frame used for team badges
-   Shared shape for GOAL (single) and POSTER (double)
+   Shared shape for MATCH, GOAL (single) and POSTER (double)
 ========================================================= */
 
 function drawBadgeFrame(
@@ -2743,15 +2548,11 @@ function drawBadgeFrame(
     canvas.height
   );
 
-  const inner=
-    outer*.80;
+  const inner=outer*.80;
 
   ctx.save();
 
-  /* outer golden frame */
-
-  ctx.fillStyle=
-    "rgba(255,255,255,.03)";
+  ctx.fillStyle="rgba(255,255,255,.03)";
 
   ctx.fillRect(
     pos.x-outer/2,
@@ -2771,10 +2572,7 @@ function drawBadgeFrame(
   );
 
 
-  /* inner golden frame */
-
-  ctx.fillStyle=
-    "rgba(0,0,0,.18)";
+  ctx.fillStyle="rgba(0,0,0,.18)";
 
   ctx.fillRect(
     pos.x-inner/2,
@@ -2814,6 +2612,58 @@ function drawGoalFrame(){
 
 
 /* =========================================================
+   FULL TIME BADGES (Al Ahly + Opponent)
+========================================================= */
+
+function drawFullTimeBadges(){
+
+  const min=Math.min(
+    canvas.width,
+    canvas.height
+  );
+
+  const badgeOuter=
+    min*.34*state.logoScale;
+
+  const badgeInner=
+    badgeOuter*.80*.86;
+
+
+  drawBadgeFrame(
+    state.positions.homeLogo,
+    badgeOuter
+  );
+
+  drawBadgeFrame(
+    state.positions.awayLogo,
+    badgeOuter
+  );
+
+
+  if(state.homeLogo){
+
+    drawLogo(
+      state.homeLogo,
+      state.positions.homeLogo,
+      badgeInner
+    );
+
+  }
+
+  if(state.awayLogo){
+
+    drawLogo(
+      state.awayLogo,
+      state.positions.awayLogo,
+      badgeInner
+    );
+
+  }
+
+}
+
+
+/* =========================================================
    GOAL CLUB LOGO
 ========================================================= */
 
@@ -2826,21 +2676,14 @@ function drawGoalLogo(){
     canvas.height
   );
 
-  const pos=
-    state.goalPositions.logo;
+  const pos=state.goalPositions.logo;
 
-  const inner=
-    min*.50*.80;
+  const inner=min*.50*.80;
 
   const target=
-    inner*.86*
-    state.goalLogoScale;
+    inner*.86*state.goalLogoScale;
 
-  drawLogo(
-    state.goalLogo,
-    pos,
-    target
-  );
+  drawLogo(state.goalLogo,pos,target);
 
 }
 
@@ -2856,38 +2699,25 @@ function drawGoalWord(){
 
   const min=Math.min(w,h);
 
-  const size=
-    min*.155;
+  const size=min*.155;
 
   ctx.save();
 
-  ctx.font=
-    `900 ${size}px 'Cairo',sans-serif`;
+  ctx.font=`900 ${size}px 'Cairo',sans-serif`;
 
   ctx.textAlign="center";
   ctx.textBaseline="middle";
 
   ctx.fillStyle="#ffffff";
 
-  ctx.shadowColor=
-    "rgba(0,0,0,.55)";
+  ctx.shadowColor="rgba(0,0,0,.55)";
+  ctx.shadowBlur=size*.12;
+  ctx.shadowOffsetY=size*.03;
 
-  ctx.shadowBlur=
-    size*.12;
-
-  ctx.shadowOffsetY=
-    size*.03;
-
-  ctx.fillText(
-    "جوووول",
-    w/2,
-    h*.665
-  );
+  ctx.fillText("جوووول",w/2,h*.665);
 
   ctx.restore();
 
-
-  /* thin golden divider under the word */
 
   ctx.save();
 
@@ -2915,12 +2745,10 @@ function drawGoalPlayerName(){
     canvas.height
   );
 
-  const pos=
-    state.goalPositions.name;
+  const pos=state.goalPositions.name;
 
   const size=
-    min*.048*
-    state.goalNameScale;
+    min*.048*state.goalNameScale;
 
   const hasName=
     state.goalPlayerName &&
@@ -2939,11 +2767,8 @@ function drawGoalPlayerName(){
       ? "#f3f4f6"
       : "rgba(255,255,255,.32)";
 
-  ctx.shadowColor=
-    "rgba(0,0,0,.55)";
-
-  ctx.shadowBlur=
-    size*.20;
+  ctx.shadowColor="rgba(0,0,0,.55)";
+  ctx.shadowBlur=size*.20;
 
   ctx.fillText(
     hasName
@@ -2964,72 +2789,25 @@ function drawGoalPlayerName(){
 
 function drawPosterTitle(){
 
-  const w=canvas.width;
-  const h=canvas.height;
+  const min=Math.min(
+    canvas.width,
+    canvas.height
+  );
 
-  const min=Math.min(w,h);
-
-  const pos=
-    state.posterPositions.title;
+  const pos=state.posterPositions.title;
 
   const size=
-    min*.115*
-    state.posterTitleScale;
+    min*.115*state.posterTitleScale;
 
   const text=
     (state.posterTitle || "KICK OFF").toUpperCase();
 
-  ctx.save();
-
-  ctx.font=
-    `800 ${size}px '${state.posterTitleFont}',sans-serif`;
-
-  ctx.textAlign="center";
-  ctx.textBaseline="middle";
-
-  ctx.fillStyle="#ffffff";
-
-  ctx.shadowColor=
-    "rgba(0,0,0,.55)";
-
-  ctx.shadowBlur=
-    size*.14;
-
-  ctx.shadowOffsetY=
-    size*.03;
-
-  ctx.fillText(
+  drawTitleText(
+    pos,
     text,
-    pos.x,
-    pos.y
+    state.posterTitleFont,
+    size
   );
-
-
-  const textWidth=
-    ctx.measureText(text).width;
-
-  ctx.restore();
-
-
-  /* thin golden divider under the title */
-
-  const halfLine=
-    Math.max(
-      min*.16,
-      textWidth*.42
-    );
-
-  ctx.save();
-
-  ctx.strokeStyle=GOAL_GOLD;
-  ctx.lineWidth=min*.0025;
-
-  ctx.beginPath();
-  ctx.moveTo(pos.x-halfLine,pos.y+size*.62);
-  ctx.lineTo(pos.x+halfLine,pos.y+size*.62);
-  ctx.stroke();
-
-  ctx.restore();
 
 }
 
@@ -3065,12 +2843,8 @@ function drawSocialIcon(
 
   ctx.fill();
 
-  ctx.strokeStyle=
-    "rgba(255,255,255,.18)";
-
-  ctx.lineWidth=
-    Math.max(1,size*.03);
-
+  ctx.strokeStyle="rgba(255,255,255,.18)";
+  ctx.lineWidth=Math.max(1,size*.03);
   ctx.stroke();
 
 
@@ -3082,16 +2856,12 @@ function drawSocialIcon(
 
   if(type==="facebook"){
 
-    ctx.font=
-      `bold ${size*.62}px sans-serif`;
-
+    ctx.font=`bold ${size*.62}px sans-serif`;
     ctx.fillText("f",size*.02,size*.03);
 
   }else if(type==="x"){
 
-    ctx.font=
-      `900 ${size*.5}px sans-serif`;
-
+    ctx.font=`900 ${size*.5}px sans-serif`;
     ctx.fillText("X",0,size*.02);
 
   }else if(type==="youtube"){
@@ -3123,13 +2893,7 @@ function drawSocialIcon(
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.arc(
-      size*.15,
-      -size*.15,
-      size*.035,
-      0,
-      Math.PI*2
-    );
+    ctx.arc(size*.15,-size*.15,size*.035,0,Math.PI*2);
 
     ctx.fillStyle="#ffffff";
     ctx.fill();
@@ -3149,14 +2913,7 @@ function drawSocialIcon(
         ctx.lineCap="round";
 
         ctx.beginPath();
-        ctx.arc(
-          -size*.075,
-          size*.125,
-          size*.1,
-          0,
-          Math.PI*2
-        );
-
+        ctx.arc(-size*.075,size*.125,size*.1,0,Math.PI*2);
         ctx.fill();
 
         ctx.beginPath();
@@ -3165,15 +2922,7 @@ function drawSocialIcon(
         ctx.stroke();
 
         ctx.beginPath();
-        ctx.arc(
-          size*.175,
-          -size*.125,
-          size*.15,
-          Math.PI,
-          Math.PI*1.5,
-          true
-        );
-
+        ctx.arc(size*.175,-size*.125,size*.15,Math.PI,Math.PI*1.5,true);
         ctx.stroke();
 
         ctx.restore();
@@ -3201,19 +2950,13 @@ function drawSocialRow(
     canvas.height
   );
 
-  const iconSize=
-    min*.036;
-
-  const gap=
-    min*.018;
-
-  const brandSize=
-    min*.026;
+  const iconSize=min*.036;
+  const gap=min*.018;
+  const brandSize=min*.026;
 
   ctx.save();
 
-  ctx.font=
-    `800 ${brandSize}px 'Archivo',sans-serif`;
+  ctx.font=`800 ${brandSize}px 'Archivo',sans-serif`;
 
   const brandWidth=
     ctx.measureText("ZONE SPORT").width;
@@ -3227,43 +2970,30 @@ function drawSocialRow(
     brandWidth;
 
   let cursorX=
-    pos.x-totalWidth/2+
-    iconSize/2;
+    pos.x-totalWidth/2+iconSize/2;
 
   types.forEach(
     function(type){
 
-      drawSocialIcon(
-        type,
-        cursorX,
-        pos.y,
-        iconSize
-      );
+      drawSocialIcon(type,cursorX,pos.y,iconSize);
 
-      cursorX+=
-        iconSize+gap;
+      cursorX+=iconSize+gap;
 
     }
   );
 
-  cursorX+=
-    gap*.6;
+  cursorX+=gap*.6;
 
   ctx.save();
 
-  ctx.font=
-    `800 ${brandSize}px 'Archivo',sans-serif`;
+  ctx.font=`800 ${brandSize}px 'Archivo',sans-serif`;
 
   ctx.textAlign="left";
   ctx.textBaseline="middle";
 
   ctx.fillStyle="#ffffff";
 
-  ctx.fillText(
-    "ZONE SPORT",
-    cursorX,
-    pos.y
-  );
+  ctx.fillText("ZONE SPORT",cursorX,pos.y);
 
   ctx.restore();
 
@@ -3290,6 +3020,40 @@ function drawPosterSocial(){
 }
 
 
+function drawFullTimeSocial(){
+
+  drawSocialRow(
+    state.positions.social,
+    ["facebook","x","youtube"]
+  );
+
+}
+
+
+/* =========================================================
+   FULL TIME (MATCH) RENDER
+========================================================= */
+
+function drawFullTimeTemplate(){
+
+  ensureMatchPositions();
+
+  drawStudioBackground(
+    canvas.width/2,
+    canvas.height*.335
+  );
+
+  drawFullTimeBadges();
+
+  drawFullTime();
+
+  drawScore();
+
+  drawFullTimeSocial();
+
+}
+
+
 /* =========================================================
    POSTER (KICK OFF) RENDER
 ========================================================= */
@@ -3309,8 +3073,7 @@ function drawPoster(){
   );
 
   const badgeOuter=
-    min*.34*
-    state.posterLogoScale;
+    min*.34*state.posterLogoScale;
 
   const badgeInner=
     badgeOuter*.80*.86;
@@ -3327,10 +3090,10 @@ function drawPoster(){
   );
 
 
-  if(state.homeLogo){
+  if(state.posterHomeLogo){
 
     drawLogo(
-      state.homeLogo,
+      state.posterHomeLogo,
       state.posterPositions.logo1,
       badgeInner
     );
@@ -3384,17 +3147,10 @@ function drawGoal(){
 
 function render(){
 
-  ctx.clearRect(
-    0,
-    0,
-    canvas.width,
-    canvas.height
-  );
+  ctx.clearRect(0,0,canvas.width,canvas.height);
 
 
   if(state.mode==="goal"){
-
-    emptyHint.style.display="none";
 
     drawGoal();
 
@@ -3405,8 +3161,6 @@ function render(){
 
   if(state.mode==="poster"){
 
-    emptyHint.style.display="none";
-
     drawPoster();
 
     return;
@@ -3414,30 +3168,7 @@ function render(){
   }
 
 
-  if(!state.bgImage){
-
-    emptyHint.style.display="flex";
-
-    return;
-
-  }
-
-
-  emptyHint.style.display="none";
-
-  ensureMatchPositions();
-
-  drawBackground(
-    state.bgImage
-  );
-
-  drawOverlay();
-
-  drawFullTime();
-
-  drawMatchup();
-
-  drawScore();
+  drawFullTimeTemplate();
 
 }
 
@@ -3448,60 +3179,26 @@ function render(){
 
 function updateScaleUI(){
 
-  document.getElementById(
-    "scoreScale"
-  ).textContent=
-    Math.round(
-      state.scoreScale*100
-    )+"%";
+  document.getElementById("scoreScale").textContent=
+    Math.round(state.scoreScale*100)+"%";
 
+  document.getElementById("logoScale").textContent=
+    Math.round(state.logoScale*100)+"%";
 
-  document.getElementById(
-    "logoScale"
-  ).textContent=
-    Math.round(
-      state.logoScale*100
-    )+"%";
+  document.getElementById("fullTimeScale").textContent=
+    Math.round(state.fullTimeScale*100)+"%";
 
+  document.getElementById("posterLogoScale").textContent=
+    Math.round(state.posterLogoScale*100)+"%";
 
-  document.getElementById(
-    "fullTimeScale"
-  ).textContent=
-    Math.round(
-      state.fullTimeScale*100
-    )+"%";
+  document.getElementById("posterTitleScale").textContent=
+    Math.round(state.posterTitleScale*100)+"%";
 
+  document.getElementById("goalNameScale").textContent=
+    Math.round(state.goalNameScale*100)+"%";
 
-  document.getElementById(
-    "posterLogoScale"
-  ).textContent=
-    Math.round(
-      state.posterLogoScale*100
-    )+"%";
-
-
-  document.getElementById(
-    "posterTitleScale"
-  ).textContent=
-    Math.round(
-      state.posterTitleScale*100
-    )+"%";
-
-
-  document.getElementById(
-    "goalNameScale"
-  ).textContent=
-    Math.round(
-      state.goalNameScale*100
-    )+"%";
-
-
-  document.getElementById(
-    "goalLogoScale"
-  ).textContent=
-    Math.round(
-      state.goalLogoScale*100
-    )+"%";
+  document.getElementById("goalLogoScale").textContent=
+    Math.round(state.goalLogoScale*100)+"%";
 
 }
 
@@ -3512,14 +3209,10 @@ function updateScaleUI(){
 
 function updateScores(){
 
-  document.getElementById(
-    "homeScore"
-  ).textContent=
+  document.getElementById("homeScore").textContent=
     state.homeScore;
 
-  document.getElementById(
-    "awayScore"
-  ).textContent=
+  document.getElementById("awayScore").textContent=
     state.awayScore;
 
 }
@@ -3529,84 +3222,39 @@ function updateScores(){
    SCORE BUTTONS
 ========================================================= */
 
-document
-.getElementById("homePlus")
-.addEventListener(
-  "click",
-  ()=>{
-    state.homeScore++;
-    updateScores();
-    render();
-  }
-);
+document.getElementById("homePlus").addEventListener("click",()=>{
+  state.homeScore++;
+  updateScores();
+  render();
+});
 
+document.getElementById("homeMinus").addEventListener("click",()=>{
+  state.homeScore=Math.max(0,state.homeScore-1);
+  updateScores();
+  render();
+});
 
-document
-.getElementById("homeMinus")
-.addEventListener(
-  "click",
-  ()=>{
-    state.homeScore=
-      Math.max(
-        0,
-        state.homeScore-1
-      );
+document.getElementById("awayPlus").addEventListener("click",()=>{
+  state.awayScore++;
+  updateScores();
+  render();
+});
 
-    updateScores();
-    render();
-  }
-);
-
-
-document
-.getElementById("awayPlus")
-.addEventListener(
-  "click",
-  ()=>{
-    state.awayScore++;
-    updateScores();
-    render();
-  }
-);
-
-
-document
-.getElementById("awayMinus")
-.addEventListener(
-  "click",
-  ()=>{
-    state.awayScore=
-      Math.max(
-        0,
-        state.awayScore-1
-      );
-
-    updateScores();
-    render();
-  }
-);
+document.getElementById("awayMinus").addEventListener("click",()=>{
+  state.awayScore=Math.max(0,state.awayScore-1);
+  updateScores();
+  render();
+});
 
 
 /* =========================================================
    GENERIC SCALE
 ========================================================= */
 
-function changeScale(
-  property,
-  min,
-  max,
-  direction
-){
+function changeScale(property,min,max,direction){
 
   state[property]=
-    Math.min(
-      max,
-      Math.max(
-        min,
-        state[property]+
-        STEP*direction
-      )
-    );
+    Math.min(max,Math.max(min,state[property]+STEP*direction));
 
   updateScaleUI();
   render();
@@ -3616,275 +3264,105 @@ function changeScale(
 
 /* MATCH SCALES */
 
-document
-.getElementById("scorePlus")
-.addEventListener(
-  "click",
-  ()=>changeScale(
-    "scoreScale",
-    SCORE_MIN,
-    SCORE_MAX,
-    1
-  )
-);
+document.getElementById("scorePlus").addEventListener("click",
+  ()=>changeScale("scoreScale",SCORE_MIN,SCORE_MAX,1));
 
+document.getElementById("scoreMinus").addEventListener("click",
+  ()=>changeScale("scoreScale",SCORE_MIN,SCORE_MAX,-1));
 
-document
-.getElementById("scoreMinus")
-.addEventListener(
-  "click",
-  ()=>changeScale(
-    "scoreScale",
-    SCORE_MIN,
-    SCORE_MAX,
-    -1
-  )
-);
+document.getElementById("logoPlus").addEventListener("click",
+  ()=>changeScale("logoScale",LOGO_MIN,LOGO_MAX,1));
 
+document.getElementById("logoMinus").addEventListener("click",
+  ()=>changeScale("logoScale",LOGO_MIN,LOGO_MAX,-1));
 
-document
-.getElementById("logoPlus")
-.addEventListener(
-  "click",
-  ()=>changeScale(
-    "logoScale",
-    LOGO_MIN,
-    LOGO_MAX,
-    1
-  )
-);
+document.getElementById("ftPlus").addEventListener("click",
+  ()=>changeScale("fullTimeScale",FT_MIN,FT_MAX,1));
 
-
-document
-.getElementById("logoMinus")
-.addEventListener(
-  "click",
-  ()=>changeScale(
-    "logoScale",
-    LOGO_MIN,
-    LOGO_MAX,
-    -1
-  )
-);
-
-
-document
-.getElementById("ftPlus")
-.addEventListener(
-  "click",
-  ()=>changeScale(
-    "fullTimeScale",
-    FT_MIN,
-    FT_MAX,
-    1
-  )
-);
-
-
-document
-.getElementById("ftMinus")
-.addEventListener(
-  "click",
-  ()=>changeScale(
-    "fullTimeScale",
-    FT_MIN,
-    FT_MAX,
-    -1
-  )
-);
+document.getElementById("ftMinus").addEventListener("click",
+  ()=>changeScale("fullTimeScale",FT_MIN,FT_MAX,-1));
 
 
 /* POSTER SCALES */
 
-document
-.getElementById("posterLogoPlus")
-.addEventListener(
-  "click",
-  ()=>changeScale(
-    "posterLogoScale",
-    POSTER_LOGO_MIN,
-    POSTER_LOGO_MAX,
-    1
-  )
-);
+document.getElementById("posterLogoPlus").addEventListener("click",
+  ()=>changeScale("posterLogoScale",POSTER_LOGO_MIN,POSTER_LOGO_MAX,1));
 
+document.getElementById("posterLogoMinus").addEventListener("click",
+  ()=>changeScale("posterLogoScale",POSTER_LOGO_MIN,POSTER_LOGO_MAX,-1));
 
-document
-.getElementById("posterLogoMinus")
-.addEventListener(
-  "click",
-  ()=>changeScale(
-    "posterLogoScale",
-    POSTER_LOGO_MIN,
-    POSTER_LOGO_MAX,
-    -1
-  )
-);
+document.getElementById("posterTitlePlus").addEventListener("click",
+  ()=>changeScale("posterTitleScale",POSTER_TITLE_MIN,POSTER_TITLE_MAX,1));
 
-
-document
-.getElementById("posterTitlePlus")
-.addEventListener(
-  "click",
-  ()=>changeScale(
-    "posterTitleScale",
-    POSTER_TITLE_MIN,
-    POSTER_TITLE_MAX,
-    1
-  )
-);
-
-
-document
-.getElementById("posterTitleMinus")
-.addEventListener(
-  "click",
-  ()=>changeScale(
-    "posterTitleScale",
-    POSTER_TITLE_MIN,
-    POSTER_TITLE_MAX,
-    -1
-  )
-);
+document.getElementById("posterTitleMinus").addEventListener("click",
+  ()=>changeScale("posterTitleScale",POSTER_TITLE_MIN,POSTER_TITLE_MAX,-1));
 
 
 /* GOAL SCALES */
 
-document
-.getElementById("goalNamePlus")
-.addEventListener(
-  "click",
-  ()=>changeScale(
-    "goalNameScale",
-    GOAL_NAME_MIN,
-    GOAL_NAME_MAX,
-    1
-  )
-);
+document.getElementById("goalNamePlus").addEventListener("click",
+  ()=>changeScale("goalNameScale",GOAL_NAME_MIN,GOAL_NAME_MAX,1));
 
+document.getElementById("goalNameMinus").addEventListener("click",
+  ()=>changeScale("goalNameScale",GOAL_NAME_MIN,GOAL_NAME_MAX,-1));
 
-document
-.getElementById("goalNameMinus")
-.addEventListener(
-  "click",
-  ()=>changeScale(
-    "goalNameScale",
-    GOAL_NAME_MIN,
-    GOAL_NAME_MAX,
-    -1
-  )
-);
+document.getElementById("goalLogoPlus").addEventListener("click",
+  ()=>changeScale("goalLogoScale",GOAL_LOGO_MIN,GOAL_LOGO_MAX,1));
 
-
-document
-.getElementById("goalLogoPlus")
-.addEventListener(
-  "click",
-  ()=>changeScale(
-    "goalLogoScale",
-    GOAL_LOGO_MIN,
-    GOAL_LOGO_MAX,
-    1
-  )
-);
-
-
-document
-.getElementById("goalLogoMinus")
-.addEventListener(
-  "click",
-  ()=>changeScale(
-    "goalLogoScale",
-    GOAL_LOGO_MIN,
-    GOAL_LOGO_MAX,
-    -1
-  )
-);
+document.getElementById("goalLogoMinus").addEventListener("click",
+  ()=>changeScale("goalLogoScale",GOAL_LOGO_MIN,GOAL_LOGO_MAX,-1));
 
 
 /* =========================================================
    FONT
 ========================================================= */
 
-const fontSelect=
-  document.getElementById(
-    "fontSelect"
-  );
+const fontSelect=document.getElementById("fontSelect");
+const fontPreview=document.getElementById("fontPreview");
 
-const fontPreview=
-  document.getElementById(
-    "fontPreview"
-  );
-
-
-fontSelect.addEventListener(
-  "change",
-  function(){
-
-    state.scoreFont=
-      this.value;
-
-    fontPreview.style.fontFamily=
-      `'${this.value}',sans-serif`;
-
-    render();
-
-  }
-);
+fontSelect.addEventListener("change",function(){
+  state.scoreFont=this.value;
+  fontPreview.style.fontFamily=`'${this.value}',sans-serif`;
+  render();
+});
 
 
-const goalFontSelect=
-  document.getElementById(
-    "goalFontSelect"
-  );
+const fullTimeFontSelect=document.getElementById("fullTimeFontSelect");
+const fullTimeFontPreview=document.getElementById("fullTimeFontPreview");
 
-const goalFontPreview=
-  document.getElementById(
-    "goalFontPreview"
-  );
-
-
-goalFontSelect.addEventListener(
-  "change",
-  function(){
-
-    state.goalNameFont=
-      this.value;
-
-    goalFontPreview.style.fontFamily=
-      `'${this.value}',sans-serif`;
-
-    render();
-
-  }
-);
+fullTimeFontSelect.addEventListener("change",function(){
+  state.fullTimeFont=this.value;
+  fullTimeFontPreview.style.fontFamily=`'${this.value}',sans-serif`;
+  render();
+});
 
 
-const posterTitleFontSelect=
-  document.getElementById(
-    "posterTitleFontSelect"
-  );
+const fullTimeTitleInput=document.getElementById("fullTimeTitleInput");
 
-const posterTitleFontPreview=
-  document.getElementById(
-    "posterTitleFontPreview"
-  );
+fullTimeTitleInput.addEventListener("input",function(){
+  state.fullTimeText=this.value;
+  render();
+});
 
 
-posterTitleFontSelect.addEventListener(
-  "change",
-  function(){
+const goalFontSelect=document.getElementById("goalFontSelect");
+const goalFontPreview=document.getElementById("goalFontPreview");
 
-    state.posterTitleFont=
-      this.value;
+goalFontSelect.addEventListener("change",function(){
+  state.goalNameFont=this.value;
+  goalFontPreview.style.fontFamily=`'${this.value}',sans-serif`;
+  render();
+});
 
-    posterTitleFontPreview.style.fontFamily=
-      `'${this.value}',sans-serif`;
 
-    render();
+const posterTitleFontSelect=document.getElementById("posterTitleFontSelect");
+const posterTitleFontPreview=document.getElementById("posterTitleFontPreview");
 
-  }
-);
+posterTitleFontSelect.addEventListener("change",function(){
+  state.posterTitleFont=this.value;
+  posterTitleFontPreview.style.fontFamily=`'${this.value}',sans-serif`;
+  render();
+});
 
 
 /* =========================================================
@@ -3903,67 +3381,44 @@ function setMode(mode){
   posterModeBtn.classList.remove("active");
   goalModeBtn.classList.remove("active");
 
+  /*
+    All three templates are self-contained
+    (generated studio background, no uploaded
+    photo needed), so they always use the
+    standard portrait canvas size.
+  */
+
+  canvas.width=1080;
+  canvas.height=1350;
+
 
   if(mode==="match"){
 
-    matchPanel.classList.remove(
-      "hidden"
-    );
-
-    matchModeBtn.classList.add(
-      "active"
-    );
+    matchPanel.classList.remove("hidden");
+    matchModeBtn.classList.add("active");
 
     dragInfo.textContent=
-      "DRAG LOGOS • SCORE • FULL TIME";
+      "DRAG BADGES • TITLE • SCORE • SOCIAL ROW";
+
+    ensureMatchPositions();
 
   }else if(mode==="poster"){
 
-    posterPanel.classList.remove(
-      "hidden"
-    );
-
-    posterModeBtn.classList.add(
-      "active"
-    );
+    posterPanel.classList.remove("hidden");
+    posterModeBtn.classList.add("active");
 
     dragInfo.textContent=
       "DRAG BADGES • TITLE • SOCIAL ROW";
-
-    /*
-      POSTER is a self-contained template
-      (generated background, no uploaded
-      photo), so it always uses the
-      standard portrait canvas size.
-    */
-
-    canvas.width=1080;
-    canvas.height=1350;
 
     ensurePosterPositions();
 
   }else{
 
-    goalPanel.classList.remove(
-      "hidden"
-    );
-
-    goalModeBtn.classList.add(
-      "active"
-    );
+    goalPanel.classList.remove("hidden");
+    goalModeBtn.classList.add("active");
 
     dragInfo.textContent=
       "DRAG LOGO • NAME • SOCIAL ROW";
-
-    /*
-      GOAL is a self-contained template
-      (no uploaded background), so it
-      always uses the standard portrait
-      canvas size.
-    */
-
-    canvas.width=1080;
-    canvas.height=1350;
 
     ensureGoalPositions();
 
@@ -3974,260 +3429,144 @@ function setMode(mode){
 }
 
 
-matchModeBtn.addEventListener(
-  "click",
-  ()=>{
-    setMode("match");
-  }
-);
-
-
-posterModeBtn.addEventListener(
-  "click",
-  ()=>{
-    setMode("poster");
-  }
-);
-
-
-goalModeBtn.addEventListener(
-  "click",
-  ()=>{
-    setMode("goal");
-  }
-);
+matchModeBtn.addEventListener("click",()=>{setMode("match");});
+posterModeBtn.addEventListener("click",()=>{setMode("poster");});
+goalModeBtn.addEventListener("click",()=>{setMode("goal");});
 
 
 /* =========================================================
-   MATCH BACKGROUND
+   MATCH HOME LOGO (Al Ahly badge in FULL TIME)
 ========================================================= */
 
-document
-.getElementById("bgInput")
-.addEventListener(
-  "change",
-  function(e){
+document.getElementById("homeLogoInput").addEventListener("change",function(e){
 
-    const file=e.target.files[0];
+  const file=e.target.files[0];
+  if(!file)return;
 
-    if(!file)return;
+  loadImage(file,function(img){
 
-    loadImage(
-      file,
-      function(img){
+    state.homeLogo=img;
 
-        state.bgImage=img;
+    document.getElementById("homeLogoName").textContent=file.name;
+    document.getElementById("homeLogoStatus").textContent="Loaded";
 
-        canvas.width=
-          img.naturalWidth;
+    render();
 
-        canvas.height=
-          img.naturalHeight;
+  });
 
-        state.positions=
-          getDefaultPositions();
-
-        document.getElementById(
-          "bgFileName"
-        ).textContent=file.name;
-
-        document.getElementById(
-          "bgStatus"
-        ).textContent="Loaded";
-
-        render();
-
-      }
-    );
-
-  }
-);
-
-
-/* =========================================================
-   MATCH HOME LOGO (also used as fixed Al Ahly badge in POSTER)
-========================================================= */
-
-document
-.getElementById("homeLogoInput")
-.addEventListener(
-  "change",
-  function(e){
-
-    const file=e.target.files[0];
-
-    if(!file)return;
-
-    loadImage(
-      file,
-      function(img){
-
-        state.homeLogo=img;
-
-        document.getElementById(
-          "homeLogoName"
-        ).textContent=file.name;
-
-        document.getElementById(
-          "homeLogoStatus"
-        ).textContent="Loaded";
-
-        render();
-
-      }
-    );
-
-  }
-);
+});
 
 
 /* =========================================================
    MATCH AWAY LOGO
 ========================================================= */
 
-document
-.getElementById("awayLogoInput")
-.addEventListener(
-  "change",
-  function(e){
+document.getElementById("awayLogoInput").addEventListener("change",function(e){
 
-    const file=e.target.files[0];
+  const file=e.target.files[0];
+  if(!file)return;
 
-    if(!file)return;
+  loadImage(file,function(img){
 
-    loadImage(
-      file,
-      function(img){
+    state.awayLogo=img;
 
-        state.awayLogo=img;
+    document.getElementById("awayLogoName").textContent=file.name;
+    document.getElementById("awayLogoStatus").textContent="Loaded";
 
-        document.getElementById(
-          "awayLogoName"
-        ).textContent=file.name;
+    render();
 
-        document.getElementById(
-          "awayLogoStatus"
-        ).textContent="Loaded";
+  });
 
-        render();
+});
 
-      }
-    );
 
-  }
-);
+/* =========================================================
+   POSTER AL AHLY LOGO
+========================================================= */
+
+document.getElementById("posterHomeLogoInput").addEventListener("change",function(e){
+
+  const file=e.target.files[0];
+  if(!file)return;
+
+  loadImage(file,function(img){
+
+    state.posterHomeLogo=img;
+
+    document.getElementById("posterHomeLogoName").textContent=file.name;
+    document.getElementById("posterHomeLogoStatus").textContent="Loaded";
+
+    render();
+
+  });
+
+});
 
 
 /* =========================================================
    POSTER OPPONENT LOGO
 ========================================================= */
 
-document
-.getElementById("posterAwayLogoInput")
-.addEventListener(
-  "change",
-  function(e){
+document.getElementById("posterAwayLogoInput").addEventListener("change",function(e){
 
-    const file=e.target.files[0];
+  const file=e.target.files[0];
+  if(!file)return;
 
-    if(!file)return;
+  loadImage(file,function(img){
 
-    loadImage(
-      file,
-      function(img){
+    state.posterAwayLogo=img;
 
-        state.posterAwayLogo=img;
+    document.getElementById("posterAwayLogoName").textContent=file.name;
+    document.getElementById("posterAwayLogoStatus").textContent="Loaded";
 
-        document.getElementById(
-          "posterAwayLogoName"
-        ).textContent=file.name;
+    render();
 
-        document.getElementById(
-          "posterAwayLogoStatus"
-        ).textContent="Loaded";
+  });
 
-        render();
-
-      }
-    );
-
-  }
-);
+});
 
 
 /* =========================================================
    POSTER TITLE
 ========================================================= */
 
-document
-.getElementById("posterTitleInput")
-.addEventListener(
-  "input",
-  function(){
-
-    state.posterTitle=
-      this.value;
-
-    render();
-
-  }
-);
+document.getElementById("posterTitleInput").addEventListener("input",function(){
+  state.posterTitle=this.value;
+  render();
+});
 
 
 /* =========================================================
    GOAL CLUB LOGO
 ========================================================= */
 
-document
-.getElementById("goalLogoInput")
-.addEventListener(
-  "change",
-  function(e){
+document.getElementById("goalLogoInput").addEventListener("change",function(e){
 
-    const file=e.target.files[0];
+  const file=e.target.files[0];
+  if(!file)return;
 
-    if(!file)return;
+  loadImage(file,function(img){
 
-    loadImage(
-      file,
-      function(img){
+    state.goalLogo=img;
 
-        state.goalLogo=img;
+    document.getElementById("goalLogoName").textContent=file.name;
+    document.getElementById("goalLogoStatus").textContent="Loaded";
 
-        document.getElementById(
-          "goalLogoName"
-        ).textContent=file.name;
+    render();
 
-        document.getElementById(
-          "goalLogoStatus"
-        ).textContent="Loaded";
+  });
 
-        render();
-
-      }
-    );
-
-  }
-);
+});
 
 
 /* =========================================================
    GOAL PLAYER NAME
 ========================================================= */
 
-document
-.getElementById("goalNameInput")
-.addEventListener(
-  "input",
-  function(){
-
-    state.goalPlayerName=
-      this.value;
-
-    render();
-
-  }
-);
+document.getElementById("goalNameInput").addEventListener("input",function(){
+  state.goalPlayerName=this.value;
+  render();
+});
 
 
 /* =========================================================
@@ -4236,84 +3575,29 @@ document
 
 function getCanvasPoint(e){
 
-  const rect=
-    canvas.getBoundingClientRect();
+  const rect=canvas.getBoundingClientRect();
 
   return{
-
-    x:
-      (e.clientX-rect.left)*
-      canvas.width/
-      rect.width,
-
-    y:
-      (e.clientY-rect.top)*
-      canvas.height/
-      rect.height
-
+    x:(e.clientX-rect.left)*canvas.width/rect.width,
+    y:(e.clientY-rect.top)*canvas.height/rect.height
   };
 
 }
 
 
 /* =========================================================
-   HIT LOGO
+   HIT BADGE FRAME (square) — MATCH + GOAL + POSTER
 ========================================================= */
 
-function hitLogo(
-  img,
-  position,
-  target,
-  point
-){
-
-  if(!img || !position)
-    return false;
-
-  const size=
-    getContainDimensions(
-      img,
-      target
-    );
-
-  return(
-
-    point.x >=
-      position.x-size.width/2 &&
-
-    point.x <=
-      position.x+size.width/2 &&
-
-    point.y >=
-      position.y-size.height/2 &&
-
-    point.y <=
-      position.y+size.height/2
-
-  );
-
-}
-
-
-/* =========================================================
-   HIT BADGE FRAME (square) — GOAL + POSTER
-========================================================= */
-
-function hitBadgeFrame(
-  pos,
-  outer,
-  point
-){
+function hitBadgeFrame(pos,outer,point){
 
   if(!pos)return false;
 
   return(
-
     point.x>=pos.x-outer/2 &&
     point.x<=pos.x+outer/2 &&
     point.y>=pos.y-outer/2 &&
     point.y<=pos.y+outer/2
-
   );
 
 }
@@ -4328,55 +3612,50 @@ function hitScore(point){
   if(!state.positions.score)
     return false;
 
-  const min=Math.min(
-    canvas.width,
-    canvas.height
-  );
+  const min=Math.min(canvas.width,canvas.height);
 
-  const size=
-    min*.185*
-    state.scoreScale;
+  const size=min*.15*state.scoreScale;
 
-  const text=
-    state.homeScore+
-    " - "+
-    state.awayScore;
+  const text=state.homeScore+" - "+state.awayScore;
 
   ctx.save();
 
-  ctx.font=
-    `700 ${size}px '${state.scoreFont}',sans-serif`;
+  ctx.font=`700 ${size}px '${state.scoreFont}',sans-serif`;
 
-  const width=
-    ctx.measureText(text).width;
+  const width=ctx.measureText(text).width;
 
   ctx.restore();
 
   return(
-
-    point.x >=
-      state.positions.score.x-
-      width*.70 &&
-
-    point.x <=
-      state.positions.score.x+
-      width*.70 &&
-
-    point.y >=
-      state.positions.score.y-
-      size*.65 &&
-
-    point.y <=
-      state.positions.score.y+
-      size*.65
-
+    point.x>=state.positions.score.x-width*.70 &&
+    point.x<=state.positions.score.x+width*.70 &&
+    point.y>=state.positions.score.y-size*.65 &&
+    point.y<=state.positions.score.y+size*.65
   );
 
 }
 
 
 /* =========================================================
-   HIT FULL TIME
+   HIT TITLE TEXT — shared by FULL TIME + KICK OFF titles
+========================================================= */
+
+function hitTitleTextAt(pos,size,point){
+
+  const min=Math.min(canvas.width,canvas.height);
+
+  return(
+    point.x>=pos.x-min*.30 &&
+    point.x<=pos.x+min*.30 &&
+    point.y>=pos.y-size*.75 &&
+    point.y<=pos.y+size*.75
+  );
+
+}
+
+
+/* =========================================================
+   HIT FULL TIME TITLE
 ========================================================= */
 
 function hitFullTime(point){
@@ -4384,30 +3663,11 @@ function hitFullTime(point){
   if(!state.positions.fullTime)
     return false;
 
-  const min=Math.min(
-    canvas.width,
-    canvas.height
-  );
+  const min=Math.min(canvas.width,canvas.height);
 
-  const size=
-    min*.052*
-    state.fullTimeScale;
+  const size=min*.072*state.fullTimeScale;
 
-  return(
-
-    point.x >=
-      state.positions.fullTime.x-min*.18 &&
-
-    point.x <=
-      state.positions.fullTime.x+min*.18 &&
-
-    point.y >=
-      state.positions.fullTime.y-size &&
-
-    point.y <=
-      state.positions.fullTime.y+size
-
-  );
+  return hitTitleTextAt(state.positions.fullTime,size,point);
 
 }
 
@@ -4421,54 +3681,30 @@ function hitPosterTitle(point){
   if(!state.posterPositions.title)
     return false;
 
-  const min=Math.min(
-    canvas.width,
-    canvas.height
-  );
+  const min=Math.min(canvas.width,canvas.height);
 
-  const size=
-    min*.115*
-    state.posterTitleScale;
+  const size=min*.115*state.posterTitleScale;
 
-  return(
-
-    point.x >=
-      state.posterPositions.title.x-min*.30 &&
-
-    point.x <=
-      state.posterPositions.title.x+min*.30 &&
-
-    point.y >=
-      state.posterPositions.title.y-size*.75 &&
-
-    point.y <=
-      state.posterPositions.title.y+size*.75
-
-  );
+  return hitTitleTextAt(state.posterPositions.title,size,point);
 
 }
 
 
 /* =========================================================
-   HIT SOCIAL ROW — GOAL + POSTER
+   HIT SOCIAL ROW — MATCH + GOAL + POSTER
 ========================================================= */
 
 function hitSocialRow(pos,point){
 
   if(!pos)return false;
 
-  const min=Math.min(
-    canvas.width,
-    canvas.height
-  );
+  const min=Math.min(canvas.width,canvas.height);
 
   return(
-
     point.x>=pos.x-min*.30 &&
     point.x<=pos.x+min*.30 &&
     point.y>=pos.y-min*.035 &&
     point.y<=pos.y+min*.035
-
   );
 
 }
@@ -4480,25 +3716,17 @@ function hitSocialRow(pos,point){
 
 function hitGoalPlayerName(point){
 
-  const min=Math.min(
-    canvas.width,
-    canvas.height
-  );
+  const min=Math.min(canvas.width,canvas.height);
 
-  const pos=
-    state.goalPositions.name;
+  const pos=state.goalPositions.name;
 
-  const size=
-    min*.048*
-    state.goalNameScale;
+  const size=min*.048*state.goalNameScale;
 
   return(
-
     point.x>=pos.x-min*.30 &&
     point.x<=pos.x+min*.30 &&
     point.y>=pos.y-size &&
     point.y<=pos.y+size
-
   );
 
 }
@@ -4508,379 +3736,204 @@ function hitGoalPlayerName(point){
    POINTER DOWN
 ========================================================= */
 
-canvas.addEventListener(
-  "pointerdown",
-  function(e){
+canvas.addEventListener("pointerdown",function(e){
 
-    if(
-      state.mode==="match" &&
-      !state.bgImage
-    )
-      return;
+  const point=getCanvasPoint(e);
 
-    const point=
-      getCanvasPoint(e);
-
-    let target=null;
+  let target=null;
 
 
-    if(state.mode==="goal"){
+  if(state.mode==="goal"){
 
-      ensureGoalPositions();
+    ensureGoalPositions();
 
-      /*
-        Reverse drawing order
-        for intuitive selection.
-      */
-
-      if(hitSocialRow(state.goalPositions.social,point)){
-
-        target="social";
-
-      }
-      else if(hitGoalPlayerName(point)){
-
-        target="name";
-
-      }
-      else if(hitBadgeFrame(state.goalPositions.logo,Math.min(canvas.width,canvas.height)*.50,point)){
-
-        target="logo";
-
-      }
-
-
-      if(!target)
-        return;
-
-
-      state.drag={
-
-        type:"goal",
-
-        target,
-
-        offsetX:
-          point.x-
-          state.goalPositions[target].x,
-
-        offsetY:
-          point.y-
-          state.goalPositions[target].y
-
-      };
-
-      canvas.setPointerCapture(
-        e.pointerId
-      );
-
-      canvas.style.cursor=
-        "grabbing";
-
-      e.preventDefault();
-
-      return;
-
+    if(hitSocialRow(state.goalPositions.social,point)){
+      target="social";
+    }
+    else if(hitGoalPlayerName(point)){
+      target="name";
+    }
+    else if(hitBadgeFrame(state.goalPositions.logo,Math.min(canvas.width,canvas.height)*.50,point)){
+      target="logo";
     }
 
+    if(!target)return;
 
-    if(state.mode==="poster"){
+    state.drag={
+      type:"goal",
+      target,
+      offsetX:point.x-state.goalPositions[target].x,
+      offsetY:point.y-state.goalPositions[target].y
+    };
 
-      ensurePosterPositions();
-
-      const min=Math.min(
-        canvas.width,
-        canvas.height
-      );
-
-      const badgeOuter=
-        min*.34*
-        state.posterLogoScale;
-
-
-      /*
-        Reverse drawing order
-        for intuitive selection.
-      */
-
-      if(hitSocialRow(state.posterPositions.social,point)){
-
-        target="social";
-
-      }
-      else if(hitPosterTitle(point)){
-
-        target="title";
-
-      }
-      else if(hitBadgeFrame(state.posterPositions.logo2,badgeOuter,point)){
-
-        target="logo2";
-
-      }
-      else if(hitBadgeFrame(state.posterPositions.logo1,badgeOuter,point)){
-
-        target="logo1";
-
-      }
-
-
-      if(!target)
-        return;
-
-
-      state.drag={
-
-        type:"poster",
-
-        target,
-
-        offsetX:
-          point.x-
-          state.posterPositions[target].x,
-
-        offsetY:
-          point.y-
-          state.posterPositions[target].y
-
-      };
-
-      canvas.setPointerCapture(
-        e.pointerId
-      );
-
-      canvas.style.cursor=
-        "grabbing";
-
-      e.preventDefault();
-
-      return;
-
-    }
-
-
-    if(state.mode==="match"){
-
-      ensureMatchPositions();
-
-      const min=Math.min(
-        canvas.width,
-        canvas.height
-      );
-
-      const logoSize=
-        min*.135*
-        state.logoScale;
-
-
-      if(hitFullTime(point)){
-
-        target="fullTime";
-
-      }
-      else if(hitScore(point)){
-
-        target="score";
-
-      }
-      else if(
-        hitLogo(
-          state.awayLogo,
-          state.positions.awayLogo,
-          logoSize,
-          point
-        )
-      ){
-
-        target="awayLogo";
-
-      }
-      else if(
-        hitLogo(
-          state.homeLogo,
-          state.positions.homeLogo,
-          logoSize,
-          point
-        )
-      ){
-
-        target="homeLogo";
-
-      }
-
-
-      if(!target)
-        return;
-
-
-      state.drag={
-
-        type:"match",
-
-        target,
-
-        offsetX:
-          point.x-
-          state.positions[target].x,
-
-        offsetY:
-          point.y-
-          state.positions[target].y
-
-      };
-
-    }
-
-
-    canvas.setPointerCapture(
-      e.pointerId
-    );
-
-    canvas.style.cursor=
-      "grabbing";
-
+    canvas.setPointerCapture(e.pointerId);
+    canvas.style.cursor="grabbing";
     e.preventDefault();
 
+    return;
+
   }
-);
+
+
+  if(state.mode==="poster"){
+
+    ensurePosterPositions();
+
+    const min=Math.min(canvas.width,canvas.height);
+    const badgeOuter=min*.34*state.posterLogoScale;
+
+    if(hitSocialRow(state.posterPositions.social,point)){
+      target="social";
+    }
+    else if(hitPosterTitle(point)){
+      target="title";
+    }
+    else if(hitBadgeFrame(state.posterPositions.logo2,badgeOuter,point)){
+      target="logo2";
+    }
+    else if(hitBadgeFrame(state.posterPositions.logo1,badgeOuter,point)){
+      target="logo1";
+    }
+
+    if(!target)return;
+
+    state.drag={
+      type:"poster",
+      target,
+      offsetX:point.x-state.posterPositions[target].x,
+      offsetY:point.y-state.posterPositions[target].y
+    };
+
+    canvas.setPointerCapture(e.pointerId);
+    canvas.style.cursor="grabbing";
+    e.preventDefault();
+
+    return;
+
+  }
+
+
+  if(state.mode==="match"){
+
+    ensureMatchPositions();
+
+    const min=Math.min(canvas.width,canvas.height);
+    const badgeOuter=min*.34*state.logoScale;
+
+    if(hitSocialRow(state.positions.social,point)){
+      target="social";
+    }
+    else if(hitScore(point)){
+      target="score";
+    }
+    else if(hitFullTime(point)){
+      target="fullTime";
+    }
+    else if(hitBadgeFrame(state.positions.awayLogo,badgeOuter,point)){
+      target="awayLogo";
+    }
+    else if(hitBadgeFrame(state.positions.homeLogo,badgeOuter,point)){
+      target="homeLogo";
+    }
+
+    if(!target)return;
+
+    state.drag={
+      type:"match",
+      target,
+      offsetX:point.x-state.positions[target].x,
+      offsetY:point.y-state.positions[target].y
+    };
+
+  }
+
+
+  canvas.setPointerCapture(e.pointerId);
+  canvas.style.cursor="grabbing";
+  e.preventDefault();
+
+});
 
 
 /* =========================================================
    POINTER MOVE
 ========================================================= */
 
-canvas.addEventListener(
-  "pointermove",
-  function(e){
+canvas.addEventListener("pointermove",function(e){
 
-    if(
-      state.mode==="match" &&
-      !state.bgImage
-    )
-      return;
-
-    const point=
-      getCanvasPoint(e);
+  const point=getCanvasPoint(e);
 
 
-    if(state.drag){
+  if(state.drag){
 
-      const target=
-        state.drag.target;
+    const target=state.drag.target;
 
-      const positions=
-        state.drag.type==="match"
-          ? state.positions
-          : state.drag.type==="goal"
-          ? state.goalPositions
-          : state.posterPositions;
+    const positions=
+      state.drag.type==="match"
+        ? state.positions
+        : state.drag.type==="goal"
+        ? state.goalPositions
+        : state.posterPositions;
 
+    positions[target].x=point.x-state.drag.offsetX;
+    positions[target].y=point.y-state.drag.offsetY;
 
-      positions[target].x=
-        point.x-
-        state.drag.offsetX;
+    render();
 
-      positions[target].y=
-        point.y-
-        state.drag.offsetY;
-
-
-      render();
-
-      return;
-
-    }
-
-
-    let hovering=false;
-
-
-    if(state.mode==="goal"){
-
-      ensureGoalPositions();
-
-      const min=Math.min(
-        canvas.width,
-        canvas.height
-      );
-
-      hovering=
-
-        hitSocialRow(state.goalPositions.social,point) ||
-
-        hitGoalPlayerName(point) ||
-
-        hitBadgeFrame(state.goalPositions.logo,min*.50,point);
-
-    }
-    else if(state.mode==="poster"){
-
-      ensurePosterPositions();
-
-      const min=Math.min(
-        canvas.width,
-        canvas.height
-      );
-
-      const badgeOuter=
-        min*.34*
-        state.posterLogoScale;
-
-      hovering=
-
-        hitSocialRow(state.posterPositions.social,point) ||
-
-        hitPosterTitle(point) ||
-
-        hitBadgeFrame(state.posterPositions.logo1,badgeOuter,point) ||
-
-        hitBadgeFrame(state.posterPositions.logo2,badgeOuter,point);
-
-    }
-    else if(state.mode==="match"){
-
-      ensureMatchPositions();
-
-      const min=Math.min(
-        canvas.width,
-        canvas.height
-      );
-
-      const logoSize=
-        min*.135*
-        state.logoScale;
-
-
-      hovering=
-
-        hitFullTime(point) ||
-
-        hitScore(point) ||
-
-        hitLogo(
-          state.homeLogo,
-          state.positions.homeLogo,
-          logoSize,
-          point
-        ) ||
-
-        hitLogo(
-          state.awayLogo,
-          state.positions.awayLogo,
-          logoSize,
-          point
-        );
-
-    }
-
-
-    canvas.style.cursor=
-      hovering
-        ? "grab"
-        : "default";
+    return;
 
   }
-);
+
+
+  let hovering=false;
+
+
+  if(state.mode==="goal"){
+
+    ensureGoalPositions();
+
+    const min=Math.min(canvas.width,canvas.height);
+
+    hovering=
+      hitSocialRow(state.goalPositions.social,point) ||
+      hitGoalPlayerName(point) ||
+      hitBadgeFrame(state.goalPositions.logo,min*.50,point);
+
+  }
+  else if(state.mode==="poster"){
+
+    ensurePosterPositions();
+
+    const min=Math.min(canvas.width,canvas.height);
+    const badgeOuter=min*.34*state.posterLogoScale;
+
+    hovering=
+      hitSocialRow(state.posterPositions.social,point) ||
+      hitPosterTitle(point) ||
+      hitBadgeFrame(state.posterPositions.logo1,badgeOuter,point) ||
+      hitBadgeFrame(state.posterPositions.logo2,badgeOuter,point);
+
+  }
+  else if(state.mode==="match"){
+
+    ensureMatchPositions();
+
+    const min=Math.min(canvas.width,canvas.height);
+    const badgeOuter=min*.34*state.logoScale;
+
+    hovering=
+      hitSocialRow(state.positions.social,point) ||
+      hitScore(point) ||
+      hitFullTime(point) ||
+      hitBadgeFrame(state.positions.homeLogo,badgeOuter,point) ||
+      hitBadgeFrame(state.positions.awayLogo,badgeOuter,point);
+
+  }
+
+
+  canvas.style.cursor=hovering ? "grab" : "default";
+
+});
 
 
 /* =========================================================
@@ -4888,281 +3941,178 @@ canvas.addEventListener(
 ========================================================= */
 
 function stopDrag(){
-
   state.drag=null;
-
-  canvas.style.cursor=
-    "default";
-
+  canvas.style.cursor="default";
 }
 
-canvas.addEventListener(
-  "pointerup",
-  stopDrag
-);
-
-canvas.addEventListener(
-  "pointercancel",
-  stopDrag
-);
+canvas.addEventListener("pointerup",stopDrag);
+canvas.addEventListener("pointercancel",stopDrag);
 
 
 /* =========================================================
    RESET POSITIONS
 ========================================================= */
 
-document
-.getElementById("resetPositions")
-.addEventListener(
-  "click",
-  resetPositions
-);
-
-
-document
-.getElementById("resetPosterPositions")
-.addEventListener(
-  "click",
-  resetPosterPositions
-);
-
-
-document
-.getElementById("resetGoalPositions")
-.addEventListener(
-  "click",
-  resetGoalPositions
-);
+document.getElementById("resetPositions").addEventListener("click",resetPositions);
+document.getElementById("resetPosterPositions").addEventListener("click",resetPosterPositions);
+document.getElementById("resetGoalPositions").addEventListener("click",resetGoalPositions);
 
 
 /* =========================================================
    EXPORT
 ========================================================= */
 
-document
-.getElementById("exportBtn")
-.addEventListener(
-  "click",
-  function(){
+document.getElementById("exportBtn").addEventListener("click",function(){
 
-    if(
-      state.mode==="match" &&
-      !state.bgImage
-    ){
+  const link=document.createElement("a");
 
-      alert(
-        "Upload a background photo before exporting."
-      );
+  link.download=
+    state.mode==="match"
+      ? "zone-sport-full-time.png"
+      : state.mode==="poster"
+      ? "zone-sport-kick-off.png"
+      : "zone-sport-goal.png";
 
-      return;
+  link.href=canvas.toDataURL("image/png");
 
-    }
+  link.click();
 
-
-    const link=
-      document.createElement("a");
-
-
-    link.download=
-      state.mode==="match"
-        ? "zone-sport-full-time.png"
-        : state.mode==="poster"
-        ? "zone-sport-kick-off.png"
-        : "zone-sport-goal.png";
-
-
-    link.href=
-      canvas.toDataURL(
-        "image/png"
-      );
-
-
-    link.click();
-
-  }
-);
+});
 
 
 /* =========================================================
    RESET EVERYTHING
 ========================================================= */
 
-document
-.getElementById("resetBtn")
-.addEventListener(
-  "click",
-  function(){
+document.getElementById("resetBtn").addEventListener("click",function(){
 
-    state.mode="match";
+  state.mode="match";
 
-    state.bgImage=null;
+  state.homeLogo=null;
+  state.awayLogo=null;
 
-    state.homeLogo=null;
-    state.awayLogo=null;
+  state.homeScore=0;
+  state.awayScore=0;
 
-    state.homeScore=0;
-    state.awayScore=0;
+  state.scoreScale=1;
+  state.logoScale=1;
+  state.fullTimeScale=1;
 
-    state.scoreScale=1;
-    state.logoScale=1;
-    state.fullTimeScale=1;
+  state.scoreFont="Anton";
 
-    state.scoreFont="Anton";
+  state.fullTimeText="FULL TIME";
+  state.fullTimeFont="Anton";
 
 
-    state.posterAwayLogo=null;
+  state.posterHomeLogo=null;
+  state.posterAwayLogo=null;
 
-    state.posterTitle="KICK OFF";
-    state.posterTitleFont="Anton";
+  state.posterTitle="KICK OFF";
+  state.posterTitleFont="Anton";
 
-    state.posterLogoScale=1;
-    state.posterTitleScale=1;
-
-
-    state.positions={
-      homeLogo:null,
-      awayLogo:null,
-      score:null,
-      fullTime:null
-    };
+  state.posterLogoScale=1;
+  state.posterTitleScale=1;
 
 
-    state.posterPositions={
-      logo1:null,
-      logo2:null,
-      title:null,
-      social:null
-    };
+  state.positions={
+    homeLogo:null,
+    awayLogo:null,
+    score:null,
+    fullTime:null,
+    social:null
+  };
 
 
-    state.goalLogo=null;
-
-    state.goalPlayerName="";
-
-    state.goalNameFont="Cairo";
-
-    state.goalNameScale=1;
-    state.goalLogoScale=1;
-
-    state.goalPositions={
-      logo:null,
-      name:null,
-      social:null
-    };
+  state.posterPositions={
+    logo1:null,
+    logo2:null,
+    title:null,
+    social:null
+  };
 
 
-    state.drag=null;
+  state.goalLogo=null;
+
+  state.goalPlayerName="";
+
+  state.goalNameFont="Cairo";
+
+  state.goalNameScale=1;
+  state.goalLogoScale=1;
+
+  state.goalPositions={
+    logo:null,
+    name:null,
+    social:null
+  };
 
 
-    const ids=[
-
-      "bgInput",
-
-      "homeLogoInput",
-      "awayLogoInput",
-
-      "posterAwayLogoInput",
-
-      "goalLogoInput"
-
-    ];
+  state.drag=null;
 
 
-    ids.forEach(
-      id=>{
-        document.getElementById(
-          id
-        ).value="";
-      }
-    );
+  const ids=[
+    "homeLogoInput",
+    "awayLogoInput",
+    "posterHomeLogoInput",
+    "posterAwayLogoInput",
+    "goalLogoInput"
+  ];
+
+  ids.forEach(id=>{
+    document.getElementById(id).value="";
+  });
 
 
-    document.getElementById(
-      "bgFileName"
-    ).textContent=
-      "Upload photo";
+  document.getElementById("homeLogoName").textContent="Al Ahly logo";
+  document.getElementById("awayLogoName").textContent="Opponent logo";
 
-    document.getElementById(
-      "homeLogoName"
-    ).textContent=
-      "Al Ahly logo";
+  document.getElementById("posterHomeLogoName").textContent="Upload Al Ahly logo";
+  document.getElementById("posterAwayLogoName").textContent="Upload opponent logo";
 
-    document.getElementById(
-      "awayLogoName"
-    ).textContent=
-      "Opponent logo";
+  document.getElementById("goalLogoName").textContent="Upload club logo";
 
 
-    document.getElementById(
-      "posterAwayLogoName"
-    ).textContent=
-      "Upload opponent logo";
+  [
+    "homeLogoStatus",
+    "awayLogoStatus",
+    "posterHomeLogoStatus",
+    "posterAwayLogoStatus",
+    "goalLogoStatus"
+  ].forEach(id=>{
+    document.getElementById(id).textContent="—";
+  });
 
 
-    document.getElementById(
-      "goalLogoName"
-    ).textContent=
-      "Upload club logo";
+  document.getElementById("fullTimeTitleInput").value="FULL TIME";
+  document.getElementById("posterTitleInput").value="KICK OFF";
+  document.getElementById("goalNameInput").value="";
 
 
-    [
-      "bgStatus",
-      "homeLogoStatus",
-      "awayLogoStatus",
-      "posterAwayLogoStatus",
-      "goalLogoStatus"
-    ].forEach(
-      id=>{
-        document.getElementById(
-          id
-        ).textContent="—";
-      }
-    );
+  canvas.width=1080;
+  canvas.height=1350;
 
 
-    document.getElementById(
-      "posterTitleInput"
-    ).value=
-      "KICK OFF";
+  fontSelect.value="Anton";
+  fontPreview.style.fontFamily="'Anton',sans-serif";
+
+  fullTimeFontSelect.value="Anton";
+  fullTimeFontPreview.style.fontFamily="'Anton',sans-serif";
+
+  goalFontSelect.value="Cairo";
+  goalFontPreview.style.fontFamily="'Cairo',sans-serif";
+
+  posterTitleFontSelect.value="Anton";
+  posterTitleFontPreview.style.fontFamily="'Anton',sans-serif";
 
 
-    document.getElementById(
-      "goalNameInput"
-    ).value="";
+  updateScores();
+  updateScaleUI();
 
+  setMode("match");
 
-    canvas.width=1080;
-    canvas.height=1350;
+  render();
 
-
-    fontSelect.value="Anton";
-
-    fontPreview.style.fontFamily=
-      "'Anton',sans-serif";
-
-
-    goalFontSelect.value="Cairo";
-
-    goalFontPreview.style.fontFamily=
-      "'Cairo',sans-serif";
-
-
-    posterTitleFontSelect.value="Anton";
-
-    posterTitleFontPreview.style.fontFamily=
-      "'Anton',sans-serif";
-
-
-    updateScores();
-
-    updateScaleUI();
-
-    setMode("match");
-
-    render();
-
-  }
-);
+});
 
 
 /* =========================================================
@@ -5170,28 +4120,16 @@ document
 ========================================================= */
 
 updateScores();
-
 updateScaleUI();
 
-fontPreview.style.fontFamily=
-  "'Anton',sans-serif";
-
-goalFontPreview.style.fontFamily=
-  "'Cairo',sans-serif";
-
-posterTitleFontPreview.style.fontFamily=
-  "'Anton',sans-serif";
+fontPreview.style.fontFamily="'Anton',sans-serif";
+fullTimeFontPreview.style.fontFamily="'Anton',sans-serif";
+goalFontPreview.style.fontFamily="'Cairo',sans-serif";
+posterTitleFontPreview.style.fontFamily="'Anton',sans-serif";
 
 
-if(
-  document.fonts &&
-  document.fonts.ready
-){
-
-  document.fonts.ready.then(
-    render
-  );
-
+if(document.fonts && document.fonts.ready){
+  document.fonts.ready.then(render);
 }
 
 

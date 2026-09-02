@@ -469,6 +469,68 @@ button,select,input{
   background:#15181c;
 }
 
+/* SHARED STUDIO NAVIGATION */
+.studio-nav{
+  position:fixed;
+  z-index:20;
+  left:50%;
+  bottom:18px;
+  transform:translateX(-50%);
+  display:flex;
+  align-items:center;
+  gap:6px;
+  width:min(520px, calc(100vw - 32px));
+  padding:7px;
+  background:rgba(8,11,19,.9);
+  border:1px solid var(--studio-line);
+  border-radius:15px;
+  box-shadow:0 16px 42px rgba(0,0,0,.32);
+  backdrop-filter:blur(18px);
+}
+
+.studio-nav a{
+  flex:1;
+  min-width:0;
+  padding:10px 8px;
+  border-radius:10px;
+  color:#8f9aa8;
+  text-align:center;
+  text-decoration:none;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.8px;
+  transition:background .18s ease, color .18s ease, transform .18s ease;
+}
+
+.studio-nav a:hover{
+  color:#f7fbff;
+  background:rgba(255,255,255,.06);
+  transform:translateY(-1px);
+}
+
+.studio-nav a.active{
+  color:#071016;
+  background:var(--studio-cyan);
+}
+
+@media(min-width:901px){
+  .studio-nav{
+    top:18px;
+    bottom:auto;
+    left:auto;
+    right:28px;
+    transform:none;
+    width:min(420px, 40vw);
+    border-color:transparent;
+    background:rgba(8,11,19,.5);
+    box-shadow:none;
+  }
+
+  .stage{
+    padding-bottom:100px;
+  }
+}
+
 /* HIDDEN */
 
 .hidden{
@@ -1585,6 +1647,12 @@ body{
   </div>
 
 </main>
+
+<nav class="studio-nav" aria-label="ZONE SPORT Studio navigation">
+  <a href="index.html#tab-create">ADD NEWS</a>
+  <a href="index.html#tab-designs">NEWS</a>
+  <a href="poster.html" class="active" aria-current="page">POSTER</a>
+</nav>
 
 </div>
 

@@ -2043,6 +2043,11 @@ function wrapTextLeft(ctx, text, x, y, maxWidth, lineHeight) {
     initSmartDragEvents('canvas4');
     initSmartDragEvents('canvas5');
     renderCanvases();
+    if (window.location.hash === '#tab-designs') {
+        switchMobileTab('tab-designs', document.getElementById('nav-designs'));
+    } else if (window.location.hash === '#tab-create') {
+        switchMobileTab('tab-create', document.getElementById('nav-create'));
+    }
                                     };
     </script>
 </body>

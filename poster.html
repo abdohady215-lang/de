@@ -1284,152 +1284,43 @@ body{
     </div>
 
 
-    <!-- BACKGROUND -->
+    <!-- OPPONENT LOGO -->
 
     <div class="group">
 
       <div class="label">
-        Background
+        Opponent Logo
       </div>
 
       <label class="upload">
 
         <span
           class="upload-name"
-          id="posterBgName">
-          Upload background
+          id="posterAwayLogoName">
+          Upload opponent logo
         </span>
 
         <span
           class="upload-status"
-          id="posterBgStatus">
+          id="posterAwayLogoStatus">
           —
         </span>
 
         <input
-          id="posterBgInput"
+          id="posterAwayLogoInput"
           type="file"
           accept="image/*">
 
       </label>
 
-    </div>
-
-
-    <!-- PLAYER 1 -->
-
-    <div class="group">
-
-      <div class="label">
-        Main Image 01
+      <div
+        style="
+        margin-top:2px;
+        font-size:9px;
+        line-height:1.6;
+        color:#5b636d;">
+        Al Ahly badge stays fixed — it reuses the logo uploaded under FULL TIME → Team Logos.
       </div>
-
-      <label class="upload">
-
-        <span
-          class="upload-name"
-          id="player1Name">
-          Player / Team 01
-        </span>
-
-        <span
-          class="upload-status"
-          id="player1Status">
-          —
-        </span>
-
-        <input
-          id="player1Input"
-          type="file"
-          accept="image/*">
-
-      </label>
-
-    </div>
-
-
-    <!-- PLAYER 2 -->
-
-    <div class="group">
-
-      <div class="label">
-        Main Image 02
-      </div>
-
-      <label class="upload">
-
-        <span
-          class="upload-name"
-          id="player2Name">
-          Player / Team 02
-        </span>
-
-        <span
-          class="upload-status"
-          id="player2Status">
-          —
-        </span>
-
-        <input
-          id="player2Input"
-          type="file"
-          accept="image/*">
-
-      </label>
-
-    </div>
-
-
-    <!-- CLUB LOGOS -->
-
-    <div class="group">
-
-      <div class="label">
-        Club Logos
-      </div>
-
-      <label class="upload">
-
-        <span
-          class="upload-name"
-          id="posterLogo1Name">
-          Club Logo 01
-        </span>
-
-        <span
-          class="upload-status"
-          id="posterLogo1Status">
-          —
-        </span>
-
-        <input
-          id="posterLogo1Input"
-          type="file"
-          accept="image/*">
-
-      </label>
-
-
-      <label class="upload">
-
-        <span
-          class="upload-name"
-          id="posterLogo2Name">
-          Club Logo 02
-        </span>
-
-        <span
-          class="upload-status"
-          id="posterLogo2Status">
-          —
-        </span>
-
-        <input
-          id="posterLogo2Input"
-          type="file"
-          accept="image/*">
-
-      </label>
 
     </div>
 
@@ -1439,75 +1330,78 @@ body{
     <div class="group">
 
       <div class="label">
-        Poster Title
+        Kick Off Text
       </div>
 
       <input
         class="poster-title-input"
         id="posterTitleInput"
-        value="بداية المباراة">
+        style="direction:ltr;text-align:center;letter-spacing:1px;"
+        value="KICK OFF">
 
     </div>
 
 
-    <!-- PLAYER SIZE -->
+    <!-- TITLE FONT -->
 
     <div class="group">
 
       <div class="label">
-        Main Images Size
+        Kick Off Font
+      </div>
+
+      <select
+        class="font-select"
+        id="posterTitleFontSelect">
+
+        <option value="Anton">
+          Anton — Athletic
+        </option>
+
+        <option value="Bebas Neue">
+          Bebas Neue — Sports
+        </option>
+
+        <option value="Oswald">
+          Oswald — Condensed
+        </option>
+
+        <option value="Teko">
+          Teko — Powerful
+        </option>
+
+        <option value="Rajdhani">
+          Rajdhani — Modern
+        </option>
+
+        <option value="Archivo Black">
+          Archivo Black — Bold
+        </option>
+
+      </select>
+
+      <div
+        class="font-preview"
+        id="posterTitleFontPreview">
+        KICK OFF
+      </div>
+
+    </div>
+
+
+    <!-- BADGE SIZE -->
+
+    <div class="group">
+
+      <div class="label">
+        Badges Size
       </div>
 
       <div class="control-card">
 
         <div class="control-title">
 
-          <span>Players</span>
-
-          <span
-            class="control-value"
-            id="posterPlayerScale">
-            100%
-          </span>
-
-        </div>
-
-        <div class="controls">
-
-          <button
-            class="small-btn"
-            id="posterPlayerMinus">−</button>
-
-          <div
-            class="value"
-            style="font-family:'Archivo';font-size:10px;color:#69717c;letter-spacing:1px;">
-            IMAGES
-          </div>
-
-          <button
-            class="small-btn"
-            id="posterPlayerPlus">+</button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- LOGO SIZE -->
-
-    <div class="group">
-
-      <div class="label">
-        Poster Logo Size
-      </div>
-
-      <div class="control-card">
-
-        <div class="control-title">
-
-          <span>Club Logos</span>
+          <span>Team Badges</span>
 
           <span
             class="control-value"
@@ -1526,7 +1420,7 @@ body{
           <div
             class="value"
             style="font-family:'Archivo';font-size:10px;color:#69717c;letter-spacing:1px;">
-            LOGOS
+            BADGES
           </div>
 
           <button
@@ -1552,7 +1446,7 @@ body{
 
         <div class="control-title">
 
-          <span>Poster Title</span>
+          <span>Kick Off Text</span>
 
           <span
             class="control-value"
@@ -1944,28 +1838,21 @@ const state = {
   },
 
 
-  /* POSTER */
+  /* POSTER — KICK OFF layout: two team badges + title + social row */
 
-  posterBg:null,
+  posterAwayLogo:null,
 
-  player1:null,
-  player2:null,
+  posterTitle:"KICK OFF",
+  posterTitleFont:"Anton",
 
-  posterLogo1:null,
-  posterLogo2:null,
-
-  posterTitle:"بداية المباراة",
-
-  posterPlayerScale:1,
   posterLogoScale:1,
   posterTitleScale:1,
 
   posterPositions:{
-    player1:null,
-    player2:null,
     logo1:null,
     logo2:null,
-    title:null
+    title:null,
+    social:null
   },
 
 
@@ -2005,9 +1892,6 @@ const LOGO_MAX=1.60;
 const FT_MIN=.65;
 const FT_MAX=1.60;
 
-const PLAYER_MIN=.55;
-const PLAYER_MAX=1.60;
-
 const POSTER_LOGO_MIN=.60;
 const POSTER_LOGO_MAX=1.60;
 
@@ -2024,7 +1908,7 @@ const STEP=.05;
 
 
 /* =========================================================
-   GOAL VISUAL CONSTANTS
+   STUDIO VISUAL CONSTANTS (shared by GOAL + POSTER)
 ========================================================= */
 
 const GOAL_GOLD="#d9b25c";
@@ -2033,8 +1917,8 @@ const GOAL_GOLD_BRIGHT="#f3d488";
 /*
   Background base tones — a distinct
   dark navy shade from the match / poster
-  overlays, so the GOAL template reads
-  as its own identity.
+  overlays, so the GOAL / POSTER templates
+  read as their own identity.
 */
 
 const GOAL_BG_TOP="#111a2e";
@@ -2210,7 +2094,7 @@ function getDefaultPositions(){
 
 
 /* =========================================================
-   POSTER DEFAULT POSITIONS
+   POSTER (KICK OFF) DEFAULT POSITIONS
 ========================================================= */
 
 function getDefaultPosterPositions(){
@@ -2221,29 +2105,24 @@ function getDefaultPosterPositions(){
 
   return{
 
-    player1:{
-      x:w*.31,
-      y:h*.48
-    },
-
-    player2:{
-      x:w*.69,
-      y:h*.48
-    },
-
     logo1:{
-      x:w*.44,
-      y:h*.88
+      x:w/2-min*.20,
+      y:h*.335
     },
 
     logo2:{
-      x:w*.56,
-      y:h*.88
+      x:w/2+min*.20,
+      y:h*.335
     },
 
     title:{
       x:w/2,
-      y:h*.73
+      y:h*.615
+    },
+
+    social:{
+      x:w/2,
+      y:h*.90
     }
 
   };
@@ -2297,7 +2176,7 @@ function ensureMatchPositions(){
 
 function ensurePosterPositions(){
 
-  if(!state.posterPositions.player1){
+  if(!state.posterPositions.logo1){
     state.posterPositions=
       getDefaultPosterPositions();
   }
@@ -2354,7 +2233,7 @@ function resetGoalPositions(){
 
 
 /* =========================================================
-   BACKGROUND
+   BACKGROUND (match mode — uploaded photo)
 ========================================================= */
 
 function drawBackground(img){
@@ -2373,7 +2252,7 @@ function drawBackground(img){
 
 
 /* =========================================================
-   CINEMATIC OVERLAY
+   CINEMATIC OVERLAY (match mode)
 ========================================================= */
 
 function drawOverlay(){
@@ -2448,6 +2327,122 @@ function drawOverlay(){
     0,
     w,
     h
+  );
+
+}
+
+
+/* =========================================================
+   STUDIO BACKGROUND — generated navy + golden rays
+   Shared by GOAL and POSTER (no uploaded photo needed)
+========================================================= */
+
+function drawStudioBackground(
+  centerX,
+  centerY
+){
+
+  const w=canvas.width;
+  const h=canvas.height;
+
+  const base=
+    ctx.createLinearGradient(
+      0,
+      0,
+      0,
+      h
+    );
+
+  base.addColorStop(0,GOAL_BG_TOP);
+  base.addColorStop(1,GOAL_BG_BOTTOM);
+
+  ctx.fillStyle=base;
+
+  ctx.fillRect(0,0,w,h);
+
+
+  const radius=
+    Math.max(w,h)*.78;
+
+  ctx.save();
+
+  ctx.strokeStyle=GOAL_GOLD;
+  ctx.lineCap="round";
+
+  GOAL_RAYS.forEach(
+    function(ray){
+
+      const innerR=
+        radius*.10;
+
+      const outerR=
+        radius*ray.lengthRatio;
+
+      const x1=
+        centerX+
+        Math.cos(ray.angle)*innerR;
+
+      const y1=
+        centerY+
+        Math.sin(ray.angle)*innerR;
+
+      const x2=
+        centerX+
+        Math.cos(ray.angle)*outerR;
+
+      const y2=
+        centerY+
+        Math.sin(ray.angle)*outerR;
+
+      ctx.globalAlpha=
+        ray.opacity;
+
+      ctx.lineWidth=
+        ray.widthPx*(w/1080);
+
+      ctx.beginPath();
+      ctx.moveTo(x1,y1);
+      ctx.lineTo(x2,y2);
+      ctx.stroke();
+
+    }
+  );
+
+  ctx.restore();
+
+
+  const vignette=
+    ctx.createRadialGradient(
+      centerX,
+      centerY,
+      Math.min(w,h)*.18,
+      centerX,
+      h*.55,
+      Math.max(w,h)*.85
+    );
+
+  vignette.addColorStop(
+    0,
+    "rgba(0,0,0,0)"
+  );
+
+  vignette.addColorStop(
+    1,
+    "rgba(0,0,0,.45)"
+  );
+
+  ctx.fillStyle=vignette;
+
+  ctx.fillRect(0,0,w,h);
+
+}
+
+
+function drawGoalBackground(){
+
+  drawStudioBackground(
+    canvas.width/2,
+    canvas.height*.40
   );
 
 }
@@ -2734,415 +2729,19 @@ function drawMatchup(){
 
 
 /* =========================================================
-   POSTER SUBJECT
+   BADGE FRAME — square golden frame used for team badges
+   Shared shape for GOAL (single) and POSTER (double)
 ========================================================= */
 
-function drawPosterSubject(
-  img,
-  position,
-  target
+function drawBadgeFrame(
+  pos,
+  outer
 ){
 
-  if(!img)return;
-
-  const size=
-    getContainDimensions(
-      img,
-      target
-    );
-
-  ctx.save();
-
-  /*
-    Strong cinematic black separation.
-  */
-
-  ctx.shadowColor=
-    "rgba(0,0,0,.94)";
-
-  ctx.shadowBlur=
-    target*.075;
-
-  ctx.shadowOffsetX=0;
-  ctx.shadowOffsetY=
-    target*.045;
-
-  ctx.drawImage(
-    img,
-    position.x-size.width/2,
-    position.y-size.height/2,
-    size.width,
-    size.height
-  );
-
-  ctx.restore();
-
-}
-
-
-/* =========================================================
-   POSTER LOGO
-========================================================= */
-
-function drawPosterLogo(
-  img,
-  position,
-  target
-){
-
-  if(!img)return;
-
-  const size=
-    getContainDimensions(
-      img,
-      target
-    );
-
-  ctx.save();
-
-  ctx.shadowColor=
-    "rgba(0,0,0,.95)";
-
-  ctx.shadowBlur=
-    target*.16;
-
-  ctx.shadowOffsetY=
-    target*.045;
-
-  ctx.drawImage(
-    img,
-    position.x-size.width/2,
-    position.y-size.height/2,
-    size.width,
-    size.height
-  );
-
-  ctx.restore();
-
-}
-
-
-/* =========================================================
-   POSTER TITLE
-========================================================= */
-
-function drawPosterTitle(){
-
   const min=Math.min(
     canvas.width,
     canvas.height
   );
-
-  const pos=
-    state.posterPositions.title;
-
-  const size=
-    min*.067*
-    state.posterTitleScale;
-
-  ctx.save();
-
-  ctx.font=
-    `800 ${size}px 'Archivo',sans-serif`;
-
-  ctx.textAlign="center";
-  ctx.textBaseline="middle";
-
-  ctx.fillStyle="#ffffff";
-
-  ctx.shadowColor=
-    "rgba(0,0,0,.95)";
-
-  ctx.shadowBlur=
-    size*.30;
-
-  ctx.shadowOffsetY=
-    size*.07;
-
-  ctx.fillText(
-    state.posterTitle || "بداية المباراة",
-    pos.x,
-    pos.y
-  );
-
-  ctx.restore();
-
-}
-
-
-/* =========================================================
-   POSTER CENTER TREATMENT
-========================================================= */
-
-function drawPosterCenter(){
-
-  const min=Math.min(
-    canvas.width,
-    canvas.height
-  );
-
-  const x=canvas.width/2;
-
-  const y=canvas.height*.57;
-
-  const size=min*.038;
-
-  ctx.save();
-
-  ctx.font=
-    `800 ${size}px 'Archivo',sans-serif`;
-
-  ctx.textAlign="center";
-  ctx.textBaseline="middle";
-
-  ctx.fillStyle=
-    "rgba(255,255,255,.78)";
-
-  ctx.shadowColor=
-    "rgba(0,0,0,.92)";
-
-  ctx.shadowBlur=
-    size*.55;
-
-  ctx.fillText(
-    "VS",
-    x,
-    y
-  );
-
-  ctx.restore();
-
-}
-
-
-/* =========================================================
-   POSTER RENDER
-========================================================= */
-
-function drawPoster(){
-
-  ensurePosterPositions();
-
-  drawBackground(
-    state.posterBg
-  );
-
-  if(!state.posterBg)return;
-
-  drawOverlay();
-
-
-  const min=Math.min(
-    canvas.width,
-    canvas.height
-  );
-
-
-  /*
-    Main players.
-    Large enough to create a
-    real sports poster feeling.
-  */
-
-  const playerTarget=
-    min*.48*
-    state.posterPlayerScale;
-
-
-  if(state.player1){
-
-    drawPosterSubject(
-      state.player1,
-      state.posterPositions.player1,
-      playerTarget
-    );
-
-  }
-
-
-  if(state.player2){
-
-    drawPosterSubject(
-      state.player2,
-      state.posterPositions.player2,
-      playerTarget
-    );
-
-  }
-
-
-  drawPosterCenter();
-
-  drawPosterTitle();
-
-
-  /*
-    Club logos remain together
-    near the bottom.
-  */
-
-  const logoTarget=
-    min*.105*
-    state.posterLogoScale;
-
-
-  if(state.posterLogo1){
-
-    drawPosterLogo(
-      state.posterLogo1,
-      state.posterPositions.logo1,
-      logoTarget
-    );
-
-  }
-
-
-  if(state.posterLogo2){
-
-    drawPosterLogo(
-      state.posterLogo2,
-      state.posterPositions.logo2,
-      logoTarget
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   GOAL BACKGROUND
-========================================================= */
-
-function drawGoalBackground(){
-
-  const w=canvas.width;
-  const h=canvas.height;
-
-  const base=
-    ctx.createLinearGradient(
-      0,
-      0,
-      0,
-      h
-    );
-
-  base.addColorStop(0,GOAL_BG_TOP);
-  base.addColorStop(1,GOAL_BG_BOTTOM);
-
-  ctx.fillStyle=base;
-
-  ctx.fillRect(0,0,w,h);
-
-
-  /*
-    Golden ray burst, radiating from
-    a fixed point near the badge frame —
-    a distinct identity from the red
-    rays of the reference layout.
-  */
-
-  const centerX=w/2;
-  const centerY=h*.40;
-
-  const radius=
-    Math.max(w,h)*.78;
-
-  ctx.save();
-
-  ctx.strokeStyle=GOAL_GOLD;
-  ctx.lineCap="round";
-
-  GOAL_RAYS.forEach(
-    function(ray){
-
-      const innerR=
-        radius*.10;
-
-      const outerR=
-        radius*ray.lengthRatio;
-
-      const x1=
-        centerX+
-        Math.cos(ray.angle)*innerR;
-
-      const y1=
-        centerY+
-        Math.sin(ray.angle)*innerR;
-
-      const x2=
-        centerX+
-        Math.cos(ray.angle)*outerR;
-
-      const y2=
-        centerY+
-        Math.sin(ray.angle)*outerR;
-
-      ctx.globalAlpha=
-        ray.opacity;
-
-      ctx.lineWidth=
-        ray.widthPx*(w/1080);
-
-      ctx.beginPath();
-      ctx.moveTo(x1,y1);
-      ctx.lineTo(x2,y2);
-      ctx.stroke();
-
-    }
-  );
-
-  ctx.restore();
-
-
-  /*
-    Soft vignette to keep edges
-    darker than the center stage.
-  */
-
-  const vignette=
-    ctx.createRadialGradient(
-      centerX,
-      centerY,
-      Math.min(w,h)*.18,
-      centerX,
-      h*.55,
-      Math.max(w,h)*.85
-    );
-
-  vignette.addColorStop(
-    0,
-    "rgba(0,0,0,0)"
-  );
-
-  vignette.addColorStop(
-    1,
-    "rgba(0,0,0,.45)"
-  );
-
-  ctx.fillStyle=vignette;
-
-  ctx.fillRect(0,0,w,h);
-
-}
-
-
-/* =========================================================
-   GOAL BADGE FRAME
-========================================================= */
-
-function drawGoalFrame(){
-
-  const min=Math.min(
-    canvas.width,
-    canvas.height
-  );
-
-  const pos=
-    state.goalPositions.logo;
-
-  const outer=
-    min*.50;
 
   const inner=
     outer*.80;
@@ -3199,6 +2798,21 @@ function drawGoalFrame(){
 }
 
 
+function drawGoalFrame(){
+
+  const min=Math.min(
+    canvas.width,
+    canvas.height
+  );
+
+  drawBadgeFrame(
+    state.goalPositions.logo,
+    min*.50
+  );
+
+}
+
+
 /* =========================================================
    GOAL CLUB LOGO
 ========================================================= */
@@ -3222,29 +2836,11 @@ function drawGoalLogo(){
     inner*.86*
     state.goalLogoScale;
 
-  const size=
-    getContainDimensions(
-      state.goalLogo,
-      target
-    );
-
-  ctx.save();
-
-  ctx.shadowColor=
-    "rgba(0,0,0,.55)";
-
-  ctx.shadowBlur=
-    target*.06;
-
-  ctx.drawImage(
+  drawLogo(
     state.goalLogo,
-    pos.x-size.width/2,
-    pos.y-size.height/2,
-    size.width,
-    size.height
+    pos,
+    target
   );
-
-  ctx.restore();
 
 }
 
@@ -3363,10 +2959,86 @@ function drawGoalPlayerName(){
 
 
 /* =========================================================
-   GOAL SOCIAL ICON
+   POSTER — KICK OFF TITLE (Latin, chosen font)
 ========================================================= */
 
-function drawGoalSocialIcon(
+function drawPosterTitle(){
+
+  const w=canvas.width;
+  const h=canvas.height;
+
+  const min=Math.min(w,h);
+
+  const pos=
+    state.posterPositions.title;
+
+  const size=
+    min*.115*
+    state.posterTitleScale;
+
+  const text=
+    (state.posterTitle || "KICK OFF").toUpperCase();
+
+  ctx.save();
+
+  ctx.font=
+    `800 ${size}px '${state.posterTitleFont}',sans-serif`;
+
+  ctx.textAlign="center";
+  ctx.textBaseline="middle";
+
+  ctx.fillStyle="#ffffff";
+
+  ctx.shadowColor=
+    "rgba(0,0,0,.55)";
+
+  ctx.shadowBlur=
+    size*.14;
+
+  ctx.shadowOffsetY=
+    size*.03;
+
+  ctx.fillText(
+    text,
+    pos.x,
+    pos.y
+  );
+
+
+  const textWidth=
+    ctx.measureText(text).width;
+
+  ctx.restore();
+
+
+  /* thin golden divider under the title */
+
+  const halfLine=
+    Math.max(
+      min*.16,
+      textWidth*.42
+    );
+
+  ctx.save();
+
+  ctx.strokeStyle=GOAL_GOLD;
+  ctx.lineWidth=min*.0025;
+
+  ctx.beginPath();
+  ctx.moveTo(pos.x-halfLine,pos.y+size*.62);
+  ctx.lineTo(pos.x+halfLine,pos.y+size*.62);
+  ctx.stroke();
+
+  ctx.restore();
+
+}
+
+
+/* =========================================================
+   SOCIAL ROW ICONS — vector drawn, no external logos
+========================================================= */
+
+function drawSocialIcon(
   type,
   x,
   y,
@@ -3386,6 +3058,8 @@ function drawGoalSocialIcon(
     ctx.fillStyle="#20242b";
   else if(type==="instagram")
     ctx.fillStyle="#c2337c";
+  else if(type==="youtube")
+    ctx.fillStyle="#ff0000";
   else
     ctx.fillStyle="#111417";
 
@@ -3419,6 +3093,15 @@ function drawGoalSocialIcon(
       `900 ${size*.5}px sans-serif`;
 
     ctx.fillText("X",0,size*.02);
+
+  }else if(type==="youtube"){
+
+    ctx.beginPath();
+    ctx.moveTo(-size*.11,-size*.16);
+    ctx.lineTo(size*.15,0);
+    ctx.lineTo(-size*.11,size*.16);
+    ctx.closePath();
+    ctx.fill();
 
   }else if(type==="instagram"){
 
@@ -3508,19 +3191,15 @@ function drawGoalSocialIcon(
 }
 
 
-/* =========================================================
-   GOAL SOCIAL ROW
-========================================================= */
-
-function drawGoalSocial(){
+function drawSocialRow(
+  pos,
+  types
+){
 
   const min=Math.min(
     canvas.width,
     canvas.height
   );
-
-  const pos=
-    state.goalPositions.social;
 
   const iconSize=
     min*.036;
@@ -3530,13 +3209,6 @@ function drawGoalSocial(){
 
   const brandSize=
     min*.026;
-
-  const types=[
-    "facebook",
-    "x",
-    "instagram",
-    "tiktok"
-  ];
 
   ctx.save();
 
@@ -3561,7 +3233,7 @@ function drawGoalSocial(){
   types.forEach(
     function(type){
 
-      drawGoalSocialIcon(
+      drawSocialIcon(
         type,
         cursorX,
         pos.y,
@@ -3594,6 +3266,91 @@ function drawGoalSocial(){
   );
 
   ctx.restore();
+
+}
+
+
+function drawGoalSocial(){
+
+  drawSocialRow(
+    state.goalPositions.social,
+    ["facebook","x","instagram","tiktok"]
+  );
+
+}
+
+
+function drawPosterSocial(){
+
+  drawSocialRow(
+    state.posterPositions.social,
+    ["facebook","x","youtube"]
+  );
+
+}
+
+
+/* =========================================================
+   POSTER (KICK OFF) RENDER
+========================================================= */
+
+function drawPoster(){
+
+  ensurePosterPositions();
+
+  drawStudioBackground(
+    canvas.width/2,
+    canvas.height*.335
+  );
+
+  const min=Math.min(
+    canvas.width,
+    canvas.height
+  );
+
+  const badgeOuter=
+    min*.34*
+    state.posterLogoScale;
+
+  const badgeInner=
+    badgeOuter*.80*.86;
+
+
+  drawBadgeFrame(
+    state.posterPositions.logo1,
+    badgeOuter
+  );
+
+  drawBadgeFrame(
+    state.posterPositions.logo2,
+    badgeOuter
+  );
+
+
+  if(state.homeLogo){
+
+    drawLogo(
+      state.homeLogo,
+      state.posterPositions.logo1,
+      badgeInner
+    );
+
+  }
+
+  if(state.posterAwayLogo){
+
+    drawLogo(
+      state.posterAwayLogo,
+      state.posterPositions.logo2,
+      badgeInner
+    );
+
+  }
+
+
+  drawPosterTitle();
+
+  drawPosterSocial();
 
 }
 
@@ -3646,13 +3403,18 @@ function render(){
   }
 
 
-  const activeBg=
-    state.mode==="match"
-      ? state.bgImage
-      : state.posterBg;
+  if(state.mode==="poster"){
+
+    emptyHint.style.display="none";
+
+    drawPoster();
+
+    return;
+
+  }
 
 
-  if(!activeBg){
+  if(!state.bgImage){
 
     emptyHint.style.display="flex";
 
@@ -3663,28 +3425,19 @@ function render(){
 
   emptyHint.style.display="none";
 
+  ensureMatchPositions();
 
-  if(state.mode==="match"){
+  drawBackground(
+    state.bgImage
+  );
 
-    ensureMatchPositions();
+  drawOverlay();
 
-    drawBackground(
-      state.bgImage
-    );
+  drawFullTime();
 
-    drawOverlay();
+  drawMatchup();
 
-    drawFullTime();
-
-    drawMatchup();
-
-    drawScore();
-
-  }else{
-
-    drawPoster();
-
-  }
+  drawScore();
 
 }
 
@@ -3716,14 +3469,6 @@ function updateScaleUI(){
   ).textContent=
     Math.round(
       state.fullTimeScale*100
-    )+"%";
-
-
-  document.getElementById(
-    "posterPlayerScale"
-  ).textContent=
-    Math.round(
-      state.posterPlayerScale*100
     )+"%";
 
 
@@ -3952,32 +3697,6 @@ document
 /* POSTER SCALES */
 
 document
-.getElementById("posterPlayerPlus")
-.addEventListener(
-  "click",
-  ()=>changeScale(
-    "posterPlayerScale",
-    PLAYER_MIN,
-    PLAYER_MAX,
-    1
-  )
-);
-
-
-document
-.getElementById("posterPlayerMinus")
-.addEventListener(
-  "click",
-  ()=>changeScale(
-    "posterPlayerScale",
-    PLAYER_MIN,
-    PLAYER_MAX,
-    -1
-  )
-);
-
-
-document
 .getElementById("posterLogoPlus")
 .addEventListener(
   "click",
@@ -4141,6 +3860,33 @@ goalFontSelect.addEventListener(
 );
 
 
+const posterTitleFontSelect=
+  document.getElementById(
+    "posterTitleFontSelect"
+  );
+
+const posterTitleFontPreview=
+  document.getElementById(
+    "posterTitleFontPreview"
+  );
+
+
+posterTitleFontSelect.addEventListener(
+  "change",
+  function(){
+
+    state.posterTitleFont=
+      this.value;
+
+    posterTitleFontPreview.style.fontFamily=
+      `'${this.value}',sans-serif`;
+
+    render();
+
+  }
+);
+
+
 /* =========================================================
    MODE SWITCH
 ========================================================= */
@@ -4182,7 +3928,19 @@ function setMode(mode){
     );
 
     dragInfo.textContent=
-      "DRAG PLAYERS • LOGOS • TITLE";
+      "DRAG BADGES • TITLE • SOCIAL ROW";
+
+    /*
+      POSTER is a self-contained template
+      (generated background, no uploaded
+      photo), so it always uses the
+      standard portrait canvas size.
+    */
+
+    canvas.width=1080;
+    canvas.height=1350;
+
+    ensurePosterPositions();
 
   }else{
 
@@ -4287,7 +4045,7 @@ document
 
 
 /* =========================================================
-   MATCH HOME LOGO
+   MATCH HOME LOGO (also used as fixed Al Ahly badge in POSTER)
 ========================================================= */
 
 document
@@ -4361,11 +4119,11 @@ document
 
 
 /* =========================================================
-   POSTER BACKGROUND
+   POSTER OPPONENT LOGO
 ========================================================= */
 
 document
-.getElementById("posterBgInput")
+.getElementById("posterAwayLogoInput")
 .addEventListener(
   "change",
   function(e){
@@ -4378,171 +4136,14 @@ document
       file,
       function(img){
 
-        state.posterBg=img;
-
-        canvas.width=
-          img.naturalWidth;
-
-        canvas.height=
-          img.naturalHeight;
-
-        state.posterPositions=
-          getDefaultPosterPositions();
+        state.posterAwayLogo=img;
 
         document.getElementById(
-          "posterBgName"
+          "posterAwayLogoName"
         ).textContent=file.name;
 
         document.getElementById(
-          "posterBgStatus"
-        ).textContent="Loaded";
-
-        render();
-
-      }
-    );
-
-  }
-);
-
-
-/* =========================================================
-   POSTER PLAYER 1
-========================================================= */
-
-document
-.getElementById("player1Input")
-.addEventListener(
-  "change",
-  function(e){
-
-    const file=e.target.files[0];
-
-    if(!file)return;
-
-    loadImage(
-      file,
-      function(img){
-
-        state.player1=img;
-
-        document.getElementById(
-          "player1Name"
-        ).textContent=file.name;
-
-        document.getElementById(
-          "player1Status"
-        ).textContent="Loaded";
-
-        render();
-
-      }
-    );
-
-  }
-);
-
-
-/* =========================================================
-   POSTER PLAYER 2
-========================================================= */
-
-document
-.getElementById("player2Input")
-.addEventListener(
-  "change",
-  function(e){
-
-    const file=e.target.files[0];
-
-    if(!file)return;
-
-    loadImage(
-      file,
-      function(img){
-
-        state.player2=img;
-
-        document.getElementById(
-          "player2Name"
-        ).textContent=file.name;
-
-        document.getElementById(
-          "player2Status"
-        ).textContent="Loaded";
-
-        render();
-
-      }
-    );
-
-  }
-);
-
-
-/* =========================================================
-   POSTER LOGO 1
-========================================================= */
-
-document
-.getElementById("posterLogo1Input")
-.addEventListener(
-  "change",
-  function(e){
-
-    const file=e.target.files[0];
-
-    if(!file)return;
-
-    loadImage(
-      file,
-      function(img){
-
-        state.posterLogo1=img;
-
-        document.getElementById(
-          "posterLogo1Name"
-        ).textContent=file.name;
-
-        document.getElementById(
-          "posterLogo1Status"
-        ).textContent="Loaded";
-
-        render();
-
-      }
-    );
-
-  }
-);
-
-
-/* =========================================================
-   POSTER LOGO 2
-========================================================= */
-
-document
-.getElementById("posterLogo2Input")
-.addEventListener(
-  "change",
-  function(e){
-
-    const file=e.target.files[0];
-
-    if(!file)return;
-
-    loadImage(
-      file,
-      function(img){
-
-        state.posterLogo2=img;
-
-        document.getElementById(
-          "posterLogo2Name"
-        ).textContent=file.name;
-
-        document.getElementById(
-          "posterLogo2Status"
+          "posterAwayLogoStatus"
         ).textContent="Loaded";
 
         render();
@@ -4695,38 +4296,23 @@ function hitLogo(
 
 
 /* =========================================================
-   HIT SUBJECT
+   HIT BADGE FRAME (square) — GOAL + POSTER
 ========================================================= */
 
-function hitSubject(
-  img,
-  position,
-  target,
+function hitBadgeFrame(
+  pos,
+  outer,
   point
 ){
 
-  if(!img || !position)
-    return false;
-
-  const size=
-    getContainDimensions(
-      img,
-      target
-    );
+  if(!pos)return false;
 
   return(
 
-    point.x >=
-      position.x-size.width/2 &&
-
-    point.x <=
-      position.x+size.width/2 &&
-
-    point.y >=
-      position.y-size.height/2 &&
-
-    point.y <=
-      position.y+size.height/2
+    point.x>=pos.x-outer/2 &&
+    point.x<=pos.x+outer/2 &&
+    point.y>=pos.y-outer/2 &&
+    point.y<=pos.y+outer/2
 
   );
 
@@ -4841,22 +4427,22 @@ function hitPosterTitle(point){
   );
 
   const size=
-    min*.067*
+    min*.115*
     state.posterTitleScale;
 
   return(
 
     point.x >=
-      state.posterPositions.title.x-min*.25 &&
+      state.posterPositions.title.x-min*.30 &&
 
     point.x <=
-      state.posterPositions.title.x+min*.25 &&
+      state.posterPositions.title.x+min*.30 &&
 
     point.y >=
-      state.posterPositions.title.y-size &&
+      state.posterPositions.title.y-size*.75 &&
 
     point.y <=
-      state.posterPositions.title.y+size
+      state.posterPositions.title.y+size*.75
 
   );
 
@@ -4864,28 +4450,24 @@ function hitPosterTitle(point){
 
 
 /* =========================================================
-   HIT GOAL LOGO FRAME
+   HIT SOCIAL ROW — GOAL + POSTER
 ========================================================= */
 
-function hitGoalLogo(point){
+function hitSocialRow(pos,point){
+
+  if(!pos)return false;
 
   const min=Math.min(
     canvas.width,
     canvas.height
   );
 
-  const pos=
-    state.goalPositions.logo;
-
-  const outer=
-    min*.50;
-
   return(
 
-    point.x>=pos.x-outer/2 &&
-    point.x<=pos.x+outer/2 &&
-    point.y>=pos.y-outer/2 &&
-    point.y<=pos.y+outer/2
+    point.x>=pos.x-min*.30 &&
+    point.x<=pos.x+min*.30 &&
+    point.y>=pos.y-min*.035 &&
+    point.y<=pos.y+min*.035
 
   );
 
@@ -4923,32 +4505,6 @@ function hitGoalPlayerName(point){
 
 
 /* =========================================================
-   HIT GOAL SOCIAL ROW
-========================================================= */
-
-function hitGoalSocial(point){
-
-  const min=Math.min(
-    canvas.width,
-    canvas.height
-  );
-
-  const pos=
-    state.goalPositions.social;
-
-  return(
-
-    point.x>=pos.x-min*.30 &&
-    point.x<=pos.x+min*.30 &&
-    point.y>=pos.y-min*.035 &&
-    point.y<=pos.y+min*.035
-
-  );
-
-}
-
-
-/* =========================================================
    POINTER DOWN
 ========================================================= */
 
@@ -4956,14 +4512,10 @@ canvas.addEventListener(
   "pointerdown",
   function(e){
 
-    const activeBg=
-      state.mode==="match"
-        ? state.bgImage
-        : state.mode==="poster"
-        ? state.posterBg
-        : true;
-
-    if(!activeBg)
+    if(
+      state.mode==="match" &&
+      !state.bgImage
+    )
       return;
 
     const point=
@@ -4981,7 +4533,7 @@ canvas.addEventListener(
         for intuitive selection.
       */
 
-      if(hitGoalSocial(point)){
+      if(hitSocialRow(state.goalPositions.social,point)){
 
         target="social";
 
@@ -4991,7 +4543,7 @@ canvas.addEventListener(
         target="name";
 
       }
-      else if(hitGoalLogo(point)){
+      else if(hitBadgeFrame(state.goalPositions.logo,Math.min(canvas.width,canvas.height)*.50,point)){
 
         target="logo";
 
@@ -5015,6 +4567,81 @@ canvas.addEventListener(
         offsetY:
           point.y-
           state.goalPositions[target].y
+
+      };
+
+      canvas.setPointerCapture(
+        e.pointerId
+      );
+
+      canvas.style.cursor=
+        "grabbing";
+
+      e.preventDefault();
+
+      return;
+
+    }
+
+
+    if(state.mode==="poster"){
+
+      ensurePosterPositions();
+
+      const min=Math.min(
+        canvas.width,
+        canvas.height
+      );
+
+      const badgeOuter=
+        min*.34*
+        state.posterLogoScale;
+
+
+      /*
+        Reverse drawing order
+        for intuitive selection.
+      */
+
+      if(hitSocialRow(state.posterPositions.social,point)){
+
+        target="social";
+
+      }
+      else if(hitPosterTitle(point)){
+
+        target="title";
+
+      }
+      else if(hitBadgeFrame(state.posterPositions.logo2,badgeOuter,point)){
+
+        target="logo2";
+
+      }
+      else if(hitBadgeFrame(state.posterPositions.logo1,badgeOuter,point)){
+
+        target="logo1";
+
+      }
+
+
+      if(!target)
+        return;
+
+
+      state.drag={
+
+        type:"poster",
+
+        target,
+
+        offsetX:
+          point.x-
+          state.posterPositions[target].x,
+
+        offsetY:
+          point.y-
+          state.posterPositions[target].y
 
       };
 
@@ -5102,104 +4729,6 @@ canvas.addEventListener(
 
       };
 
-    }else{
-
-      ensurePosterPositions();
-
-      const min=Math.min(
-        canvas.width,
-        canvas.height
-      );
-
-      const playerSize=
-        min*.48*
-        state.posterPlayerScale;
-
-      const logoSize=
-        min*.105*
-        state.posterLogoScale;
-
-
-      /*
-        Reverse drawing order
-        for intuitive selection.
-      */
-
-      if(hitPosterTitle(point)){
-
-        target="title";
-
-      }
-      else if(
-        hitLogo(
-          state.posterLogo2,
-          state.posterPositions.logo2,
-          logoSize,
-          point
-        )
-      ){
-
-        target="logo2";
-
-      }
-      else if(
-        hitLogo(
-          state.posterLogo1,
-          state.posterPositions.logo1,
-          logoSize,
-          point
-        )
-      ){
-
-        target="logo1";
-
-      }
-      else if(
-        hitSubject(
-          state.player2,
-          state.posterPositions.player2,
-          playerSize,
-          point
-        )
-      ){
-
-        target="player2";
-
-      }
-      else if(
-        hitSubject(
-          state.player1,
-          state.posterPositions.player1,
-          playerSize,
-          point
-        )
-      ){
-
-        target="player1";
-
-      }
-
-
-      if(!target)
-        return;
-
-
-      state.drag={
-
-        type:"poster",
-
-        target,
-
-        offsetX:
-          point.x-
-          state.posterPositions[target].x,
-
-        offsetY:
-          point.y-
-          state.posterPositions[target].y
-
-      };
-
     }
 
 
@@ -5224,14 +4753,10 @@ canvas.addEventListener(
   "pointermove",
   function(e){
 
-    const activeBg=
-      state.mode==="match"
-        ? state.bgImage
-        : state.mode==="poster"
-        ? state.posterBg
-        : true;
-
-    if(!activeBg)
+    if(
+      state.mode==="match" &&
+      !state.bgImage
+    )
       return;
 
     const point=
@@ -5274,13 +4799,42 @@ canvas.addEventListener(
 
       ensureGoalPositions();
 
+      const min=Math.min(
+        canvas.width,
+        canvas.height
+      );
+
       hovering=
 
-        hitGoalSocial(point) ||
+        hitSocialRow(state.goalPositions.social,point) ||
 
         hitGoalPlayerName(point) ||
 
-        hitGoalLogo(point);
+        hitBadgeFrame(state.goalPositions.logo,min*.50,point);
+
+    }
+    else if(state.mode==="poster"){
+
+      ensurePosterPositions();
+
+      const min=Math.min(
+        canvas.width,
+        canvas.height
+      );
+
+      const badgeOuter=
+        min*.34*
+        state.posterLogoScale;
+
+      hovering=
+
+        hitSocialRow(state.posterPositions.social,point) ||
+
+        hitPosterTitle(point) ||
+
+        hitBadgeFrame(state.posterPositions.logo1,badgeOuter,point) ||
+
+        hitBadgeFrame(state.posterPositions.logo2,badgeOuter,point);
 
     }
     else if(state.mode==="match"){
@@ -5314,56 +4868,6 @@ canvas.addEventListener(
           state.awayLogo,
           state.positions.awayLogo,
           logoSize,
-          point
-        );
-
-    }else{
-
-      ensurePosterPositions();
-
-      const min=Math.min(
-        canvas.width,
-        canvas.height
-      );
-
-      const playerSize=
-        min*.48*
-        state.posterPlayerScale;
-
-      const logoSize=
-        min*.105*
-        state.posterLogoScale;
-
-
-      hovering=
-
-        hitPosterTitle(point) ||
-
-        hitLogo(
-          state.posterLogo1,
-          state.posterPositions.logo1,
-          logoSize,
-          point
-        ) ||
-
-        hitLogo(
-          state.posterLogo2,
-          state.posterPositions.logo2,
-          logoSize,
-          point
-        ) ||
-
-        hitSubject(
-          state.player1,
-          state.posterPositions.player1,
-          playerSize,
-          point
-        ) ||
-
-        hitSubject(
-          state.player2,
-          state.posterPositions.player2,
-          playerSize,
           point
         );
 
@@ -5441,14 +4945,10 @@ document
   "click",
   function(){
 
-    const activeBg=
-      state.mode==="match"
-        ? state.bgImage
-        : state.mode==="poster"
-        ? state.posterBg
-        : true;
-
-    if(!activeBg){
+    if(
+      state.mode==="match" &&
+      !state.bgImage
+    ){
 
       alert(
         "Upload a background photo before exporting."
@@ -5510,17 +5010,11 @@ document
     state.scoreFont="Anton";
 
 
-    state.posterBg=null;
+    state.posterAwayLogo=null;
 
-    state.player1=null;
-    state.player2=null;
+    state.posterTitle="KICK OFF";
+    state.posterTitleFont="Anton";
 
-    state.posterLogo1=null;
-    state.posterLogo2=null;
-
-    state.posterTitle="بداية المباراة";
-
-    state.posterPlayerScale=1;
     state.posterLogoScale=1;
     state.posterTitleScale=1;
 
@@ -5534,11 +5028,10 @@ document
 
 
     state.posterPositions={
-      player1:null,
-      player2:null,
       logo1:null,
       logo2:null,
-      title:null
+      title:null,
+      social:null
     };
 
 
@@ -5568,12 +5061,7 @@ document
       "homeLogoInput",
       "awayLogoInput",
 
-      "posterBgInput",
-      "player1Input",
-      "player2Input",
-
-      "posterLogo1Input",
-      "posterLogo2Input",
+      "posterAwayLogoInput",
 
       "goalLogoInput"
 
@@ -5606,29 +5094,9 @@ document
 
 
     document.getElementById(
-      "posterBgName"
+      "posterAwayLogoName"
     ).textContent=
-      "Upload background";
-
-    document.getElementById(
-      "player1Name"
-    ).textContent=
-      "Player / Team 01";
-
-    document.getElementById(
-      "player2Name"
-    ).textContent=
-      "Player / Team 02";
-
-    document.getElementById(
-      "posterLogo1Name"
-    ).textContent=
-      "Club Logo 01";
-
-    document.getElementById(
-      "posterLogo2Name"
-    ).textContent=
-      "Club Logo 02";
+      "Upload opponent logo";
 
 
     document.getElementById(
@@ -5641,11 +5109,7 @@ document
       "bgStatus",
       "homeLogoStatus",
       "awayLogoStatus",
-      "posterBgStatus",
-      "player1Status",
-      "player2Status",
-      "posterLogo1Status",
-      "posterLogo2Status",
+      "posterAwayLogoStatus",
       "goalLogoStatus"
     ].forEach(
       id=>{
@@ -5659,7 +5123,7 @@ document
     document.getElementById(
       "posterTitleInput"
     ).value=
-      "بداية المباراة";
+      "KICK OFF";
 
 
     document.getElementById(
@@ -5681,6 +5145,12 @@ document
 
     goalFontPreview.style.fontFamily=
       "'Cairo',sans-serif";
+
+
+    posterTitleFontSelect.value="Anton";
+
+    posterTitleFontPreview.style.fontFamily=
+      "'Anton',sans-serif";
 
 
     updateScores();
@@ -5708,6 +5178,9 @@ fontPreview.style.fontFamily=
 
 goalFontPreview.style.fontFamily=
   "'Cairo',sans-serif";
+
+posterTitleFontPreview.style.fontFamily=
+  "'Anton',sans-serif";
 
 
 if(

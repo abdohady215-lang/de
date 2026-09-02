@@ -7,7 +7,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&family=Archivo+Black&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&family=Archivo+Black&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&family=Teko:wght@500;600;700&family=Cairo:wght@700;800;900&family=Tajawal:wght@700;800;900&family=Almarai:wght@700;800&family=Changa:wght@700;800&family=Droid+Arabic+Kufi:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -115,7 +115,7 @@ button,select,input{
   margin-top:20px;
 
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:1fr 1fr 1fr;
 
   padding:4px;
 
@@ -134,9 +134,10 @@ button,select,input{
 
   color:#727a85;
 
-  font-size:10px;
+  font-size:9px;
   font-weight:800;
-  letter-spacing:.6px;
+  letter-spacing:.4px;
+  padding:0 2px;
 
   cursor:pointer;
 
@@ -892,6 +893,12 @@ body{
       POSTER
     </button>
 
+    <button
+      class="mode-btn"
+      id="goalModeBtn">
+      GOAL
+    </button>
+
   </div>
 
 
@@ -1591,6 +1598,247 @@ body{
   </div>
 
 
+  <!-- =====================================================
+       GOAL MODE
+  ====================================================== -->
+
+  <div
+    id="goalPanel"
+    class="hidden">
+
+    <div class="group">
+
+      <div class="label">
+        Goal Design
+      </div>
+
+      <div
+        class="control-card"
+        style="text-align:center;">
+
+        <div
+          style="
+          font-family:'Anton';
+          font-size:22px;
+          letter-spacing:1px;">
+          GOAL
+        </div>
+
+        <div
+          style="
+          margin-top:4px;
+          color:#69717c;
+          font-size:9px;
+          letter-spacing:1.5px;
+          font-weight:800;">
+          SCORER ANNOUNCEMENT
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- CLUB LOGO -->
+
+    <div class="group">
+
+      <div class="label">
+        Club Logo
+      </div>
+
+      <label class="upload">
+
+        <span
+          class="upload-name"
+          id="goalLogoName">
+          Upload club logo
+        </span>
+
+        <span
+          class="upload-status"
+          id="goalLogoStatus">
+          —
+        </span>
+
+        <input
+          id="goalLogoInput"
+          type="file"
+          accept="image/*">
+
+      </label>
+
+    </div>
+
+
+    <!-- PLAYER NAME -->
+
+    <div class="group">
+
+      <div class="label">
+        Player Name
+      </div>
+
+      <input
+        class="poster-title-input"
+        id="goalNameInput"
+        placeholder="اسم اللاعب"
+        value="">
+
+    </div>
+
+
+    <!-- PLAYER NAME FONT -->
+
+    <div class="group">
+
+      <div class="label">
+        Player Name Font
+      </div>
+
+      <select
+        class="font-select"
+        id="goalFontSelect">
+
+        <option value="Cairo">
+          Cairo — Bold
+        </option>
+
+        <option value="Tajawal">
+          Tajawal — Bold
+        </option>
+
+        <option value="Almarai">
+          Almarai — Bold
+        </option>
+
+        <option value="Changa">
+          Changa — Bold
+        </option>
+
+        <option value="Droid Arabic Kufi">
+          Droid Kufi — Bold
+        </option>
+
+        <option value="Archivo Black">
+          Archivo Black — Bold
+        </option>
+
+      </select>
+
+      <div
+        class="font-preview"
+        id="goalFontPreview"
+        style="font-size:20px;">
+        اسم اللاعب
+      </div>
+
+    </div>
+
+
+    <!-- PLAYER NAME SIZE -->
+
+    <div class="group">
+
+      <div class="label">
+        Player Name Size
+      </div>
+
+      <div class="control-card">
+
+        <div class="control-title">
+
+          <span>Name Size</span>
+
+          <span
+            class="control-value"
+            id="goalNameScale">
+            100%
+          </span>
+
+        </div>
+
+        <div class="controls">
+
+          <button
+            class="small-btn"
+            id="goalNameMinus">−</button>
+
+          <div
+            class="value"
+            style="font-family:'Archivo';font-size:10px;color:#69717c;letter-spacing:1px;">
+            NAME
+          </div>
+
+          <button
+            class="small-btn"
+            id="goalNamePlus">+</button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- CLUB LOGO SIZE -->
+
+    <div class="group">
+
+      <div class="label">
+        Club Logo Size
+      </div>
+
+      <div class="control-card">
+
+        <div class="control-title">
+
+          <span>Logo</span>
+
+          <span
+            class="control-value"
+            id="goalLogoScale">
+            100%
+          </span>
+
+        </div>
+
+        <div class="controls">
+
+          <button
+            class="small-btn"
+            id="goalLogoMinus">−</button>
+
+          <div
+            class="value"
+            style="font-family:'Archivo';font-size:10px;color:#69717c;letter-spacing:1px;">
+            LOGO
+          </div>
+
+          <button
+            class="small-btn"
+            id="goalLogoPlus">+</button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="group">
+
+      <button
+        class="reset-position"
+        id="resetGoalPositions">
+        RESET GOAL POSITIONS
+      </button>
+
+    </div>
+
+  </div>
+
+
   <!-- ACTIONS -->
 
   <div class="actions">
@@ -1721,6 +1969,24 @@ const state = {
   },
 
 
+  /* GOAL */
+
+  goalLogo:null,
+
+  goalPlayerName:"",
+
+  goalNameFont:"Cairo",
+
+  goalNameScale:1,
+  goalLogoScale:1,
+
+  goalPositions:{
+    logo:null,
+    name:null,
+    social:null
+  },
+
+
   drag:null
 
 };
@@ -1748,7 +2014,76 @@ const POSTER_LOGO_MAX=1.60;
 const POSTER_TITLE_MIN=.65;
 const POSTER_TITLE_MAX=1.60;
 
+const GOAL_NAME_MIN=.60;
+const GOAL_NAME_MAX=1.70;
+
+const GOAL_LOGO_MIN=.55;
+const GOAL_LOGO_MAX=1.60;
+
 const STEP=.05;
+
+
+/* =========================================================
+   GOAL VISUAL CONSTANTS
+========================================================= */
+
+const GOAL_GOLD="#d9b25c";
+const GOAL_GOLD_BRIGHT="#f3d488";
+
+/*
+  Background base tones — a distinct
+  dark navy shade from the match / poster
+  overlays, so the GOAL template reads
+  as its own identity.
+*/
+
+const GOAL_BG_TOP="#111a2e";
+const GOAL_BG_BOTTOM="#0a0f1d";
+
+/*
+  Precomputed ray burst — fixed values so
+  the pattern never flickers on re-render.
+*/
+
+const GOAL_RAYS=(function(){
+
+  const rays=[];
+
+  const count=30;
+
+  for(let i=0;i<count;i++){
+
+    const seed=
+      i*137.51;
+
+    const angle=
+      (seed%360)*
+      (Math.PI/180);
+
+    const lengthRatio=
+      .55+
+      ((seed*7)%100)/100*.5;
+
+    const widthPx=
+      1+
+      ((seed*13)%100)/100*2.6;
+
+    const opacity=
+      .05+
+      ((seed*19)%100)/100*.16;
+
+    rays.push({
+      angle,
+      lengthRatio,
+      widthPx,
+      opacity
+    });
+
+  }
+
+  return rays;
+
+})();
 
 
 /* =========================================================
@@ -1763,9 +2098,11 @@ const dragInfo=document.getElementById("dragInfo");
 
 const matchPanel=document.getElementById("matchPanel");
 const posterPanel=document.getElementById("posterPanel");
+const goalPanel=document.getElementById("goalPanel");
 
 const matchModeBtn=document.getElementById("matchModeBtn");
 const posterModeBtn=document.getElementById("posterModeBtn");
+const goalModeBtn=document.getElementById("goalModeBtn");
 
 
 /* =========================================================
@@ -1915,6 +2252,37 @@ function getDefaultPosterPositions(){
 
 
 /* =========================================================
+   GOAL DEFAULT POSITIONS
+========================================================= */
+
+function getDefaultGoalPositions(){
+
+  const w=canvas.width;
+  const h=canvas.height;
+
+  return{
+
+    logo:{
+      x:w/2,
+      y:h*.355
+    },
+
+    name:{
+      x:w/2,
+      y:h*.845
+    },
+
+    social:{
+      x:w/2,
+      y:h*.955
+    }
+
+  };
+
+}
+
+
+/* =========================================================
    ENSURE POSITIONS
 ========================================================= */
 
@@ -1932,6 +2300,16 @@ function ensurePosterPositions(){
   if(!state.posterPositions.player1){
     state.posterPositions=
       getDefaultPosterPositions();
+  }
+
+}
+
+
+function ensureGoalPositions(){
+
+  if(!state.goalPositions.logo){
+    state.goalPositions=
+      getDefaultGoalPositions();
   }
 
 }
@@ -1959,6 +2337,16 @@ function resetPosterPositions(){
 
   state.posterPositions=
     getDefaultPosterPositions();
+
+  render();
+
+}
+
+
+function resetGoalPositions(){
+
+  state.goalPositions=
+    getDefaultGoalPositions();
 
   render();
 
@@ -2623,6 +3011,617 @@ function drawPoster(){
 
 
 /* =========================================================
+   GOAL BACKGROUND
+========================================================= */
+
+function drawGoalBackground(){
+
+  const w=canvas.width;
+  const h=canvas.height;
+
+  const base=
+    ctx.createLinearGradient(
+      0,
+      0,
+      0,
+      h
+    );
+
+  base.addColorStop(0,GOAL_BG_TOP);
+  base.addColorStop(1,GOAL_BG_BOTTOM);
+
+  ctx.fillStyle=base;
+
+  ctx.fillRect(0,0,w,h);
+
+
+  /*
+    Golden ray burst, radiating from
+    a fixed point near the badge frame —
+    a distinct identity from the red
+    rays of the reference layout.
+  */
+
+  const centerX=w/2;
+  const centerY=h*.40;
+
+  const radius=
+    Math.max(w,h)*.78;
+
+  ctx.save();
+
+  ctx.strokeStyle=GOAL_GOLD;
+  ctx.lineCap="round";
+
+  GOAL_RAYS.forEach(
+    function(ray){
+
+      const innerR=
+        radius*.10;
+
+      const outerR=
+        radius*ray.lengthRatio;
+
+      const x1=
+        centerX+
+        Math.cos(ray.angle)*innerR;
+
+      const y1=
+        centerY+
+        Math.sin(ray.angle)*innerR;
+
+      const x2=
+        centerX+
+        Math.cos(ray.angle)*outerR;
+
+      const y2=
+        centerY+
+        Math.sin(ray.angle)*outerR;
+
+      ctx.globalAlpha=
+        ray.opacity;
+
+      ctx.lineWidth=
+        ray.widthPx*(w/1080);
+
+      ctx.beginPath();
+      ctx.moveTo(x1,y1);
+      ctx.lineTo(x2,y2);
+      ctx.stroke();
+
+    }
+  );
+
+  ctx.restore();
+
+
+  /*
+    Soft vignette to keep edges
+    darker than the center stage.
+  */
+
+  const vignette=
+    ctx.createRadialGradient(
+      centerX,
+      centerY,
+      Math.min(w,h)*.18,
+      centerX,
+      h*.55,
+      Math.max(w,h)*.85
+    );
+
+  vignette.addColorStop(
+    0,
+    "rgba(0,0,0,0)"
+  );
+
+  vignette.addColorStop(
+    1,
+    "rgba(0,0,0,.45)"
+  );
+
+  ctx.fillStyle=vignette;
+
+  ctx.fillRect(0,0,w,h);
+
+}
+
+
+/* =========================================================
+   GOAL BADGE FRAME
+========================================================= */
+
+function drawGoalFrame(){
+
+  const min=Math.min(
+    canvas.width,
+    canvas.height
+  );
+
+  const pos=
+    state.goalPositions.logo;
+
+  const outer=
+    min*.50;
+
+  const inner=
+    outer*.80;
+
+  ctx.save();
+
+  /* outer golden frame */
+
+  ctx.fillStyle=
+    "rgba(255,255,255,.03)";
+
+  ctx.fillRect(
+    pos.x-outer/2,
+    pos.y-outer/2,
+    outer,
+    outer
+  );
+
+  ctx.strokeStyle=GOAL_GOLD;
+  ctx.lineWidth=min*.009;
+
+  ctx.strokeRect(
+    pos.x-outer/2,
+    pos.y-outer/2,
+    outer,
+    outer
+  );
+
+
+  /* inner golden frame */
+
+  ctx.fillStyle=
+    "rgba(0,0,0,.18)";
+
+  ctx.fillRect(
+    pos.x-inner/2,
+    pos.y-inner/2,
+    inner,
+    inner
+  );
+
+  ctx.strokeStyle=GOAL_GOLD_BRIGHT;
+  ctx.lineWidth=min*.0055;
+
+  ctx.strokeRect(
+    pos.x-inner/2,
+    pos.y-inner/2,
+    inner,
+    inner
+  );
+
+  ctx.restore();
+
+}
+
+
+/* =========================================================
+   GOAL CLUB LOGO
+========================================================= */
+
+function drawGoalLogo(){
+
+  if(!state.goalLogo)return;
+
+  const min=Math.min(
+    canvas.width,
+    canvas.height
+  );
+
+  const pos=
+    state.goalPositions.logo;
+
+  const inner=
+    min*.50*.80;
+
+  const target=
+    inner*.86*
+    state.goalLogoScale;
+
+  const size=
+    getContainDimensions(
+      state.goalLogo,
+      target
+    );
+
+  ctx.save();
+
+  ctx.shadowColor=
+    "rgba(0,0,0,.55)";
+
+  ctx.shadowBlur=
+    target*.06;
+
+  ctx.drawImage(
+    state.goalLogo,
+    pos.x-size.width/2,
+    pos.y-size.height/2,
+    size.width,
+    size.height
+  );
+
+  ctx.restore();
+
+}
+
+
+/* =========================================================
+   GOAL WORD ("جوول") — fixed, not draggable
+========================================================= */
+
+function drawGoalWord(){
+
+  const w=canvas.width;
+  const h=canvas.height;
+
+  const min=Math.min(w,h);
+
+  const size=
+    min*.155;
+
+  ctx.save();
+
+  ctx.font=
+    `900 ${size}px 'Cairo',sans-serif`;
+
+  ctx.textAlign="center";
+  ctx.textBaseline="middle";
+
+  ctx.fillStyle="#ffffff";
+
+  ctx.shadowColor=
+    "rgba(0,0,0,.55)";
+
+  ctx.shadowBlur=
+    size*.12;
+
+  ctx.shadowOffsetY=
+    size*.03;
+
+  ctx.fillText(
+    "جوووول",
+    w/2,
+    h*.665
+  );
+
+  ctx.restore();
+
+
+  /* thin golden divider under the word */
+
+  ctx.save();
+
+  ctx.strokeStyle=GOAL_GOLD;
+  ctx.lineWidth=min*.0025;
+
+  ctx.beginPath();
+  ctx.moveTo(w*.29,h*.735);
+  ctx.lineTo(w*.71,h*.735);
+  ctx.stroke();
+
+  ctx.restore();
+
+}
+
+
+/* =========================================================
+   GOAL PLAYER NAME
+========================================================= */
+
+function drawGoalPlayerName(){
+
+  const min=Math.min(
+    canvas.width,
+    canvas.height
+  );
+
+  const pos=
+    state.goalPositions.name;
+
+  const size=
+    min*.048*
+    state.goalNameScale;
+
+  const hasName=
+    state.goalPlayerName &&
+    state.goalPlayerName.trim().length>0;
+
+  ctx.save();
+
+  ctx.font=
+    `800 ${size}px '${state.goalNameFont}',sans-serif`;
+
+  ctx.textAlign="center";
+  ctx.textBaseline="middle";
+
+  ctx.fillStyle=
+    hasName
+      ? "#f3f4f6"
+      : "rgba(255,255,255,.32)";
+
+  ctx.shadowColor=
+    "rgba(0,0,0,.55)";
+
+  ctx.shadowBlur=
+    size*.20;
+
+  ctx.fillText(
+    hasName
+      ? state.goalPlayerName
+      : "اسم اللاعب",
+    pos.x,
+    pos.y
+  );
+
+  ctx.restore();
+
+}
+
+
+/* =========================================================
+   GOAL SOCIAL ICON
+========================================================= */
+
+function drawGoalSocialIcon(
+  type,
+  x,
+  y,
+  size
+){
+
+  ctx.save();
+
+  ctx.translate(x,y);
+
+  ctx.beginPath();
+  ctx.arc(0,0,size/2,0,Math.PI*2);
+
+  if(type==="facebook")
+    ctx.fillStyle="#1877f2";
+  else if(type==="x")
+    ctx.fillStyle="#20242b";
+  else if(type==="instagram")
+    ctx.fillStyle="#c2337c";
+  else
+    ctx.fillStyle="#111417";
+
+  ctx.fill();
+
+  ctx.strokeStyle=
+    "rgba(255,255,255,.18)";
+
+  ctx.lineWidth=
+    Math.max(1,size*.03);
+
+  ctx.stroke();
+
+
+  ctx.fillStyle="#ffffff";
+  ctx.strokeStyle="#ffffff";
+
+  ctx.textAlign="center";
+  ctx.textBaseline="middle";
+
+  if(type==="facebook"){
+
+    ctx.font=
+      `bold ${size*.62}px sans-serif`;
+
+    ctx.fillText("f",size*.02,size*.03);
+
+  }else if(type==="x"){
+
+    ctx.font=
+      `900 ${size*.5}px sans-serif`;
+
+    ctx.fillText("X",0,size*.02);
+
+  }else if(type==="instagram"){
+
+    ctx.lineWidth=size*.07;
+
+    ctx.beginPath();
+    ctx.roundRect(
+      -size*.24,
+      -size*.24,
+      size*.48,
+      size*.48,
+      size*.14
+    );
+
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(0,0,size*.12,0,Math.PI*2);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(
+      size*.15,
+      -size*.15,
+      size*.035,
+      0,
+      Math.PI*2
+    );
+
+    ctx.fillStyle="#ffffff";
+    ctx.fill();
+
+  }else if(type==="tiktok"){
+
+    const drawNote=
+      function(color,ox,oy){
+
+        ctx.save();
+
+        ctx.translate(ox,oy);
+
+        ctx.strokeStyle=color;
+        ctx.fillStyle=color;
+        ctx.lineWidth=size*.075;
+        ctx.lineCap="round";
+
+        ctx.beginPath();
+        ctx.arc(
+          -size*.075,
+          size*.125,
+          size*.1,
+          0,
+          Math.PI*2
+        );
+
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(size*.025,size*.125);
+        ctx.lineTo(size*.025,-size*.225);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(
+          size*.175,
+          -size*.125,
+          size*.15,
+          Math.PI,
+          Math.PI*1.5,
+          true
+        );
+
+        ctx.stroke();
+
+        ctx.restore();
+
+      };
+
+    drawNote("#25f4ee",-size*.02,-size*.02);
+    drawNote("#fe2c55",size*.02,size*.02);
+    drawNote("#ffffff",0,0);
+
+  }
+
+  ctx.restore();
+
+}
+
+
+/* =========================================================
+   GOAL SOCIAL ROW
+========================================================= */
+
+function drawGoalSocial(){
+
+  const min=Math.min(
+    canvas.width,
+    canvas.height
+  );
+
+  const pos=
+    state.goalPositions.social;
+
+  const iconSize=
+    min*.036;
+
+  const gap=
+    min*.018;
+
+  const brandSize=
+    min*.026;
+
+  const types=[
+    "facebook",
+    "x",
+    "instagram",
+    "tiktok"
+  ];
+
+  ctx.save();
+
+  ctx.font=
+    `800 ${brandSize}px 'Archivo',sans-serif`;
+
+  const brandWidth=
+    ctx.measureText("ZONE SPORT").width;
+
+  ctx.restore();
+
+  const totalWidth=
+    (iconSize*types.length)+
+    (gap*(types.length-1))+
+    (gap*1.6)+
+    brandWidth;
+
+  let cursorX=
+    pos.x-totalWidth/2+
+    iconSize/2;
+
+  types.forEach(
+    function(type){
+
+      drawGoalSocialIcon(
+        type,
+        cursorX,
+        pos.y,
+        iconSize
+      );
+
+      cursorX+=
+        iconSize+gap;
+
+    }
+  );
+
+  cursorX+=
+    gap*.6;
+
+  ctx.save();
+
+  ctx.font=
+    `800 ${brandSize}px 'Archivo',sans-serif`;
+
+  ctx.textAlign="left";
+  ctx.textBaseline="middle";
+
+  ctx.fillStyle="#ffffff";
+
+  ctx.fillText(
+    "ZONE SPORT",
+    cursorX,
+    pos.y
+  );
+
+  ctx.restore();
+
+}
+
+
+/* =========================================================
+   GOAL RENDER
+========================================================= */
+
+function drawGoal(){
+
+  ensureGoalPositions();
+
+  drawGoalBackground();
+
+  drawGoalFrame();
+
+  drawGoalLogo();
+
+  drawGoalWord();
+
+  drawGoalPlayerName();
+
+  drawGoalSocial();
+
+}
+
+
+/* =========================================================
    MASTER RENDER
 ========================================================= */
 
@@ -2634,6 +3633,17 @@ function render(){
     canvas.width,
     canvas.height
   );
+
+
+  if(state.mode==="goal"){
+
+    emptyHint.style.display="none";
+
+    drawGoal();
+
+    return;
+
+  }
 
 
   const activeBg=
@@ -2730,6 +3740,22 @@ function updateScaleUI(){
   ).textContent=
     Math.round(
       state.posterTitleScale*100
+    )+"%";
+
+
+  document.getElementById(
+    "goalNameScale"
+  ).textContent=
+    Math.round(
+      state.goalNameScale*100
+    )+"%";
+
+
+  document.getElementById(
+    "goalLogoScale"
+  ).textContent=
+    Math.round(
+      state.goalLogoScale*100
     )+"%";
 
 }
@@ -3003,6 +4029,60 @@ document
 );
 
 
+/* GOAL SCALES */
+
+document
+.getElementById("goalNamePlus")
+.addEventListener(
+  "click",
+  ()=>changeScale(
+    "goalNameScale",
+    GOAL_NAME_MIN,
+    GOAL_NAME_MAX,
+    1
+  )
+);
+
+
+document
+.getElementById("goalNameMinus")
+.addEventListener(
+  "click",
+  ()=>changeScale(
+    "goalNameScale",
+    GOAL_NAME_MIN,
+    GOAL_NAME_MAX,
+    -1
+  )
+);
+
+
+document
+.getElementById("goalLogoPlus")
+.addEventListener(
+  "click",
+  ()=>changeScale(
+    "goalLogoScale",
+    GOAL_LOGO_MIN,
+    GOAL_LOGO_MAX,
+    1
+  )
+);
+
+
+document
+.getElementById("goalLogoMinus")
+.addEventListener(
+  "click",
+  ()=>changeScale(
+    "goalLogoScale",
+    GOAL_LOGO_MIN,
+    GOAL_LOGO_MAX,
+    -1
+  )
+);
+
+
 /* =========================================================
    FONT
 ========================================================= */
@@ -3034,6 +4114,33 @@ fontSelect.addEventListener(
 );
 
 
+const goalFontSelect=
+  document.getElementById(
+    "goalFontSelect"
+  );
+
+const goalFontPreview=
+  document.getElementById(
+    "goalFontPreview"
+  );
+
+
+goalFontSelect.addEventListener(
+  "change",
+  function(){
+
+    state.goalNameFont=
+      this.value;
+
+    goalFontPreview.style.fontFamily=
+      `'${this.value}',sans-serif`;
+
+    render();
+
+  }
+);
+
+
 /* =========================================================
    MODE SWITCH
 ========================================================= */
@@ -3042,13 +4149,18 @@ function setMode(mode){
 
   state.mode=mode;
 
+  matchPanel.classList.add("hidden");
+  posterPanel.classList.add("hidden");
+  goalPanel.classList.add("hidden");
+
+  matchModeBtn.classList.remove("active");
+  posterModeBtn.classList.remove("active");
+  goalModeBtn.classList.remove("active");
+
+
   if(mode==="match"){
 
     matchPanel.classList.remove(
-      "hidden"
-    );
-
-    posterPanel.classList.add(
       "hidden"
     );
 
@@ -3056,25 +4168,13 @@ function setMode(mode){
       "active"
     );
 
-    posterModeBtn.classList.remove(
-      "active"
-    );
-
     dragInfo.textContent=
       "DRAG LOGOS • SCORE • FULL TIME";
 
-  }else{
-
-    matchPanel.classList.add(
-      "hidden"
-    );
+  }else if(mode==="poster"){
 
     posterPanel.classList.remove(
       "hidden"
-    );
-
-    matchModeBtn.classList.remove(
-      "active"
     );
 
     posterModeBtn.classList.add(
@@ -3083,6 +4183,31 @@ function setMode(mode){
 
     dragInfo.textContent=
       "DRAG PLAYERS • LOGOS • TITLE";
+
+  }else{
+
+    goalPanel.classList.remove(
+      "hidden"
+    );
+
+    goalModeBtn.classList.add(
+      "active"
+    );
+
+    dragInfo.textContent=
+      "DRAG LOGO • NAME • SOCIAL ROW";
+
+    /*
+      GOAL is a self-contained template
+      (no uploaded background), so it
+      always uses the standard portrait
+      canvas size.
+    */
+
+    canvas.width=1080;
+    canvas.height=1350;
+
+    ensureGoalPositions();
 
   }
 
@@ -3103,6 +4228,14 @@ posterModeBtn.addEventListener(
   "click",
   ()=>{
     setMode("poster");
+  }
+);
+
+
+goalModeBtn.addEventListener(
+  "click",
+  ()=>{
+    setMode("goal");
   }
 );
 
@@ -3441,6 +4574,62 @@ document
 
 
 /* =========================================================
+   GOAL CLUB LOGO
+========================================================= */
+
+document
+.getElementById("goalLogoInput")
+.addEventListener(
+  "change",
+  function(e){
+
+    const file=e.target.files[0];
+
+    if(!file)return;
+
+    loadImage(
+      file,
+      function(img){
+
+        state.goalLogo=img;
+
+        document.getElementById(
+          "goalLogoName"
+        ).textContent=file.name;
+
+        document.getElementById(
+          "goalLogoStatus"
+        ).textContent="Loaded";
+
+        render();
+
+      }
+    );
+
+  }
+);
+
+
+/* =========================================================
+   GOAL PLAYER NAME
+========================================================= */
+
+document
+.getElementById("goalNameInput")
+.addEventListener(
+  "input",
+  function(){
+
+    state.goalPlayerName=
+      this.value;
+
+    render();
+
+  }
+);
+
+
+/* =========================================================
    CANVAS POINT
 ========================================================= */
 
@@ -3675,6 +4864,91 @@ function hitPosterTitle(point){
 
 
 /* =========================================================
+   HIT GOAL LOGO FRAME
+========================================================= */
+
+function hitGoalLogo(point){
+
+  const min=Math.min(
+    canvas.width,
+    canvas.height
+  );
+
+  const pos=
+    state.goalPositions.logo;
+
+  const outer=
+    min*.50;
+
+  return(
+
+    point.x>=pos.x-outer/2 &&
+    point.x<=pos.x+outer/2 &&
+    point.y>=pos.y-outer/2 &&
+    point.y<=pos.y+outer/2
+
+  );
+
+}
+
+
+/* =========================================================
+   HIT GOAL PLAYER NAME
+========================================================= */
+
+function hitGoalPlayerName(point){
+
+  const min=Math.min(
+    canvas.width,
+    canvas.height
+  );
+
+  const pos=
+    state.goalPositions.name;
+
+  const size=
+    min*.048*
+    state.goalNameScale;
+
+  return(
+
+    point.x>=pos.x-min*.30 &&
+    point.x<=pos.x+min*.30 &&
+    point.y>=pos.y-size &&
+    point.y<=pos.y+size
+
+  );
+
+}
+
+
+/* =========================================================
+   HIT GOAL SOCIAL ROW
+========================================================= */
+
+function hitGoalSocial(point){
+
+  const min=Math.min(
+    canvas.width,
+    canvas.height
+  );
+
+  const pos=
+    state.goalPositions.social;
+
+  return(
+
+    point.x>=pos.x-min*.30 &&
+    point.x<=pos.x+min*.30 &&
+    point.y>=pos.y-min*.035 &&
+    point.y<=pos.y+min*.035
+
+  );
+
+}
+
+
+/* =========================================================
    POINTER DOWN
 ========================================================= */
 
@@ -3685,7 +4959,9 @@ canvas.addEventListener(
     const activeBg=
       state.mode==="match"
         ? state.bgImage
-        : state.posterBg;
+        : state.mode==="poster"
+        ? state.posterBg
+        : true;
 
     if(!activeBg)
       return;
@@ -3694,6 +4970,66 @@ canvas.addEventListener(
       getCanvasPoint(e);
 
     let target=null;
+
+
+    if(state.mode==="goal"){
+
+      ensureGoalPositions();
+
+      /*
+        Reverse drawing order
+        for intuitive selection.
+      */
+
+      if(hitGoalSocial(point)){
+
+        target="social";
+
+      }
+      else if(hitGoalPlayerName(point)){
+
+        target="name";
+
+      }
+      else if(hitGoalLogo(point)){
+
+        target="logo";
+
+      }
+
+
+      if(!target)
+        return;
+
+
+      state.drag={
+
+        type:"goal",
+
+        target,
+
+        offsetX:
+          point.x-
+          state.goalPositions[target].x,
+
+        offsetY:
+          point.y-
+          state.goalPositions[target].y
+
+      };
+
+      canvas.setPointerCapture(
+        e.pointerId
+      );
+
+      canvas.style.cursor=
+        "grabbing";
+
+      e.preventDefault();
+
+      return;
+
+    }
 
 
     if(state.mode==="match"){
@@ -3891,7 +5227,9 @@ canvas.addEventListener(
     const activeBg=
       state.mode==="match"
         ? state.bgImage
-        : state.posterBg;
+        : state.mode==="poster"
+        ? state.posterBg
+        : true;
 
     if(!activeBg)
       return;
@@ -3908,6 +5246,8 @@ canvas.addEventListener(
       const positions=
         state.drag.type==="match"
           ? state.positions
+          : state.drag.type==="goal"
+          ? state.goalPositions
           : state.posterPositions;
 
 
@@ -3930,7 +5270,20 @@ canvas.addEventListener(
     let hovering=false;
 
 
-    if(state.mode==="match"){
+    if(state.mode==="goal"){
+
+      ensureGoalPositions();
+
+      hovering=
+
+        hitGoalSocial(point) ||
+
+        hitGoalPlayerName(point) ||
+
+        hitGoalLogo(point);
+
+    }
+    else if(state.mode==="match"){
 
       ensureMatchPositions();
 
@@ -4070,6 +5423,14 @@ document
 );
 
 
+document
+.getElementById("resetGoalPositions")
+.addEventListener(
+  "click",
+  resetGoalPositions
+);
+
+
 /* =========================================================
    EXPORT
 ========================================================= */
@@ -4083,7 +5444,9 @@ document
     const activeBg=
       state.mode==="match"
         ? state.bgImage
-        : state.posterBg;
+        : state.mode==="poster"
+        ? state.posterBg
+        : true;
 
     if(!activeBg){
 
@@ -4103,7 +5466,9 @@ document
     link.download=
       state.mode==="match"
         ? "zone-sport-full-time.png"
-        : "zone-sport-kick-off.png";
+        : state.mode==="poster"
+        ? "zone-sport-kick-off.png"
+        : "zone-sport-goal.png";
 
 
     link.href=
@@ -4177,12 +5542,29 @@ document
     };
 
 
+    state.goalLogo=null;
+
+    state.goalPlayerName="";
+
+    state.goalNameFont="Cairo";
+
+    state.goalNameScale=1;
+    state.goalLogoScale=1;
+
+    state.goalPositions={
+      logo:null,
+      name:null,
+      social:null
+    };
+
+
     state.drag=null;
 
 
     const ids=[
 
       "bgInput",
+
       "homeLogoInput",
       "awayLogoInput",
 
@@ -4191,7 +5573,9 @@ document
       "player2Input",
 
       "posterLogo1Input",
-      "posterLogo2Input"
+      "posterLogo2Input",
+
+      "goalLogoInput"
 
     ];
 
@@ -4247,6 +5631,12 @@ document
       "Club Logo 02";
 
 
+    document.getElementById(
+      "goalLogoName"
+    ).textContent=
+      "Upload club logo";
+
+
     [
       "bgStatus",
       "homeLogoStatus",
@@ -4255,7 +5645,8 @@ document
       "player1Status",
       "player2Status",
       "posterLogo1Status",
-      "posterLogo2Status"
+      "posterLogo2Status",
+      "goalLogoStatus"
     ].forEach(
       id=>{
         document.getElementById(
@@ -4271,6 +5662,11 @@ document
       "بداية المباراة";
 
 
+    document.getElementById(
+      "goalNameInput"
+    ).value="";
+
+
     canvas.width=1080;
     canvas.height=1350;
 
@@ -4279,6 +5675,12 @@ document
 
     fontPreview.style.fontFamily=
       "'Anton',sans-serif";
+
+
+    goalFontSelect.value="Cairo";
+
+    goalFontPreview.style.fontFamily=
+      "'Cairo',sans-serif";
 
 
     updateScores();
@@ -4304,6 +5706,9 @@ updateScaleUI();
 fontPreview.style.fontFamily=
   "'Anton',sans-serif";
 
+goalFontPreview.style.fontFamily=
+  "'Cairo',sans-serif";
+
 
 if(
   document.fonts &&
@@ -4325,4 +5730,3 @@ render();
 
 </body>
 </html>
-

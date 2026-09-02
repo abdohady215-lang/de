@@ -1107,7 +1107,7 @@ function drawTemplate3() {
 
     drawCustomLogo(ctx, w, h);
 }
-                    // التصميم الرابع — EDITORIAL PRIME
+// التصميم الرابع — EDITORIAL PRIME
 // فكرة احترافية: تغطية Full-Bleed بأسلوب البث الرياضي العالمي
 // (ESPN / Bleacher Report / The Athletic) بدل شكل الـ Portal السايبري.
 function drawTemplate4() {
@@ -1210,15 +1210,15 @@ function drawTemplate4() {
     ctx.save();
     ctx.font = `900 ${18 * scale}px 'Cairo', sans-serif`;
     ctx.textBaseline = 'middle';
-    ctx.textAlign = 'left';
+    ctx.textAlign = 'right';
 
-    const kickerText = 'تغطية خاصة';
+    const kickerText = 'خبر جديد تعالا هنا';
     ctx.fillStyle = cfg.accent;
-    ctx.fillText(kickerText, cfg.margin + 16 * scale, cfg.kickerY);
+    ctx.fillText(kickerText, w - cfg.margin - 16 * scale, cfg.kickerY);
 
-    // الخط العمودي المميز على يسار الكتلة النصية
+    // الخط العمودي المميز على يمين الكتلة النصية
     ctx.fillStyle = cfg.accent;
-    ctx.fillRect(cfg.margin, cfg.kickerY - 14 * scale, 4 * scale, 28 * scale);
+    ctx.fillRect(w - cfg.margin - 4 * scale, cfg.kickerY - 14 * scale, 4 * scale, 28 * scale);
     ctx.restore();
 
     // ==========================================
@@ -1242,12 +1242,12 @@ function drawTemplate4() {
 
     ctx.save();
     ctx.fillStyle = '#FFFFFF';
-    ctx.textAlign = 'left';
+    ctx.textAlign = 'center';
     ctx.font = `900 ${titleSize}px '${appState.fontFamily}', sans-serif`;
-    wrapTextLeft(
+    wrapTextCenter(
         ctx,
         appState.title,
-        cfg.margin + 16 * scale,
+        w / 2,
         cfg.titleTopY,
         titleMaxWidth,
         titleLineHeight
@@ -1318,14 +1318,55 @@ function drawTemplate4() {
 
     ctx.textAlign = 'right';
     ctx.fillStyle = cfg.accent;
-    ctx.fillText('NEWS / 04', w - cfg.margin, cfg.footerY);
+    ctx.fillText('NEWS', w - cfg.margin, cfg.footerY);
     ctx.restore();
-
-    // ==========================================
-    // 10 — Logo
-    // ==========================================
-    drawCustomLogo(ctx, w, h);
 }
+
+// دالة مساعدة: التفاف نص محاذي للمنتصف (تُستخدم للعنوان الرئيسي)
+function wrapTextCenter(ctx, text, cx, y, maxWidth, lineHeight) {
+    const words = String(text).split(' ');
+    let line = '';
+    const lines = [];
+
+    for (let n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + ' ';
+        const testWidth = ctx.measureText(testLine).width;
+
+        if (testWidth > maxWidth && n > 0) {
+            lines.push(line.trim());
+            line = words[n] + ' ';
+        } else {
+            line = testLine;
+        }
+    }
+    lines.push(line.trim());
+
+    lines.forEach(function (l, i) {
+        ctx.fillText(l, cx, y + i * lineHeight);
+    });
+}
+
+// دالة مساعدة: التفاف نص محاذي لليسار (تُستخدم للنص الفرعي)
+function wrapTextLeft(ctx, text, x, y, maxWidth, lineHeight) {
+    const words = String(text).split(' ');
+    let line = '';
+    let currentY = y;
+
+    for (let n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + ' ';
+        const testWidth = ctx.measureText(testLine).width;
+
+        if (testWidth > maxWidth && n > 0) {
+            ctx.fillText(line.trim(), x, currentY);
+            line = words[n] + ' ';
+            currentY += lineHeight;
+        } else {
+            line = testLine;
+        }
+    }
+    ctx.fillText(line.trim(), x, currentY);
+}
+  
 
 // دالة مساعدة: التفاف نص محاذي لليسار (بدل النص المتمركز)
 // تُستخدم هنا لأن أسلوب Editorial يعتمد على محاذاة يسار وليس منتصف

@@ -471,6 +471,23 @@
                     <button class="download-btn" onclick="downloadSingleCanvas('canvas3', 'Neon_03')"><i class="fas fa-download"></i> تحميل التصميم الثالث</button>
                 </div>
 
+                <!-- DESIGN 04 -->
+                <div class="design-card">
+                <div class="design-card-header">
+                <span class="design-title">🌀 04 — DEPTH PORTAL</span>
+                 </div>
+
+                    <div class="canvas-wrapper">
+                        <canvas id="canvas4"></canvas>
+                        </div>
+
+                    <button class="download-btn" onclick="downloadSingleCanvas('canvas4', 'Depth_Portal_04')">
+                        <i class="fas fa-download"></i> تحميل التصميم الرابع
+                     </button>
+                    </div>
+
+                
+
             </div>
         </section>
 
@@ -627,16 +644,18 @@
         }
 
         function renderCanvases() {
-            setupCanvasDimensions('canvas1');
-            setupCanvasDimensions('canvas2');
-            setupCanvasDimensions('canvas3');
+    setupCanvasDimensions('canvas1');
+    setupCanvasDimensions('canvas2');
+    setupCanvasDimensions('canvas3');
+    setupCanvasDimensions('canvas4');
 
-            document.fonts.ready.then(() => {
-                drawTemplate1();
-                drawTemplate2();
-                drawTemplate3();
-            });
-        }
+    document.fonts.ready.then(() => {
+        drawTemplate1();
+        drawTemplate2();
+        drawTemplate3();
+        drawTemplate4();
+    });
+}
 
         function setupCanvasDimensions(id) {
             const cvs = document.getElementById(id);
@@ -754,12 +773,7 @@
             ctx.fillStyle = grad;
             ctx.fillRect(0, shadowStartY, w, h - shadowStartY);
 
-            const glowGrad = ctx.createLinearGradient(w * 0.2, 0, w * 0.8, 0);
-            glowGrad.addColorStop(0, 'rgba(255, 42, 133, 0)');
-            glowGrad.addColorStop(0.5, 'rgba(0, 242, 254, 0.8)');
-            glowGrad.addColorStop(1, 'rgba(255, 42, 133, 0)');
-            ctx.fillStyle = glowGrad;
-            ctx.fillRect(w * 0.2, startY - (15 * scale), w * 0.6, 4 * scale);
+            
 
             ctx.fillStyle = '#FFFFFF';
             ctx.font = `bold ${titleSize}px '${appState.fontFamily}', sans-serif`;
@@ -838,93 +852,504 @@
             drawCustomLogo(ctx, w, h);
         }
 
-        // التصميم الثالث (تم استبدال الروابط الخارجية بأيقونات فيكتور آمنة 100% للتحميل)
-        function drawTemplate3() {
-            const canvas = document.getElementById('canvas3');
-            const ctx = canvas.getContext('2d');
-            const w = canvas.width, h = canvas.height;
+       // دالة رسم الأيقونات الفيكتور الواقعية والاحترافية
+function drawVectorIcon(ctx, type, x, y, size) {
+    ctx.save();
+    ctx.translate(x, y);
 
-            drawBackgroundImage(ctx, w, h);
+    const scale = size / 40; // مقياس رسم موحد
+    ctx.scale(scale, scale);
 
-            const scale = w / 1080;
-            const titleSize = Math.max(18, Math.round(appState.baseFontSize * scale));
-            const contentSize = Math.max(14, Math.round((appState.baseFontSize * 0.55) * scale));
+    if (type === 'facebook') {
+        // خلفية فيسبوك الدائرية
+        ctx.beginPath();
+        ctx.arc(0, 0, 20, 0, Math.PI * 2);
+        ctx.fillStyle = '#1877F2';
+        ctx.fill();
 
-            const titleLineHeight = titleSize * appState.lineHeightFactor;
-            const contentLineHeight = contentSize * appState.lineHeightFactor;
+        // حرف f الرسمي المصمم بدقة
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = 'bold 26px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('f', 2, 2);
+    } 
+    else if (type === 'instagram') {
+        // تدرج إنستجرام الشهير
+        const grad = ctx.createLinearGradient(-20, 20, 20, -20);
+        grad.addColorStop(0, '#f09433');
+        grad.addColorStop(0.25, '#e6683c');
+        grad.addColorStop(0.5, '#dc2743');
+        grad.addColorStop(0.75, '#cc2366');
+        grad.addColorStop(1, '#bc1888');
 
-            ctx.font = `bold ${titleSize}px '${appState.fontFamily}', sans-serif`;
-            const titleH = measureWrapTextHeight(ctx, appState.title, w * 0.85, titleLineHeight);
+        // خلفية حواف دائرية (Squircle)
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        if (ctx.roundRect) {
+            ctx.roundRect(-20, -20, 40, 40, 10);
+        } else {
+            ctx.arc(0, 0, 20, 0, Math.PI * 2);
+        }
+        ctx.fill();
 
-            ctx.font = `bold ${contentSize}px '${appState.fontFamily}', sans-serif`;
-            const contentH = appState.content ? measureWrapTextHeight(ctx, appState.content, w * 0.85, contentLineHeight) : 0;
+        // إطار كاميرا إنستجرام
+        ctx.strokeStyle = '#FFFFFF';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        if (ctx.roundRect) {
+            ctx.roundRect(-11, -11, 22, 22, 6);
+        } else {
+            ctx.rect(-11, -11, 22, 22);
+        }
+        ctx.stroke();
 
-            const extraBottomSpace = 100 * scale;
-            const totalTextH = titleH + (appState.content ? contentH + (20 * scale) : 0) + extraBottomSpace;
-            const startY = h - (h * appState.textY) - totalTextH;
+        // عدسة الكاميرا
+        ctx.beginPath();
+        ctx.arc(0, 0, 5, 0, Math.PI * 2);
+        ctx.stroke();
 
-            const shadowStartY = h * appState.shadowStartY;
-            const grad = ctx.createLinearGradient(0, shadowStartY, 0, h);
-            grad.addColorStop(0, 'rgba(10, 15, 29, 0)');
-            grad.addColorStop(0.4, 'rgba(10, 15, 29, 0.85)');
-            grad.addColorStop(1, '#070b14');
-            ctx.fillStyle = grad;
-            ctx.fillRect(0, shadowStartY, w, h - shadowStartY);
+        // نقطة الفلاش
+        ctx.fillStyle = '#FFFFFF';
+        ctx.beginPath();
+        ctx.arc(6, -6, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+    } 
+    else if (type === 'tiktok') {
+        // خلفية تيك توك سوداء أنيقة
+        ctx.beginPath();
+        ctx.arc(0, 0, 20, 0, Math.PI * 2);
+        ctx.fillStyle = '#010101';
+        ctx.fill();
 
-            ctx.fillStyle = '#FFFFFF';
-            ctx.font = `bold ${titleSize}px '${appState.fontFamily}', sans-serif`;
-            ctx.textAlign = 'center';
-            wrapTextCentered(ctx, appState.title, w / 2, startY + (titleSize * 0.8), w * 0.85, titleLineHeight);
+        // رسم النوتة الموسيقية مع تأثير النيون (3D Cyan/Pink Offset)
+        const drawNote = (color, offsetX, offsetY) => {
+            ctx.save();
+            ctx.translate(offsetX, offsetY);
+            ctx.strokeStyle = color;
+            ctx.fillStyle = color;
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'round';
 
-            let nextY = startY + titleH + (10 * scale);
-            if (appState.content) {
-                ctx.fillStyle = '#ff2a85';
-                ctx.font = `bold ${contentSize}px '${appState.fontFamily}', sans-serif`;
-                nextY = wrapTextCentered(ctx, appState.content, w / 2, nextY + (contentSize * 0.8), w * 0.85, contentLineHeight);
-            }
-
-            const lineY = nextY + (25 * scale);
-            const lineGrad = ctx.createLinearGradient(w * 0.15, 0, w * 0.85, 0);
-            lineGrad.addColorStop(0, 'rgba(0, 242, 254, 0)');
-            lineGrad.addColorStop(0.5, '#00f2fe');
-            lineGrad.addColorStop(1, 'rgba(0, 242, 254, 0)');
-
-            ctx.strokeStyle = lineGrad;
-            ctx.lineWidth = 4 * scale;
+            // رأس وعصا النوتة
             ctx.beginPath();
-            ctx.moveTo(w * 0.15, lineY);
-            ctx.lineTo(w * 0.85, lineY);
+            ctx.arc(-3, 5, 4, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.moveTo(1, 5);
+            ctx.lineTo(1, -9);
             ctx.stroke();
 
-            // رسم الأيقونات الفيكتور وبجانبها اسم المنصة
-            const iconSize = 40 * scale;
-            const gap = 18 * scale;
-            ctx.font = `bold ${24 * scale}px '${appState.fontFamily}', sans-serif`;
-            const textWidth = ctx.measureText('ZONE SPORT').width;
-            
-            const totalWidth = (iconSize * 4) + (gap * 3) + (26 * scale) + textWidth;
-            let startX = (w / 2) - (totalWidth / 2) + (iconSize / 2);
-            const socialY = lineY + (45 * scale);
-
-            drawVectorIcon(ctx, 'facebook', startX, socialY, iconSize);
-            startX += iconSize + gap;
-            drawVectorIcon(ctx, 'instagram', startX, socialY, iconSize);
-            startX += iconSize + gap;
-            drawVectorIcon(ctx, 'tiktok', startX, socialY, iconSize);
-            startX += iconSize + gap;
-            drawVectorIcon(ctx, 'youtube', startX, socialY, iconSize);
-            startX += iconSize + (26 * scale) - (iconSize / 2);
-
-            ctx.save();
-            ctx.fillStyle = '#FFFFFF';
-            ctx.font = `bold ${26 * scale}px '${appState.fontFamily}', sans-serif`;
-            ctx.textAlign = 'left';
-            ctx.textBaseline = 'middle';
-            ctx.fillText('ZONE SPORT', startX, socialY);
+            // قوس النوتة العلوي
+            ctx.beginPath();
+            ctx.arc(7, -5, 6, Math.PI, Math.PI * 1.5, true);
+            ctx.stroke();
             ctx.restore();
+        };
 
-            drawCustomLogo(ctx, w, h);
+        drawNote('#00F2FE', -1.5, -1.5); // تأثير النيون السماوي
+        drawNote('#FF2A85', 1.5, 1.5);   // تأثير النيون الوردي
+        drawNote('#FFFFFF', 0, 0);       // جسم النوتة الأبيض الأساسي
+    } 
+    else if (type === 'youtube') {
+        // مستطيل يوتيوب منحني مع تدرج أحمر قوي
+        const grad = ctx.createLinearGradient(0, -15, 0, 15);
+        grad.addColorStop(0, '#FF0000');
+        grad.addColorStop(1, '#CC0000');
+
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        if (ctx.roundRect) {
+            ctx.roundRect(-20, -14, 40, 28, 8);
+        } else {
+            ctx.rect(-20, -14, 40, 28);
         }
+        ctx.fill();
+
+        // مثلث التشغيل (Play Button)
+        ctx.fillStyle = '#FFFFFF';
+        ctx.beginPath();
+        ctx.moveTo(-5, -7);
+        ctx.lineTo(8, 0);
+        ctx.lineTo(-5, 7);
+        ctx.closePath();
+        ctx.fill();
+    }
+
+    ctx.restore();
+}
+// 1. خريطة الشعارات الرسمية (تضمن تحميل الصورة الحقيقية للوجو)
+const socialLogos = {
+    facebook: new Image(),
+    instagram: new Image(),
+    tiktok: new Image(),
+    youtube: new Image()
+};
+
+// تفعيل إمكانية تحميل وتصدير الـ Canvas بدون مشاكل أمان (CORS)
+Object.keys(socialLogos).forEach(key => {
+    socialLogos[key].crossOrigin = "anonymous";
+});
+
+// روابط الصور الرسمية عالية الدقة HD
+socialLogos.facebook.src = "https://cdn-icons-png.flaticon.com/512/5968/5968764.png";
+socialLogos.instagram.src = "https://cdn-icons-png.flaticon.com/512/3955/3955024.png";
+socialLogos.tiktok.src = "https://cdn-icons-png.flaticon.com/512/3046/3046124.png";
+socialLogos.youtube.src = "https://cdn-icons-png.flaticon.com/512/1384/1384060.png";
+
+// دالة رسم اللوجو الحقيقي من الصورة
+function drawRealLogo(ctx, type, x, y, size) {
+    const img = socialLogos[type];
+    ctx.save();
+    
+    // التمركز حول المنتصف بالضبط
+    ctx.translate(x, y);
+
+    if (img.complete && img.naturalWidth !== 0) {
+        // رسم الصورة الرسمية الأصلية للوجو
+        ctx.drawImage(img, -size / 2, -size / 2, size, size);
+    } else {
+        // في حالة عدم اكتمال تحميل الصورة بعد، ننتظر التحميل ثم نعيد الرسم
+        img.onload = () => {
+            if (typeof drawTemplate3 === 'function') drawTemplate3();
+        };
+    }
+    
+    ctx.restore();
+}
+
+// التصميم الثالث باستخدام اللوجوهات الحقيقية المحملة
+function drawTemplate3() {
+    const canvas = document.getElementById('canvas3');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width, h = canvas.height;
+
+    drawBackgroundImage(ctx, w, h);
+
+    const scale = w / 1080;
+    const titleSize = Math.max(18, Math.round(appState.baseFontSize * scale));
+    const contentSize = Math.max(14, Math.round((appState.baseFontSize * 0.55) * scale));
+
+    const titleLineHeight = titleSize * appState.lineHeightFactor;
+    const contentLineHeight = contentSize * appState.lineHeightFactor;
+
+    ctx.font = `bold ${titleSize}px '${appState.fontFamily}', sans-serif`;
+    const titleH = measureWrapTextHeight(ctx, appState.title, w * 0.85, titleLineHeight);
+
+    ctx.font = `bold ${contentSize}px '${appState.fontFamily}', sans-serif`;
+    const contentH = appState.content ? measureWrapTextHeight(ctx, appState.content, w * 0.85, contentLineHeight) : 0;
+
+    const extraBottomSpace = 100 * scale;
+    const totalTextH = titleH + (appState.content ? contentH + (20 * scale) : 0) + extraBottomSpace;
+    const startY = h - (h * appState.textY) - totalTextH;
+
+    const shadowStartY = h * appState.shadowStartY;
+    const grad = ctx.createLinearGradient(0, shadowStartY, 0, h);
+    grad.addColorStop(0, 'rgba(10, 15, 29, 0)');
+    grad.addColorStop(0.4, 'rgba(10, 15, 29, 0.85)');
+    grad.addColorStop(1, '#070b14');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, shadowStartY, w, h - shadowStartY);
+
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = `bold ${titleSize}px '${appState.fontFamily}', sans-serif`;
+    ctx.textAlign = 'center';
+    wrapTextCentered(ctx, appState.title, w / 2, startY + (titleSize * 0.8), w * 0.85, titleLineHeight);
+
+    let nextY = startY + titleH + (10 * scale);
+    if (appState.content) {
+        ctx.fillStyle = '#ff2a85';
+        ctx.font = `bold ${contentSize}px '${appState.fontFamily}', sans-serif`;
+        nextY = wrapTextCentered(ctx, appState.content, w / 2, nextY + (contentSize * 0.8), w * 0.85, contentLineHeight);
+    }
+
+    const lineY = nextY + (25 * scale);
+    const lineGrad = ctx.createLinearGradient(w * 0.15, 0, w * 0.85, 0);
+    lineGrad.addColorStop(0, 'rgba(0, 242, 254, 0)');
+    lineGrad.addColorStop(0.5, '#00f2fe');
+    lineGrad.addColorStop(1, 'rgba(0, 242, 254, 0)');
+
+    ctx.strokeStyle = lineGrad;
+    ctx.lineWidth = 4 * scale;
+    ctx.beginPath();
+    ctx.moveTo(w * 0.15, lineY);
+    ctx.lineTo(w * 0.85, lineY);
+    ctx.stroke();
+
+    // حساب المسافات وأبعاد اللوجوهات الحقيقية
+    const iconSize = 36 * scale;
+    const gap = 20 * scale;
+    ctx.font = `bold ${24 * scale}px '${appState.fontFamily}', sans-serif`;
+    const textWidth = ctx.measureText('ZONE SPORT').width;
+    
+    const totalWidth = (iconSize * 4) + (gap * 3) + (26 * scale) + textWidth;
+    let startX = (w / 2) - (totalWidth / 2) + (iconSize / 2);
+    const socialY = lineY + (45 * scale);
+
+    // رسم اللوجوهات الرسمية
+    drawRealLogo(ctx, 'facebook', startX, socialY, iconSize);
+    startX += iconSize + gap;
+    drawRealLogo(ctx, 'instagram', startX, socialY, iconSize);
+    startX += iconSize + gap;
+    drawRealLogo(ctx, 'tiktok', startX, socialY, iconSize);
+    startX += iconSize + gap;
+    drawRealLogo(ctx, 'youtube', startX, socialY, iconSize);
+    startX += iconSize + (26 * scale) - (iconSize / 2);
+
+    ctx.save();
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = `bold ${26 * scale}px '${appState.fontFamily}', sans-serif`;
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('ZONE SPORT', startX, socialY);
+    ctx.restore();
+
+    drawCustomLogo(ctx, w, h);
+}
+                    // التصميم الرابع — EDITORIAL PRIME
+// فكرة احترافية: تغطية Full-Bleed بأسلوب البث الرياضي العالمي
+// (ESPN / Bleacher Report / The Athletic) بدل شكل الـ Portal السايبري.
+function drawTemplate4() {
+    const canvas = document.getElementById('canvas4');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+    const scale = w / 1080;
+
+    // ==========================================
+    // 00 — إعدادات التصميم (بدل الأرقام المبعثرة)
+    // ==========================================
+    const cfg = {
+        accent: '#f39c12',          // اللون المميز (كيكر / خط / تفاصيل)
+        accent2: '#00c2ff',         // لون ثانوي هادي للنص الفرعي
+        margin: w * 0.07,           // الهامش الجانبي العام
+        topBarY: h * 0.065,         // ارتفاع الشريط العلوي
+        scrimStart: 0.42,           // بداية التدرج الغامق (نسبة من الارتفاع)
+        kickerY: h * 0.665,         // موضع الكيكر (التصنيف الصغير)
+        titleTopY: h * 0.715,       // بداية العنوان
+        dividerGap: 26 * scale,     // مسافة الخط الفاصل تحت المحتوى
+        footerY: h * 0.955,         // شريط أسفل الصفحة
+        cornerCut: 46 * scale       // حجم القص المائل في الزاوية
+    };
+
+    // ==========================================
+    // 01 — الصورة full-bleed
+    // ==========================================
+    drawBackgroundImage(ctx, w, h);
+
+    // ==========================================
+    // 02 — Scrim سينمائي أسفل الصورة فقط
+    // (الجزء العلوي من الصورة يفضل واضح تمامًا)
+    // ==========================================
+    const scrim = ctx.createLinearGradient(0, h * cfg.scrimStart, 0, h);
+    scrim.addColorStop(0.00, 'rgba(3, 7, 18, 0)');
+    scrim.addColorStop(0.55, 'rgba(3, 7, 18, 0.55)');
+    scrim.addColorStop(1.00, 'rgba(3, 7, 18, 0.96)');
+    ctx.fillStyle = scrim;
+    ctx.fillRect(0, h * cfg.scrimStart, w, h * (1 - cfg.scrimStart));
+
+    // تظليل خفيف جدًا أعلى الصورة عشان اللوجو والتصنيف يبانوا بوضوح
+    const topShade = ctx.createLinearGradient(0, 0, 0, h * 0.18);
+    topShade.addColorStop(0, 'rgba(3, 7, 18, 0.55)');
+    topShade.addColorStop(1, 'rgba(3, 7, 18, 0)');
+    ctx.fillStyle = topShade;
+    ctx.fillRect(0, 0, w, h * 0.18);
+
+    // ==========================================
+    // 03 — القص المائل في الزاوية العلوية اليمنى
+    // (بصمة هوية بسيطة بدل الزوايا التقنية المتعددة)
+    // ==========================================
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(w - cfg.cornerCut, 0);
+    ctx.lineTo(w, 0);
+    ctx.lineTo(w, cfg.cornerCut);
+    ctx.closePath();
+    ctx.fillStyle = cfg.accent;
+    ctx.fill();
+    ctx.restore();
+
+    // ==========================================
+    // 04 — الشريط العلوي: تصنيف + خط رفيع
+    // ==========================================
+    ctx.save();
+    ctx.font = `900 ${16 * scale}px 'Cairo', sans-serif`;
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'left';
+    ctx.fillStyle = 'rgba(255,255,255,0.85)';
+    ctx.fillText('ZONE SPORT', cfg.margin, cfg.topBarY);
+
+    // نقطة فاصلة صغيرة
+    ctx.beginPath();
+    ctx.arc(cfg.margin + 128 * scale, cfg.topBarY, 3 * scale, 0, Math.PI * 2);
+    ctx.fillStyle = cfg.accent;
+    ctx.fill();
+
+    ctx.textAlign = 'right';
+    ctx.fillStyle = 'rgba(255,255,255,0.55)';
+    ctx.font = `700 ${14 * scale}px 'Cairo', sans-serif`;
+    ctx.fillText('LIVE COVERAGE', w - cfg.margin, cfg.topBarY);
+    ctx.restore();
+
+    // خط رفيع تحت الشريط العلوي
+    ctx.save();
+    ctx.strokeStyle = 'rgba(255,255,255,0.18)';
+    ctx.lineWidth = 1 * scale;
+    ctx.beginPath();
+    ctx.moveTo(cfg.margin, cfg.topBarY + 22 * scale);
+    ctx.lineTo(w - cfg.margin, cfg.topBarY + 22 * scale);
+    ctx.stroke();
+    ctx.restore();
+
+    // ==========================================
+    // 05 — الكيكر (التصنيف الصغير) + الخط العمودي المميز
+    // ==========================================
+    ctx.save();
+    ctx.font = `900 ${18 * scale}px 'Cairo', sans-serif`;
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'left';
+
+    const kickerText = 'تغطية خاصة';
+    ctx.fillStyle = cfg.accent;
+    ctx.fillText(kickerText, cfg.margin + 16 * scale, cfg.kickerY);
+
+    // الخط العمودي المميز على يسار الكتلة النصية
+    ctx.fillStyle = cfg.accent;
+    ctx.fillRect(cfg.margin, cfg.kickerY - 14 * scale, 4 * scale, 28 * scale);
+    ctx.restore();
+
+    // ==========================================
+    // 06 — العنوان الرئيسي
+    // ==========================================
+    const titleSize = Math.max(
+        26,
+        Math.round(appState.baseFontSize * 0.82 * scale)
+    );
+    const titleLineHeight = titleSize * appState.lineHeightFactor;
+    const titleMaxWidth = w - cfg.margin * 2 - 20 * scale;
+
+    ctx.font = `900 ${titleSize}px '${appState.fontFamily}', sans-serif`;
+
+    const titleHeight = measureWrapTextHeight(
+        ctx,
+        appState.title,
+        titleMaxWidth,
+        titleLineHeight
+    );
+
+    ctx.save();
+    ctx.fillStyle = '#FFFFFF';
+    ctx.textAlign = 'left';
+    ctx.font = `900 ${titleSize}px '${appState.fontFamily}', sans-serif`;
+    wrapTextLeft(
+        ctx,
+        appState.title,
+        cfg.margin + 16 * scale,
+        cfg.titleTopY,
+        titleMaxWidth,
+        titleLineHeight
+    );
+    ctx.restore();
+
+    let blockEndY = cfg.titleTopY + titleHeight;
+
+    // ==========================================
+    // 07 — النص الإضافي (subtitle)
+    // ==========================================
+    if (appState.content) {
+        const contentSize = Math.max(
+            15,
+            Math.round(appState.baseFontSize * 0.40 * scale)
+        );
+        const contentLineHeight = contentSize * appState.lineHeightFactor;
+        const contentMaxWidth = w - cfg.margin * 2 - 20 * scale;
+
+        ctx.save();
+        ctx.font = `600 ${contentSize}px '${appState.fontFamily}', sans-serif`;
+        ctx.fillStyle = 'rgba(255,255,255,0.72)';
+        ctx.textAlign = 'left';
+
+        const contentHeight = measureWrapTextHeight(
+            ctx,
+            appState.content,
+            contentMaxWidth,
+            contentLineHeight
+        );
+
+        wrapTextLeft(
+            ctx,
+            appState.content,
+            cfg.margin + 16 * scale,
+            blockEndY + 14 * scale + contentSize * 0.5,
+            contentMaxWidth,
+            contentLineHeight
+        );
+
+        blockEndY += 14 * scale + contentHeight;
+        ctx.restore();
+    }
+
+    // ==========================================
+    // 08 — خط فاصل رفيع أسفل الكتلة النصية
+    // ==========================================
+    const lineY = Math.min(h * 0.92, blockEndY + cfg.dividerGap);
+    ctx.save();
+    ctx.strokeStyle = 'rgba(255,255,255,0.16)';
+    ctx.lineWidth = 1 * scale;
+    ctx.beginPath();
+    ctx.moveTo(cfg.margin, lineY);
+    ctx.lineTo(w - cfg.margin, lineY);
+    ctx.stroke();
+    ctx.restore();
+
+    // ==========================================
+    // 09 — الشريط السفلي: مصدر الخبر + رقم
+    // ==========================================
+    ctx.save();
+    ctx.font = `800 ${14 * scale}px 'Cairo', sans-serif`;
+    ctx.textBaseline = 'middle';
+
+    ctx.textAlign = 'left';
+    ctx.fillStyle = 'rgba(255,255,255,0.55)';
+    ctx.fillText('ZONESPORT.COM', cfg.margin, cfg.footerY);
+
+    ctx.textAlign = 'right';
+    ctx.fillStyle = cfg.accent;
+    ctx.fillText('NEWS / 04', w - cfg.margin, cfg.footerY);
+    ctx.restore();
+
+    // ==========================================
+    // 10 — Logo
+    // ==========================================
+    drawCustomLogo(ctx, w, h);
+}
+
+// دالة مساعدة: التفاف نص محاذي لليسار (بدل النص المتمركز)
+// تُستخدم هنا لأن أسلوب Editorial يعتمد على محاذاة يسار وليس منتصف
+function wrapTextLeft(ctx, text, x, y, maxWidth, lineHeight) {
+    const words = String(text).split(' ');
+    let line = '';
+    let currentY = y;
+
+    for (let n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + ' ';
+        const testWidth = ctx.measureText(testLine).width;
+
+        if (testWidth > maxWidth && n > 0) {
+            ctx.fillText(line.trim(), x, currentY);
+            line = words[n] + ' ';
+            currentY += lineHeight;
+        } else {
+            line = testLine;
+        }
+    }
+    ctx.fillText(line.trim(), x, currentY);
+                                }
+
+
 
         function initSmartDragEvents(canvasId) {
             const cvs = document.getElementById(canvasId);
@@ -1020,12 +1445,13 @@
             }
         }
 
-        window.onload = function() {
-            initSmartDragEvents('canvas1');
-            initSmartDragEvents('canvas2');
-            initSmartDragEvents('canvas3');
-            renderCanvases();
-        };
+       window.onload = function() {
+    initSmartDragEvents('canvas1');
+    initSmartDragEvents('canvas2');
+    initSmartDragEvents('canvas3');
+    initSmartDragEvents('canvas4');
+    renderCanvases();
+                                    };
     </script>
 </body>
 </html>
